@@ -20,7 +20,8 @@
     <div v-if="logado" id="divPrincipal">
       <header id="header">
         <div style="width: 70%; height: 100%; display: flex; justify-content: flex-start;">
-          <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara" src="./assets/logo.png"></a>
+          <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
+              src="./assets/logo.png"></a>
           <div class="dropdown">
             <a class="headerButton">Cadastros</a>
 
@@ -163,7 +164,7 @@ export default {
   color: #0b4d75;
   border-radius: 15px;
   background-color: whitesmoke;
-  height: 60px;
+  height: 80px;
   width: 100%;
 }
 
@@ -192,6 +193,7 @@ export default {
 .logoInicial {
   height: 35px;
   width: 36.5px;
+  margin-top: 3.5px;
 }
 
 .headerImg {
