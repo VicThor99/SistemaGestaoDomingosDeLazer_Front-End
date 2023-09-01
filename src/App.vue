@@ -80,7 +80,7 @@ export default {
       },
       erro: null,
       listaCriancas: [],
-      logado: cookies.get('token') != null,
+      logado: true, //TODO voltar a como era antes
       telaAtual: 'TelaInicial'
     }
   },
