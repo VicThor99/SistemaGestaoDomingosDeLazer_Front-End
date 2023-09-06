@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         recarregaLista() {
-            axios.get('http://192.168.15.40:8080/api/alunos/')
+            axios.get('http://localhost:8080/api/alunos/')
                 .then(res => {
                     this.alunos = res.data;
                 })
@@ -56,7 +56,6 @@ export default {
 
 <style scoped>
 #principal {
-    margin-top: 70px;
     width: 100%;
     height: 100%;
     display: flex;

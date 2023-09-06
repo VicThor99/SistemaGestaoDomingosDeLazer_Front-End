@@ -5,14 +5,14 @@
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
                 style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%;">
-                <div style="height: 49px;">
+                <div style="height: 65px;">
                     <input id="arquivoExcel" type="file" style="width: 610px; height: 100%; font-size:30px;" />
                 </div>
                 <br />
                 <br />
                 <button id="btnImport" class="iniciarImport" @click="iniciarImport"
-                    style="border-radius: 15px; padding: 10px 30px; font-size: 30px; background-color: white; cursor: pointer">Iniciar
-                    Import</button>
+                    style="border-radius: 15px; padding: 10px 30px; font-size: 30px; background-color: rgba(177, 209, 250, 0.747); cursor: pointer">Iniciar
+                    Importação</button>
             </div>
         </div>
     </div>
@@ -36,11 +36,11 @@ export default {
             const input = document.getElementById("arquivoExcel");
             readXlsxFile(input.files[0]).then((rows) => {
                 for (let i = 0; i < rows.length; i++) {
-                    this.json.alunos.push({ 'nome': rows[i][0], 'nascimento': rows[i][1], 'serie': rows[i][2] })
+                    this.json.alunos.push({ 'nome': rows[i][0], 'nascimento': rows[i][1], 'serie': rows[i][2], 'sala': rows[i][3], 'domingo': rows[i][4] })
                 }
             })
 
-            axios.post('http://192.168.15.40:8080/api/alunos/import', this.json)
+            axios.post('http://localhost:8080/api/alunos/import', this.json)
                 .then(res => console.log(res.data))
                 .catch(rej => console.log(rej));
 
@@ -53,7 +53,6 @@ export default {
 
 <style scoped>
 #principal {
-    margin-top: 70px;
     width: 100%;
     height: 100%;
     display: flex;

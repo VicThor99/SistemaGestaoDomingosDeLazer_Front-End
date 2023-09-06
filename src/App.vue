@@ -26,20 +26,22 @@
             <a class="headerButton">Cadastros</a>
 
             <div class="dropdown-content">
-              <a @click="mudarPagina('Alunos')" class="headerButton">Alunos</a>
-              <a @click="mudarPagina('Usuarios')" class="headerButton">Usuários</a>
-              <a @click="mudarPagina('Salas')" class="headerButton">Salas</a>
+              <a @click="mudarPagina('Alunos')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-account-school"></i> Alunos</a>
+              <a @click="mudarPagina('Usuarios')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-account"></i> Usuários</a>
+              <a @click="mudarPagina('Salas')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-human-male-board"></i> Salas</a>
             </div>
           </div>
         </div>
         <div style="width: 30%;height: 100%; display: flex; justify-content: flex-end;">
-          <div class="dropdown" style="width: 240px; text-align: right;">
-            <a class="headerButton">Opções</a>
+          <div class="dropdown" style="width: 235px; text-align: right;">
+            <a class="headerButton"><i class="mdi mdi-cog"></i></a>
 
             <div class="opcoes-content">
-              <a @click="download" class="headerButton">Gerar Excel Sacolinhas</a>
-              <a @click="mudarPagina('ImportExcel')" class="headerButton">Importar Excel</a>
-              <a @click="sair" class="headerButton">Sair</a>
+              <p style="font-weight: bold;">Olá, {{ username }}</p>
+              <br>
+              <a @click="download" class="headerButton" style="font-weight: normal !important;">Exportar Excel <i class="mdi mdi-file-excel"></i></a>
+              <a @click="mudarPagina('ImportExcel')" class="headerButton" style="font-weight: normal !important;">Importar Excel <i class="mdi mdi-file-excel-outline"></i></a>
+              <a @click="sair" class="headerButton" style="font-weight: normal !important;">Sair <i class="mdi mdi-exit-to-app"></i></a>
             </div>
           </div>
         </div>
@@ -78,21 +80,23 @@ export default {
         username: '',
         senha: ''
       },
+      username:cookies.get('username'),
       erro: null,
       listaCriancas: [],
-      logado: true, //TODO voltar a como era antes
+      logado: cookies.get('token') !== null,
       telaAtual: 'TelaInicial'
     }
   },
   methods: {
     submit() {
-      axios.post('http://192.168.15.40:8080/api/auth', this.user)
+      axios.post('http://localhost:8080/api/auth', this.user)
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 30);
           cookies.set('token', res.data.token, date);
           cookies.set('admin', res.data.admin, date);
           cookies.set('username', res.data.username, date);
+          this.username = res.data.username;
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
@@ -101,13 +105,12 @@ export default {
           console.log(rej);
           cookies.remove('token');
           cookies.remove('admin');
-          cookies.remove('username');
           this.logado = cookies.get('token') != null;
           this.erro = 'Usuário e senha não compatíveis';
         })
     },
     download() {
-      axios.get('http://192.168.15.40:8080/api/alunos/sacolinha')
+      axios.get('http://localhost:8080/api/alunos/sacolinha')
         .then(res => {
           console.log(res.data);
           this.listaCriancas = res.data;
@@ -128,7 +131,6 @@ export default {
     sair() {
       cookies.remove('token');
       cookies.remove('admin');
-      cookies.remove('username');
       this.logado = cookies.get('token') != null;
       this.user.username = '';
       this.user.senha = '';
@@ -160,7 +162,7 @@ export default {
   padding-bottom: 10px;
   display: flex;
   justify-content: flex-start;
-  position: fixed;
+  position: static;
   color: #0b4d75;
   border-radius: 15px;
   background-color: whitesmoke;
@@ -271,13 +273,14 @@ input {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  opacity: 0.9;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 10px 10px;
+  padding: 10px;
+  font-size: 22px !important;
 }
 
 .dropdown-content {
-  width: 130px;
+  width: 150px;
   text-align: start;
 }
 
