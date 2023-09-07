@@ -18,34 +18,40 @@
       <div></div>
     </div>
     <div v-if="logado" id="divPrincipal">
-      <header id="header">
+      <header id="header" style="font-size: 22px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);">
         <div style="width: 70%; height: 100%; display: flex; justify-content: flex-start;">
           <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
               src="./assets/logo.png"></a>
-          <div class="dropdown">
-            <a class="headerButton">Cadastros</a>
-
-            <div class="dropdown-content">
-              <a @click="mudarPagina('Alunos')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-account-school"></i> Alunos</a>
-              <a @click="mudarPagina('Usuarios')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-account"></i> Usuários</a>
-              <a @click="mudarPagina('Salas')" class="headerButton" style="font-weight: normal !important;"><i class="mdi mdi-human-male-board"></i> Salas</a>
-            </div>
-          </div>
+          <a class="headerButton" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
         </div>
-        <div style="width: 30%;height: 100%; display: flex; justify-content: flex-end;">
-          <div class="dropdown" style="width: 235px; text-align: right;">
-            <a class="headerButton"><i class="mdi mdi-cog"></i></a>
-
-            <div class="opcoes-content">
-              <p style="font-weight: bold;">Olá, {{ username }}</p>
-              <br>
-              <a @click="download" class="headerButton" style="font-weight: normal !important;">Exportar Excel <i class="mdi mdi-file-excel"></i></a>
-              <a @click="mudarPagina('ImportExcel')" class="headerButton" style="font-weight: normal !important;">Importar Excel <i class="mdi mdi-file-excel-outline"></i></a>
-              <a @click="sair" class="headerButton" style="font-weight: normal !important;">Sair <i class="mdi mdi-exit-to-app"></i></a>
-            </div>
+        <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
+          <div style="width: 235px; text-align: right;">
+            <a class="headerButton" @click="abrirOuFecharOpcoes">Olá, {{ username }} <i class="mdi mdi-cog"> </i><i
+                class="mdi mdi-menu-down"></i></a>
           </div>
         </div>
       </header>
+      <div
+        style="margin: -15px -20px 0px 73px; border-radius:0px 0px 15px 15px; width: 365px; height: 50px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        v-if="cadastros">
+        <a style="margin-top: 10px; margin-left: 20px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
+            class="mdi mdi-account-school"></i> Alunos</a>
+        <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Salas')"><i
+            class="mdi mdi-google-classroom"></i> Séries</a>
+        <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
+            class="mdi mdi-account-multiple-outline"></i> Usuários</a>
+      </div>
+
+      <div
+        style="margin: -15px 15px 0px 0px; border-radius:0px 0px 15px 15px;width: 455px; height: 50px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
+        v-if="opcoes">
+        <a style="margin-top: 10px; margin-right: 25px; cursor: pointer;" @click="download"><i
+            class="mdi mdi-file-excel"></i> Exportar Excel</a>
+        <a style="margin-top: 10px; margin-right: 25px; cursor: pointer;" @click="mudarPagina('ImportExcel')"><i
+            class="mdi mdi-file-excel-outline"></i> Importar Excel</a>
+        <a style="margin-top: 10px; margin-right: 20px; cursor: pointer;" @click="sair"><i
+            class="mdi mdi-exit-to-app"></i> Sair</a>
+      </div>
       <TelaInicial :user="user.username" v-if="telaAtual === 'TelaInicial'" />
       <CadastroAlunos v-if="telaAtual === 'Alunos'" />
       <CadastroSalas v-if="telaAtual === 'Salas'" />
@@ -80,11 +86,13 @@ export default {
         username: '',
         senha: ''
       },
-      username:cookies.get('username'),
+      username: cookies.get('username'),
       erro: null,
       listaCriancas: [],
       logado: cookies.get('token') !== null,
-      telaAtual: 'TelaInicial'
+      telaAtual: 'TelaInicial',
+      cadastros: false,
+      opcoes: false
     }
   },
   methods: {
@@ -105,6 +113,7 @@ export default {
           console.log(rej);
           cookies.remove('token');
           cookies.remove('admin');
+          cookies.remove('username');
           this.logado = cookies.get('token') != null;
           this.erro = 'Usuário e senha não compatíveis';
         })
@@ -112,13 +121,13 @@ export default {
     download() {
       axios.get('http://localhost:8080/api/alunos/sacolinha')
         .then(res => {
-          console.log(res.data);
-          this.listaCriancas = res.data;
-          console.log(this.listaCriancas);
-          const data = utils.json_to_sheet(this.listaCriancas);
+          this.listaCriancas = [];
+          this.listaCriancas.push({ "codigo":"Código",	"nome":"Nome",	"idade":"Idade", "nascimento":"Data de Nascimento", "sapato":"Calçado", "calca":"Calça",	"camisa":"Camisa",	"serie":"Série",	"sala":"Sala" });
+          res.data.forEach((element) => this.listaCriancas.push(element));
+          const data = utils.json_to_sheet(this.listaCriancas, {skipHeader: true});
           const wb = utils.book_new();
           utils.book_append_sheet(wb, data, 'Dados para Sacolinha');
-          writeFile(wb, 'sacolinhaDeNatal.xlsx');
+          writeFile(wb, 'ExportSacolinhaDeNatal.xlsx');
         })
         .catch(rej => {
           console.log(rej);
@@ -127,13 +136,26 @@ export default {
     },
     mudarPagina(tela) {
       this.telaAtual = tela;
+      this.cadastros = false;
+      this.opcoes = false;
     },
     sair() {
       cookies.remove('token');
       cookies.remove('admin');
+      cookies.remove('username');
       this.logado = cookies.get('token') != null;
       this.user.username = '';
       this.user.senha = '';
+      this.cadastros = false;
+      this.opcoes = false;
+    },
+    abrirOuFecharCadastros() {
+      this.opcoes = false;
+      this.cadastros = !this.cadastros;
+    },
+    abrirOuFecharOpcoes() {
+      this.cadastros = false;
+      this.opcoes = !this.opcoes;
     }
   }
 }

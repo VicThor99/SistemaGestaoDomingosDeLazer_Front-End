@@ -23,7 +23,6 @@ export default {
 
 <style scoped>
 #principal {
-    margin-top: 70px;
     width: 100%;
     height: 100%;
     display: flex;
