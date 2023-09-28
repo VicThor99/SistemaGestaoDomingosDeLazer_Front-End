@@ -1,24 +1,51 @@
 <template>
     <div id="principal">
-        <div id="salas">
-            <h2 style="margin-left: 30px;">Cadastro de Salas</h2>
-            <hr style="opacity: 0.2; width: 99.86%;"/>
-
+        <div id="series">
+            <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
+                <h2 style="margin-top: 3px;width: 60%">Cadastro de Séries</h2>
+                <input
+                    style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 10px; background-color: white; opacity: 0.7;"
+                    type="text" placeholder="Pesquisa" v-model="search" />
+            </div>
+            <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
+            <v-data-table @click:row="rowClick" items-per-page="11" :headers="headers" :items="series"
+                style="padding: 5px 10px 10px 10px;" :search="search" class="elevation-1" v-if="series.length > 0" />
         </div>
     </div>
 </template>
 
+<script setup>
+    import { VDataTable } from 'vuetify/labs/VDataTable'
+</script>
+
 <script>
-export default {
+    import axios from 'axios';
 
-    name: 'CadastroSalas',
-    data() {
-        return {
-
+    export default {
+        name: 'CadastroSerie',
+        data() {
+            return {
+                headers: [
+                    { title: 'Id', key: 'id', align: 'start', type: Number },
+                    { title: 'Série', key: 'serie', align: 'start' },
+                    { title: 'Sala', key: 'sala', align: 'start' },
+                    { title: 'Domingo', key: 'domingo', align: 'end' },
+                ],
+                series: [],
+                search: ''
+            }
+        },
+        methods: {
+            async recarregaLista() {
+                const res = await axios.get('http://localhost:8080/api/series/');
+                this.series = res.data;
+            }
+        },
+        mounted() {
+            this.recarregaLista();
         }
-    }
 
-}
+    }
 </script>
 
 <style scoped>
@@ -31,7 +58,7 @@ export default {
     flex-direction: column;
 }
 
-#salas {
+#series {
     background-color: rgb(230, 243, 255);
     width: 98%;
     height: 795px;

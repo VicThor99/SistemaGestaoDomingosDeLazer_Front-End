@@ -11,6 +11,7 @@ import { fa } from "vuetify/iconsets/fa";
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
+import VueTheMask from 'vue-the-mask'
 
 const vuetify = createVuetify({
   components,
@@ -25,4 +26,4 @@ const vuetify = createVuetify({
   },
 })
 
-createApp(App).use(vuetify).use(CanvasJSChart).mount('#app')
+createApp(App).use(vuetify).use(CanvasJSChart).use(VueTheMask).mount('#app')

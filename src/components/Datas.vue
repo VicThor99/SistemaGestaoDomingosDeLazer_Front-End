@@ -1,15 +1,15 @@
 <template>
     <div id="principal">
-        <div id="usuarios">
+        <div id="datas">
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
-                <h2 style="margin-top: 3px;width: 60%">Cadastro de Usuários</h2>
+                <h2 style="margin-top: 3px;width: 60%">Cadastro de Datas das Atividades</h2>
                 <input
                     style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 10px; background-color: white; opacity: 0.7;"
                     type="text" placeholder="Pesquisa" v-model="search" />
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
-            <v-data-table @click:row="rowClick" items-per-page="11" :headers="headers" :items="usuarios"
-                style="padding: 5px 10px 10px 10px;" :search="search" class="elevation-1" v-if="usuarios.length > 0" />
+            <v-data-table @click:row="rowClick" items-per-page="11" :headers="headers" :items="datas"
+                style="padding: 5px 10px 10px 10px;" :search="search" class="elevation-1" v-if="datas.length > 0" />
         </div>
     </div>
 </template>
@@ -22,24 +22,22 @@
     import axios from 'axios';
 
     export default {
-        name: 'CadastroUsuarios',
+        name: 'CadastroDatas',
         data() {
             return {
                 headers: [
                     { title: 'Id', key: 'id', align: 'start', type: Number },
-                    { title: 'Nome', key: 'nome', align: 'start' },
-                    { title: 'Username', key: 'username', align: 'start' },
-                    { title: 'Email', key: 'email', align: 'start' },
-                    { title: 'Cargo', key: 'cargo', align: 'start' },
+                    { title: 'Dia da Atividade', key: 'date', align: 'end' },
+                    { title: 'Domingo da Atividade', key: 'domingo', align: 'end' },
                 ],
-                usuarios: [],
+                datas: [],
                 search: ''
             }
         },
         methods: {
             async recarregaLista() {
-                const res = await axios.get('http://localhost:8080/api/users/');
-                this.usuarios = res.data;
+                const res = await axios.get('http://localhost:8080/api/datas/');
+                this.datas = res.data;
             }
         },
         mounted() {
@@ -59,7 +57,7 @@
     flex-direction: column;
 }
 
-#usuarios {
+#datas {
     background-color: rgb(230, 243, 255);
     width: 98%;
     height: 795px;

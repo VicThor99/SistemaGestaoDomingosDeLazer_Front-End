@@ -32,10 +32,12 @@
         </div>
       </header>
       <div
-        style="margin: -15px -20px 0px 73px; border-radius:0px 0px 15px 15px; width: 365px; height: 50px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 73px; border-radius:0px 0px 15px 15px; width: 460px; height: 50px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="cadastros">
         <a style="margin-top: 10px; margin-left: 20px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
             class="mdi mdi-account-school"></i> Alunos</a>
+        <a style="margin-top: 10px; margin-left: 20px; cursor: pointer;" @click="mudarPagina('Datas')"><i
+            class="mdi mdi-calendar-heart"></i> Datas</a>
         <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Salas')"><i
             class="mdi mdi-google-classroom"></i> Séries</a>
         <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
@@ -54,6 +56,7 @@
       </div>
       <TelaInicial :user="user.username" v-if="telaAtual === 'TelaInicial'" />
       <CadastroAlunos v-if="telaAtual === 'Alunos'" />
+      <CadastroDatas v-if="telaAtual === 'Datas'" />
       <CadastroSalas v-if="telaAtual === 'Salas'" />
       <CadastroUsuarios v-if="telaAtual === 'Usuarios'" />
       <ImportExcel v-if="telaAtual === 'ImportExcel'" />
@@ -67,6 +70,7 @@ import axios from 'axios';
 import { utils, writeFile } from 'xlsx';
 import TelaInicial from './components/TelaInicial.vue';
 import CadastroAlunos from './components/Alunos.vue';
+import CadastroDatas from './components/Datas.vue';
 import CadastroSalas from './components/Salas.vue';
 import CadastroUsuarios from './components/Usuarios.vue';
 import ImportExcel from './components/ImportaExcel.vue';
@@ -76,6 +80,7 @@ export default {
   components: {
     TelaInicial,
     CadastroAlunos,
+    CadastroDatas,
     CadastroSalas,
     CadastroUsuarios,
     ImportExcel
@@ -86,8 +91,8 @@ export default {
         username: '',
         senha: ''
       },
-      username: cookies.get('username'),
       erro: null,
+      username: cookies.get('user_name'),
       listaCriancas: [],
       logado: cookies.get('token') !== null,
       telaAtual: 'TelaInicial',
@@ -103,8 +108,8 @@ export default {
           date.setUTCMinutes(date.getUTCMinutes() + 30);
           cookies.set('token', res.data.token, date);
           cookies.set('admin', res.data.admin, date);
-          cookies.set('username', res.data.username, date);
-          this.username = res.data.username;
+          cookies.set('user_name', res.data.username, date);
+          this.username = cookies.get('user_name');
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
@@ -113,7 +118,7 @@ export default {
           console.log(rej);
           cookies.remove('token');
           cookies.remove('admin');
-          cookies.remove('username');
+          cookies.remove('user_name');
           this.logado = cookies.get('token') != null;
           this.erro = 'Usuário e senha não compatíveis';
         })
@@ -142,7 +147,7 @@ export default {
     sair() {
       cookies.remove('token');
       cookies.remove('admin');
-      cookies.remove('username');
+      cookies.remove('user_name');
       this.logado = cookies.get('token') != null;
       this.user.username = '';
       this.user.senha = '';
