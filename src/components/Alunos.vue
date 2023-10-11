@@ -1,18 +1,38 @@
 <template>
     <div id="principal">
         <div id="alunos" v-if="aluno == null">
+            <div id="alert" :class="alertClass" v-if="alertAtivo">
+                <div style="display: flex; justify-content: space-between;">
+                    <h2 style="width: 90%">{{ this.alertTitle }}</h2>
+                    <a @click="fecharAlert" style="cursor: pointer;"><i class="mdi mdi-window-close"></i></a>
+                </div>
+                <hr style="opacity: 0.2; width: 100%; margin-bottom: 10px;" />
+                <div>
+                    <p>{{ this.alertText }}</p>
+                </div>
+            </div>
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
-                <h2 style="margin-top: 3px;width: 60%">Cadastro de Alunos</h2>
+                <h2 style="margin-top: 3px;width: 60%">Listagem de Alunos</h2>
                 <input
                     style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 10px; background-color: white; opacity: 0.7;"
                     type="text" placeholder="Pesquisa" v-model="search" />
-                <button id="botao" @click="novoAluno"><i class="mdi mdi-plus-circle-outline"></i>  Novo</button>
+                <button id="botao" @click="novoAluno"><i class="mdi mdi-plus-circle-outline"></i> Novo</button>
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <v-data-table items-per-page="11" :headers="headers" :items="alunos" @click:row="clickRow"
                 style="padding: 5px 10px 10px 10px;" :search="search" class="elevation-1" v-if="alunos.length > 0" />
         </div>
         <div id="aluno" v-if="aluno != null">
+            <div id="alert" :class="alertClass" v-if="alertAtivo">
+                <div style="display: flex; justify-content: space-between;">
+                    <h2 style="width: 90%">{{ this.alertTitle }}</h2>
+                    <a @click="fecharAlert" style="cursor: pointer;"><i class="mdi mdi-window-close"></i></a>
+                </div>
+                <hr style="opacity: 0.2; width: 100%; margin-bottom: 10px;" />
+                <div>
+                    <p>{{ this.alertText }}</p>
+                </div>
+            </div>
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
                 <h2 style="margin-top: 3px;width: 60%">Cadastro de Alunos - {{ title }}</h2>
             </div>
@@ -56,6 +76,12 @@
                         <input type="text"
                             style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
                             v-model="aluno.serie" />
+                    </div>
+                    <div style="display: flex; flex-direction: column; width: 125px; margin-left: 10px;">
+                        <p style="color: #5a5a5a; margin-left: 5px;">Sexo</p>
+                        <input type="text"
+                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            v-model="aluno.sexo" />
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
@@ -112,9 +138,9 @@
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
-                    <button id="botao" @click="aluno = null"><i class="mdi mdi-cancel"></i>  Cancelar</button>
+                    <button id="botao" @click="aluno = null; this.alertAtivo = false;"><i class="mdi mdi-cancel"></i> Cancelar</button>
                     <v-spacer></v-spacer>
-                    <button id="botao" @click="salvarAluno"><i class="mdi mdi-check"></i>  Salvar</button>
+                    <button id="botao" @click="salvarAluno"><i class="mdi mdi-check"></i> Salvar</button>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
@@ -137,8 +163,9 @@ export default {
         return {
             headers: [
                 { title: 'Id', key: 'id', align: 'start', type: Number },
-                { title: 'Nome', key: 'nome', align: 'start' },
                 { title: 'Código', key: 'codigo', align: 'start' },
+                { title: 'Nome', key: 'nome', align: 'start' },
+                { title: 'Sexo', key: 'sexo', align: 'start' },
                 { title: 'Série', key: 'serie', align: 'start' },
                 { title: 'Sala', key: 'sala', align: 'start' },
                 { title: 'Data de Nascimento', key: 'nascimento', align: 'end' },
@@ -153,7 +180,11 @@ export default {
             alunos: [],
             search: '',
             aluno: null,
-            title: ''
+            title: '',
+            alertAtivo: false,
+            alertTitle: '',
+            alertText: '',
+            alertClass: ''
         }
     },
     methods: {
@@ -162,7 +193,25 @@ export default {
             this.alunos = res.data;
         },
         salvarAluno() {
-            console.log("ENTROU NO MÉTODO");
+            axios.post('http://localhost:8080/api/alunos/save', this.aluno).then(res => {
+                if (this.aluno.sexo === 'M') {
+                    if (this.aluno.id > 0) {
+                        this.alert('Aluno Editado', 'Aluno ' + res.data.nome + ' editado com sucesso!', 'success');
+                    } else {
+                        this.alert('Aluno Adicionado', 'Aluno ' + res.data.nome + ' adicionado com sucesso!', 'success');
+                    }
+                } else {
+                    if (this.aluno.id > 0) {
+                        this.alert('Aluna Editada', 'Aluna ' + res.data.nome + ' editada com sucesso!', 'success');
+                    } else {
+                        this.alert('Aluna Adicionada', 'Aluna ' + res.data.nome + ' adicionada com sucesso!', 'success');
+                    }
+                }
+                this.recarregaLista();
+                this.aluno = null;
+            }).catch(rej => {
+                this.alert('Erro', rej.response.data, 'error');
+            });
         },
         clickRow(item, row) {
             const dateVet = row.item.columns.nascimento.split("/");
@@ -171,6 +220,7 @@ export default {
                 id: row.item.columns.id,
                 codigo: row.item.columns.codigo,
                 nome: row.item.columns.nome,
+                sexo: row.item.columns.sexo,
                 nascimento: dateVet[2] + "-" + dateVet[1] + "-" + dateVet[0],
                 serie: row.item.columns.serie,
                 sapato: row.item.columns.sapato,
@@ -183,14 +233,14 @@ export default {
             }
 
             this.title = "Editar Aluno";
-
-            console.log(this.aluno);
+            this.alertAtivo = false;
         },
         novoAluno() {
             this.aluno = {
                 id: 0,
                 codigo: 0,
                 nome: '',
+                sexo: '',
                 nascimento: new Date().toISOString().split('T')[0],
                 serie: '',
                 sapato: 0,
@@ -203,6 +253,19 @@ export default {
             }
 
             this.title = "Novo Aluno";
+            this.alertAtivo = false;
+        },
+        alert(title, text, classe) {
+            this.alertAtivo = true;
+            this.alertTitle = title;
+            this.alertText = text;
+            this.alertClass = classe;
+        },
+        fecharAlert() {
+            this.alertAtivo = false;
+            this.alertTitle = '';
+            this.alertText = '';
+            this.alertClass = '';
         }
     },
     mounted() {
@@ -246,4 +309,29 @@ export default {
     cursor: pointer;
 }
 
+#alert {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-radius: 15px;
+    padding: 10px 15px;
+    color: white;
+}
+
+#alert h2 {
+    font-size: 25px;
+}
+
+#alert p {
+    font-size: 20px;
+}
+
+.error {
+    background-color: rgb(210, 25, 25);
+}
+
+.success {
+    background-color: rgb(120, 200, 120);
+}
 </style>

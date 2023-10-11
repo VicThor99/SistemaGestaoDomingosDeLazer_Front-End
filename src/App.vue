@@ -25,7 +25,7 @@
           <a class="headerButton" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
         </div>
         <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
-          <div style="width: 235px; text-align: right;">
+          <div style="width: 300px; text-align: right;">
             <a class="headerButton" @click="abrirOuFecharOpcoes">Olá, {{ username }} <i class="mdi mdi-cog"> </i><i
                 class="mdi mdi-menu-down"></i></a>
           </div>
@@ -115,7 +115,7 @@ export default {
           this.telaAtual = 'TelaInicial';
         })
         .catch(rej => {
-          console.log(rej);
+          console.log(rej)
           cookies.remove('token');
           cookies.remove('admin');
           cookies.remove('user_name');
@@ -135,8 +135,7 @@ export default {
           writeFile(wb, 'ExportSacolinhaDeNatal.xlsx');
         })
         .catch(rej => {
-          console.log(rej);
-          this.erro = '';
+          this.erro = rej;
         })
     },
     mudarPagina(tela) {
@@ -277,6 +276,7 @@ input {
 .aviso {
   color: red;
   background-color: rgb(255, 210, 210);
+  margin-top: 10px;
   padding: 7px;
   border-radius: 10px;
   font-size: 20px;

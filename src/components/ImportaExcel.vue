@@ -32,13 +32,14 @@ export default {
     },
     methods: {
         async iniciarImport() {
+            this.json.alunos = [];
+            let input = document.getElementById("arquivoExcel");
 
-            const input = document.getElementById("arquivoExcel");
             await readXlsxFile(input.files[0]).then((rows) => {
                 for (let i = 0; i < rows.length; i++) {
-                    this.json.alunos.push({ 'nome': rows[i][0], 'nascimento': rows[i][1], 'serie': rows[i][2], 'sala': rows[i][3], 'domingo': rows[i][4] })
+                    this.json.alunos.push({ 'nome': rows[i][0], 'nascimento': rows[i][1], 'serie': rows[i][2], 'sala': rows[i][3], 'domingo': rows[i][4] });
                 }
-            })
+            });
 
             axios.post('http://localhost:8080/api/alunos/import', this.json)
                 .then(res => console.log(res.data))

@@ -11,7 +11,7 @@ import { fa } from "vuetify/iconsets/fa";
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
-import VueTheMask from 'vue-the-mask'
+import VueTheMask from 'vue-the-mask';
 
 const vuetify = createVuetify({
   components,
