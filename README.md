@@ -1,4 +1,4 @@
-# SistemaGestaoParaisopolis_Front-End
+# SistemaGestaoDomingoDeLazer_Front-End
 
 ## Project setup
 ```

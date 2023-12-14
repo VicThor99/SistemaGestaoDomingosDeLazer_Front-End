@@ -23,6 +23,8 @@
           <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
               src="./assets/logo.png"></a>
           <a class="headerButton" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" @click="abrirOuFecharPresencas">Presenças <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
         </div>
         <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
           <div style="width: 300px; text-align: right;">
@@ -32,26 +34,48 @@
         </div>
       </header>
       <div
-        style="margin: -15px -20px 0px 73px; border-radius:0px 0px 15px 15px; width: 460px; height: 50px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 655px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="cadastros">
-        <a style="margin-top: 10px; margin-left: 20px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
             class="mdi mdi-account-school"></i> Alunos</a>
-        <a style="margin-top: 10px; margin-left: 20px; cursor: pointer;" @click="mudarPagina('Datas')"><i
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Datas')"><i
             class="mdi mdi-calendar-heart"></i> Datas</a>
-        <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Salas')"><i
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Salas')"><i
             class="mdi mdi-google-classroom"></i> Séries</a>
-        <a style="margin-top: 10px; margin-left: 25px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
             class="mdi mdi-account-multiple-outline"></i> Usuários</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CadastroEmMassa')"><i
+            class="mdi mdi-group"></i> Cadastros em Massa</a>
+      </div>
+      <div
+        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 320px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        v-if="registroPresencas">
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
+            class="mdi mdi-calendar-plus"></i> Registro (Leitor)</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CorrecaoPresenca')"><i
+            class="mdi mdi-calendar-sync"></i> Correção</a>
+      </div>
+      <div
+        style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 491px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        v-if="impressoes">
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoMatriculas')"><i
+            class="mdi mdi-file-document-edit"></i> Matrículas</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoListas')"><i
+            class="mdi mdi-view-list"></i> Listas</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoCrachas')"><i
+            class="mdi mdi-badge-account-horizontal"></i> Crachás</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoProtocolos')"><i
+            class="mdi mdi-ticket-account"></i> Protocolos</a>
       </div>
 
       <div
-        style="margin: -15px 15px 0px 0px; border-radius:0px 0px 15px 15px;width: 455px; height: 50px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
+        style="margin: -15px 15px 0px 0px; border-radius: 0px 0px 5px 5px;width: 430px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
         v-if="opcoes">
-        <a style="margin-top: 10px; margin-right: 25px; cursor: pointer;" @click="download"><i
+        <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="download"><i
             class="mdi mdi-file-excel"></i> Exportar Excel</a>
-        <a style="margin-top: 10px; margin-right: 25px; cursor: pointer;" @click="mudarPagina('ImportExcel')"><i
+        <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="mudarPagina('ImportExcel')"><i
             class="mdi mdi-file-excel-outline"></i> Importar Excel</a>
-        <a style="margin-top: 10px; margin-right: 20px; cursor: pointer;" @click="sair"><i
+        <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="sair"><i
             class="mdi mdi-exit-to-app"></i> Sair</a>
       </div>
       <TelaInicial :user="user.username" v-if="telaAtual === 'TelaInicial'" />
@@ -60,6 +84,13 @@
       <CadastroSalas v-if="telaAtual === 'Salas'" />
       <CadastroUsuarios v-if="telaAtual === 'Usuarios'" />
       <ImportExcel v-if="telaAtual === 'ImportExcel'" />
+      <RegistroPresencas v-if="telaAtual === 'RegistroPresencas'" />
+      <CorrecaoPresencas v-if="telaAtual === 'CorrecaoPresenca'" />
+      <ImpressaoCrachas v-if="telaAtual === 'ImpressaoCrachas'" />
+      <ImpressaoListas v-if="telaAtual === 'ImpressaoListas'" />
+      <ImpressaoMatriculas v-if="telaAtual === 'ImpressaoMatriculas'" />
+      <ImpressaoProtocolos v-if="telaAtual === 'ImpressaoProtocolos'" />
+      <CadastroEmMassa v-if="telaAtual === 'CadastroEmMassa'" />
     </div>
   </div>
 </template>
@@ -74,6 +105,13 @@ import CadastroDatas from './components/Datas.vue';
 import CadastroSalas from './components/Salas.vue';
 import CadastroUsuarios from './components/Usuarios.vue';
 import ImportExcel from './components/ImportaExcel.vue';
+import CorrecaoPresencas from './components/CorrecaoPresencas.vue';
+import RegistroPresencas from './components/RegistroPresencas.vue';
+import ImpressaoCrachas from './components/ImpressaoCrachas.vue';
+import ImpressaoListas from './components/ImpressaoListas.vue';
+import ImpressaoMatriculas from './components/ImpressaoMatriculas.vue';
+import ImpressaoProtocolos from './components/ImpressaoProtocolos.vue';
+import CadastroEmMassa from './components/CadastrosEmMassa.vue';
 
 export default {
   name: 'App',
@@ -83,7 +121,14 @@ export default {
     CadastroDatas,
     CadastroSalas,
     CadastroUsuarios,
-    ImportExcel
+    ImportExcel,
+    CorrecaoPresencas,
+    RegistroPresencas,
+    ImpressaoCrachas,
+    ImpressaoListas,
+    ImpressaoProtocolos,
+    ImpressaoMatriculas,
+    CadastroEmMassa
   },
   data() {
     return {
@@ -97,7 +142,10 @@ export default {
       logado: cookies.get('token') !== null,
       telaAtual: 'TelaInicial',
       cadastros: false,
-      opcoes: false
+      registroPresencas: false,
+      impressoes: false,
+      opcoes: false,
+      token: cookies.get('token')
     }
   },
   methods: {
@@ -106,7 +154,7 @@ export default {
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 30);
-          cookies.set('token', res.data.token, date);
+          cookies.set('token', 'Bearer ' + res.data.token, date);
           cookies.set('admin', res.data.admin, date);
           cookies.set('user_name', res.data.username, date);
           this.username = cookies.get('user_name');
@@ -124,12 +172,16 @@ export default {
         })
     },
     download() {
-      axios.get('http://localhost:8080/api/alunos/sacolinha')
+      axios.get('http://localhost:8080/api/alunos/export', {
+        headers: {
+          'Authorization': this.token
+        }
+      })
         .then(res => {
           this.listaCriancas = [];
-          this.listaCriancas.push({ "codigo":"Código",	"nome":"Nome",	"idade":"Idade", "nascimento":"Data de Nascimento", "sapato":"Calçado", "calca":"Calça",	"camisa":"Camisa",	"serie":"Série",	"sala":"Sala" });
+          this.listaCriancas.push({ "codigo": "Código", "nome": "Nome", "sexo": "Sexo", "idade": "Idade", "nascimento": "Data de Nascimento", "sapato": "Calçado", "calca": "Calça", "camisa": "Camisa", "serie": "Série", "sala": "Sala" });
           res.data.forEach((element) => this.listaCriancas.push(element));
-          const data = utils.json_to_sheet(this.listaCriancas, {skipHeader: true});
+          const data = utils.json_to_sheet(this.listaCriancas, { skipHeader: true });
           const wb = utils.book_new();
           utils.book_append_sheet(wb, data, 'Dados para Sacolinha');
           writeFile(wb, 'ExportSacolinhaDeNatal.xlsx');
@@ -140,8 +192,10 @@ export default {
     },
     mudarPagina(tela) {
       this.telaAtual = tela;
-      this.cadastros = false;
       this.opcoes = false;
+      this.cadastros = false;
+      this.impressoes = false;
+      this.registroPresencas = false;
     },
     sair() {
       cookies.remove('token');
@@ -150,16 +204,34 @@ export default {
       this.logado = cookies.get('token') != null;
       this.user.username = '';
       this.user.senha = '';
-      this.cadastros = false;
       this.opcoes = false;
+      this.cadastros = false;
+      this.impressoes = false;
+      this.registroPresencas = false;
     },
     abrirOuFecharCadastros() {
       this.opcoes = false;
+      this.impressoes = false;
+      this.registroPresencas = false;
       this.cadastros = !this.cadastros;
+    },
+    abrirOuFecharPresencas() {
+      this.opcoes = false;
+      this.cadastros = false;
+      this.impressoes = false;
+      this.registroPresencas = !this.registroPresencas;
     },
     abrirOuFecharOpcoes() {
       this.cadastros = false;
+      this.impressoes = false;
+      this.registroPresencas = false;
       this.opcoes = !this.opcoes;
+    },
+    abrirOuFecharImpressoes() {
+      this.opcoes = false;
+      this.cadastros = false;
+      this.registroPresencas = false;
+      this.impressoes = !this.impressoes;
     }
   }
 }
@@ -190,7 +262,7 @@ export default {
   justify-content: flex-start;
   position: static;
   color: #0b4d75;
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: whitesmoke;
   height: 80px;
   width: 100%;
@@ -209,7 +281,7 @@ export default {
   font-size: 20px;
   padding: 20px;
   color: #0b4d75;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 
 .img {
@@ -246,7 +318,7 @@ export default {
   color: #0b4d75;
   font-size: 20px;
   border: 0;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
   margin-left: 15px;
   margin-right: 15px;
@@ -268,7 +340,7 @@ input {
   margin-top: 25px;
   border: 0;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 5px;
   padding: 8px;
   cursor: text;
 }
@@ -278,7 +350,7 @@ input {
   background-color: rgb(255, 210, 210);
   margin-top: 10px;
   padding: 7px;
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 20px;
 }
 
@@ -286,7 +358,7 @@ input {
   color: green;
   background-color: rgb(210, 255, 210);
   padding: 7px;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .dropdown {
@@ -301,7 +373,7 @@ input {
   position: absolute;
   background-color: #f9f9f9;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 5px 5px;
   padding: 10px;
   font-size: 22px !important;
 }

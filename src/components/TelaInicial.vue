@@ -1,42 +1,44 @@
 <template>
     <div id="principal">
-        <div id="telaInicial">
+        <div id="telaInicial" v-if="this.lista == null">
             <div style="width: 100%; margin: 20px; display: flex; justify-content: space-around;">
                 <div style="display: flex; justify-content: center; flex-direction: column; width: 32.5%;">
                     <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 10px; ">
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 20px 20px 0px 0px; background-color: #0b4d75; ">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo A</p>
                         </div>
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 20px 20px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account"></i> Total</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingoa.total }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomAAptas')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-check"></i> Aptas</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingoa.aptas }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomARisco')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-alert"></i> Risco</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingoa.risco }}</p>
                                 </div>
                             </div>
@@ -44,38 +46,40 @@
                     </div>
                     <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 10px;">
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 20px 20px 0px 0px; background-color: #0b4d75; ">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo B</p>
                         </div>
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 20px 20px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account"></i> Total</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingob.total }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomBAptas')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-check"></i> Aptas</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingob.aptas }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomBRisco')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-alert"></i> Risco</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingob.risco }}</p>
                                 </div>
                             </div>
@@ -83,38 +87,40 @@
                     </div>
                     <div style="display: flex; justify-content: center; flex-direction: column ;">
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 20px 20px 0px 0px; background-color: #0b4d75; ">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Todos Domingos</p>
                         </div>
                         <div
-                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 20px 20px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account"></i> Total</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingos.total }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('TodosAptos')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-check"></i> Aptas</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingos.aptas }}</p>
                                 </div>
                             </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('TodosRisco')">
                                 <div
-                                    style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-alert"></i> Risco</p>
                                 </div>
                                 <div
-                                    style="font-size: 40pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                     <p>{{ domingos.risco }}</p>
                                 </div>
                             </div>
@@ -123,37 +129,37 @@
                 </div>
                 <div style="width: 1%;"></div>
                 <div style="display: flex; flex-direction: column; width: 66%;">
-                    <div style="background-color: white; border-radius: 20px; padding: 10px;">
-                        <div id="chartContainer" style="height: 361px; width: 100%;"></div>
+                    <div style="background-color: white; border-radius: 5px; padding: 10px;">
+                        <div id="chartContainer" style="height: 360px; width: 100%;"></div>
                     </div>
                     <div
-                        style="display: flex; justify-content: space-around; width: 100%; margin-top: 15px; height: 180px;">
+                        style="display: flex; justify-content: space-around; width: 100%; margin-top: 10px; height: 185px;">
                         <div
-                            style="display: flex; justify-content: center; flex-direction: column; width: 100%; height: 180px;">
+                            style="display: flex; justify-content: center; flex-direction: column; width: 100%; height: 185px;">
                             <div
-                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 20px 20px 0px 0px; background-color: #0b4d75; ">
+                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                                 <p style="color: white; font-size: 30px;">Próximas Datas</p>
                             </div>
                             <div
-                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 20px 20px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
                                 <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                                     <div
-                                        style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                         <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
                                     </div>
                                     <div
-                                        style="font-size: 33pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                         <p>{{ this.proximaDataDomA }}</p>
                                     </div>
                                 </div>
                                 <div style="width: 2%;"></div>
                                 <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                                     <div
-                                        style="font-size: 25px; border-radius: 20px 20px 0 0; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                         <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
                                     </div>
                                     <div
-                                        style="font-size: 33pt; border-radius: 0 0 20px 20px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
                                         <p>{{ this.proximaDataDomB }}</p>
                                     </div>
                                 </div>
@@ -163,10 +169,28 @@
                 </div>
             </div>
         </div>
+        <div id="listagemDashboard" v-if="this.lista != null">
+            <div style="margin: 0px 0px 10px 10px; display: flex; justify-content: flex-start;">
+                <div style=" display: flex; justify-content: flex-start; width: 60%;">
+                    <a style="font-size: 25pt; margin-right: 10px; cursor: pointer;" @click="voltar"><i
+                            class="mdi mdi-chevron-left"></i> </a>
+                    <h2 style="margin-top: 3px;">Listagem {{ tituloListagem }}</h2>
+                </div>
+                <input id="pesquisa" type="text" placeholder="Pesquisa" v-model="search" />
+            </div>
+            <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
+            <v-data-table items-per-page="11" :headers="headers" :items="lista" style="padding: 5px 10px 10px 10px;"
+                :search="search" class="elevation-1" />
+        </div>
     </div>
 </template>
 
+<script setup>
+import { VDataTable } from 'vuetify/labs/VDataTable'
+</script>
+
 <script>
+import cookies from 'vue-cookies';
 import axios from 'axios';
 import CanvasJS from '../canvas.js';
 
@@ -175,6 +199,15 @@ export default {
     name: 'TelaInicial',
     data() {
         return {
+            headers: [
+                { title: 'Id', key: 'id', align: 'start', type: Number },
+                { title: 'Código', key: 'codigo', align: 'start' },
+                { title: 'Nome', key: 'nome', align: 'start' },
+                { title: 'Sexo', key: 'sexo', align: 'start' },
+                { title: 'Série', key: 'serie', align: 'start' },
+                { title: 'Sala', key: 'sala', align: 'start' },
+                { title: 'Data de Nascimento', key: 'nascimento', align: 'end' },
+            ],
             domingoa: {
                 total: 0,
                 aptas: 0,
@@ -191,8 +224,11 @@ export default {
                 risco: 0
             },
             proximaDataDomA: '',
-            proximaDataDomB: ''
-
+            proximaDataDomB: '',
+            lista: null,
+            tituloListagem: '',
+            search: '',
+            token: cookies.get('token')
         }
     },
     methods: {
@@ -200,9 +236,12 @@ export default {
 
             var dadosGraficoA = [];
             var dadosGraficoB = [];
-            var dadosGraficoTotal = [];
 
-            const res = await axios.get('http://localhost:8080/api/dashboard/');
+            const res = await axios.get('http://localhost:8080/api/dashboard/', {
+                headers: {
+                    Authorization: this.token,
+                }
+            });
 
             this.domingoa = res.data.domingoa;
             this.domingob = res.data.domingob;
@@ -210,7 +249,6 @@ export default {
 
             dadosGraficoA = res.data.dadosGraficoA;
             dadosGraficoB = res.data.dadosGraficoB;
-            dadosGraficoTotal = res.data.dadosGraficoTotal;
 
             this.proximaDataDomA = res.data.proximaDataDomA;
             this.proximaDataDomB = res.data.proximaDataDomB;
@@ -238,27 +276,64 @@ export default {
                         type: "column",
                         name: "Domingo A",
                         showInLegend: true,
-                        color: "rgb(60, 100, 260)",
+                        color: "rgb(120, 160, 230)",
                         dataPoints: dadosGraficoA
                     },
                     {
                         type: "column",
                         name: "Domingo B",
-                        color: "rgb(120, 160, 230)",
                         showInLegend: true,
-                        dataPoints: dadosGraficoB
-                    },
-                    {
-                        type: "column",
-                        name: "Total",
                         color: "#0B4D75",
-                        showInLegend: true,
-                        dataPoints: dadosGraficoTotal
+                        dataPoints: dadosGraficoB
                     }
                 ]
             });
 
             chart.render();
+        },
+        carregarLista(opcao) {
+            switch (opcao) {
+                case "DomAAptas":
+                    this.tituloListagem = 'Domingo A Aptas';
+                    axios.get('http://localhost:8080/api/dashboard/domAAptas', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomARisco":
+                    this.tituloListagem = 'Domingo A em Risco';
+                    axios.get('http://localhost:8080/api/dashboard/domARisco', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomBAptas":
+                    this.tituloListagem = 'Domingo B Aptas';
+                    axios.get('http://localhost:8080/api/dashboard/domBAptas', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomBRisco":
+                    this.tituloListagem = 'Domingo B em Risco';
+                    axios.get('http://localhost:8080/api/dashboard/domBRisco', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "TodosAptos":
+                    this.tituloListagem = 'Todos Alunos Aptos';
+                    axios.get('http://localhost:8080/api/dashboard/todosAptos', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "TodosRisco":
+                    this.tituloListagem = 'Todos Alunos em Risco';
+                    axios.get('http://localhost:8080/api/dashboard/todosRisco', { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+            }
+        },
+        voltar() {
+            this.lista = null;
+            this.carregarDashboard();
         }
     },
     mounted() {
@@ -284,7 +359,26 @@ export default {
     margin-top: 15px;
     margin-left: 20px;
     color: #0b4d75;
-    border-radius: 20px;
+    border-radius: 5px;
     display: flex;
+}
+
+#listagemDashboard {
+    background-color: rgb(230, 243, 255);
+    height: 795px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 20px 0px 20px 20px;
+    color: #0b4d75;
+    border-radius: 5px;
+}
+
+#pesquisa {
+    width: 40%;
+    margin-right: 20px;
+    padding-left: 15px;
+    border-radius: 5px;
+    background-color: white;
+    opacity: 0.7;
 }
 </style>

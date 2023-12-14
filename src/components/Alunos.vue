@@ -14,7 +14,7 @@
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
                 <h2 style="margin-top: 3px;width: 60%">Listagem de Alunos</h2>
                 <input
-                    style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 10px; background-color: white; opacity: 0.7;"
+                    style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 5px; background-color: white; opacity: 0.7;"
                     type="text" placeholder="Pesquisa" v-model="search" />
                 <button id="botao" @click="novoAluno"><i class="mdi mdi-plus-circle-outline"></i> Novo</button>
             </div>
@@ -38,21 +38,40 @@
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <div
-                style="background-color: white; font-size: 22px; border-radius: 20px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
+                style="background-color: white; font-size: 22px; border-radius: 5px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
                 <div style="display: flex; justify-content: start; width: 100%; margin-bottom: 10px;">
 
                     <div style="display: flex; flex-direction: column; width: 250px; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Id</p>
                         <input type="text" disabled="true"
-                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.id" />
                     </div>
 
-                    <div style="display: flex; flex-direction: column; width: 250px; margin-left: 10px;">
+                    <div
+                        style="display: flex; flex-direction: column; width: 250px; margin-left: 10px; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Código</p>
                         <input type="text" disabled="true"
-                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px; border: 0px;"
+                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px; border: 0px;"
                             v-model="aluno.codigo" />
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; width: 250px; margin-left: 10px;">
+                        <p style="color: #5a5a5a; margin-left: 5px;">Número da Sacolinha</p>
+                        <input type="text" disabled="true"
+                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px; border: 0px;"
+                            v-model="aluno.numeroSacolinha" />
+                    </div>
+                    <v-spacer></v-spacer>
+
+                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                        <p style="color: #5a5a5a; margin-left: 5px;">Aluno ativo</p>
+                        <v-switch color="info" v-model="aluno.ativo" hide-details inset style="width: 100%;"></v-switch>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                        <p style="color: #5a5a5a; margin-left: 5px;">Sair sozinho</p>
+                        <v-switch color="info" v-model="aluno.sairSo" hide-details inset style="width: 100%;"></v-switch>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
@@ -61,75 +80,70 @@
                     <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Nome</p>
                         <input type="text"
-                            style="text-transform:uppercase; border:#3f799c69 1px solid; text-align: start; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; text-align: start; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.nome" />
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 270px; margin-right: 10px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Data de Nascimento</p>
                         <input type="date"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.nascimento" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 125px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Série</p>
-                        <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
-                            v-model="aluno.serie" />
+                        <v-select density="comfortable" variant="outlined" v-model="aluno.serie"
+                            :items="seriesDisponiveis"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 125px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Sexo</p>
-                        <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
-                            v-model="aluno.sexo" />
+                        <v-select density="comfortable" variant="outlined" v-model="aluno.sexo"
+                            :items="['F', 'M']"></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Endereço</p>
                         <input type="text"
-                            style="text-transform:uppercase; border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.endereco" />
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 125px; margin-right: 10px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Sapato</p>
-                        <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
-                            v-model="aluno.sapato" />
+                        <v-select density="comfortable" variant="outlined" v-model="aluno.sapato"
+                            :items="tamanhos"></v-select>
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 125px; margin-right: 10px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Blusa</p>
-                        <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
-                            v-model="aluno.blusa" />
+                        <v-select density="comfortable" variant="outlined" v-model="aluno.blusa"
+                            :items="tamanhos"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 125px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Calça</p>
-                        <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
-                            v-model="aluno.calca" />
+                        <v-select density="comfortable" variant="outlined" v-model="aluno.calca"
+                            :items="tamanhos"></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Nome do Responsável</p>
                         <input type="text"
-                            style="text-transform:uppercase; border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.nomeResponsavel" />
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 1000px; margin-right: 10px; margin-left: 10px;">
-                        <p style="color: #5a5a5a; margin-left: 5px;">E-mail</p>
+                        <p style="color: #5a5a5a; width: 100%; margin-left: 5px;">E-mail</p>
                         <input type="email"
-                            style="text-transform:uppercase; border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.emailResponsavel" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 380px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Telefone</p>
                         <input type="text" v-mask="['(##) ####-####', '(##) #####-####']"
-                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center;  width: 100%; border-radius: 5px;"
                             v-model="aluno.telefoneResponsavel" />
                     </div>
                 </div>
@@ -138,7 +152,8 @@
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
-                    <button id="botao" @click="aluno = null; this.alertAtivo = false;"><i class="mdi mdi-cancel"></i> Cancelar</button>
+                    <button id="botao" @click="aluno = null; this.alertAtivo = false;"><i class="mdi mdi-cancel"></i>
+                        Cancelar</button>
                     <v-spacer></v-spacer>
                     <button id="botao" @click="salvarAluno"><i class="mdi mdi-check"></i> Salvar</button>
                     <v-spacer></v-spacer>
@@ -155,6 +170,7 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 </script>
 
 <script>
+import cookies from 'vue-cookies';
 import axios from 'axios';
 
 export default {
@@ -176,6 +192,9 @@ export default {
                 { title: 'Nome do Responsável', key: 'nomeResponsavel', align: ' d-none' },
                 { title: 'Telefone do Responsável', key: 'telefoneResponsavel', align: ' d-none' },
                 { title: 'Email do Responsável', key: 'emailResponsavel', align: ' d-none' },
+                { title: 'Número da Sacolinha', key: 'numeroSacolinha', align: ' d-none' },
+                { title: 'Aluno Ativo', key: 'ativo', align: ' d-none' },
+                { title: 'Sair Só', key: 'sairSo', align: ' d-none' },
             ],
             alunos: [],
             search: '',
@@ -184,16 +203,29 @@ export default {
             alertAtivo: false,
             alertTitle: '',
             alertText: '',
-            alertClass: ''
+            alertClass: '',
+            seriesDisponiveis: [],
+            tamanhos: [],
+            token: cookies.get('token')
         }
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/alunos/');
-            this.alunos = res.data;
+            const resAlunos = await axios.get('http://localhost:8080/api/alunos/', { headers: { 'Authorization': this.token } });
+            const resSeries = await axios.get('http://localhost:8080/api/series/listaString', { headers: { 'Authorization': this.token } });
+            this.alunos = resAlunos.data;
+            this.seriesDisponiveis = resSeries.data;
+            for (let i = 20; i < 46; i++) {
+                this.tamanhos.push(i);
+            }
         },
         salvarAluno() {
-            axios.post('http://localhost:8080/api/alunos/save', this.aluno).then(res => {
+            this.aluno.nome = this.aluno.nome.toUpperCase();
+            axios.post('http://localhost:8080/api/alunos/save', this.aluno, {
+                headers: {
+                    'Authorization': this.token
+                }
+            }).then(res => {
                 if (this.aluno.sexo === 'M') {
                     if (this.aluno.id > 0) {
                         this.alert('Aluno Editado', 'Aluno ' + res.data.nome + ' editado com sucesso!', 'success');
@@ -230,6 +262,9 @@ export default {
                 nomeResponsavel: row.item.columns.nomeResponsavel,
                 telefoneResponsavel: row.item.columns.telefoneResponsavel,
                 emailResponsavel: row.item.columns.emailResponsavel,
+                numeroSacolinha: row.item.columns.numeroSacolinha,
+                ativo: row.item.columns.ativo,
+                sairSo: row.item.columns.sairSo
             }
 
             this.title = "Editar Aluno";
@@ -250,6 +285,9 @@ export default {
                 nomeResponsavel: '',
                 telefoneResponsavel: '',
                 emailResponsavel: '',
+                numeroSacolinha: '',
+                ativo: false,
+                sairSo: false
             }
 
             this.title = "Novo Aluno";
@@ -285,17 +323,24 @@ export default {
     flex-direction: column;
 }
 
-#alunos,
-#aluno {
+#alunos {
     background-color: rgb(230, 243, 255);
-    width: 98%;
-    height: 795px;
+    height: 100%;
     font-size: 20px;
     padding: 10px;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 20px 0px 20px 20px;
     color: #0b4d75;
-    border-radius: 20px;
+    border-radius: 5px;
+}
+
+#aluno {
+    background-color: rgb(230, 243, 255);
+    height: 100%;
+    font-size: 20px;
+    padding: 10px;
+    margin: 20px 0px 20px 20px;
+    color: #0b4d75;
+    border-radius: 5px;
 }
 
 #botao {
@@ -303,7 +348,7 @@ export default {
     background-color: rgba(200, 230, 255, 0.699);
     border: #0b4d75 1px solid;
     color: #0b4d75;
-    border-radius: 20px;
+    border-radius: 5px;
     text-align: center;
     padding: 5px;
     cursor: pointer;
@@ -314,7 +359,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 10px 15px;
     color: white;
 }
@@ -333,5 +378,4 @@ export default {
 
 .success {
     background-color: rgb(120, 200, 120);
-}
-</style>
+}</style>

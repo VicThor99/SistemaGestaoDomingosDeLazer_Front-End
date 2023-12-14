@@ -14,7 +14,7 @@
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
                 <h2 style="margin-top: 3px;width: 60%">Listagem de Usuários</h2>
                 <input
-                    style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 10px; background-color: white; opacity: 0.7;"
+                    style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 5px; background-color: white; opacity: 0.7;"
                     type="text" placeholder="Pesquisa" v-model="search" />
                 <button id="botao" @click="novoUsuario"><i class="mdi mdi-plus-circle-outline"></i> Novo</button>
             </div>
@@ -38,41 +38,42 @@
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <div
-                style="background-color: white; font-size: 20px; border-radius: 20px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
+                style="background-color: white; font-size: 20px; border-radius: 5px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
                 <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100px; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Id</p>
                         <input type="text" disabled="true"
-                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="usuario.id" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 350px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Nome</p>
                         <input type="text"
-                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="usuario.nome" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 350px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Username</p>
                         <input type="text"
-                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="usuario.username" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 500px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">E-mail</p>
                         <input type="email"
-                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="usuario.email" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 350px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Senha</p>
                         <input type="password"
-                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 20px;"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="usuario.senha" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 75px; margin-left: 10px; align-items: center;">
+                    <div
+                        style="display: flex; flex-direction: column; width: 75px; margin-left: 10px; align-items: center;">
                         <p style="color: #5a5a5a;">Admin</p>
-                        <v-switch  v-model="usuario.admin" hide-details inset></v-switch>
+                        <v-switch color="info" v-model="usuario.admin" hide-details inset></v-switch>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
@@ -98,6 +99,7 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 </script>
 
 <script>
+import cookies from 'vue-cookies';
 import axios from 'axios';
 
 export default {
@@ -119,16 +121,21 @@ export default {
             alertAtivo: false,
             alertTitle: '',
             alertText: '',
-            alertClass: ''
+            alertClass: '',
+            token: cookies.get('token')
         }
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/users/');
+            const res = await axios.get('http://localhost:8080/api/users/', { headers: { 'Authorization': this.token } });
             this.usuarios = res.data;
         },
         salvarUsuario() {
-            axios.post('http://localhost:8080/api/users', this.usuario).then(res => {
+            axios.post('http://localhost:8080/api/users', this.usuario, {
+                headers: {
+                    'Authorization': this.token
+                }
+            }).then(res => {
                 if (this.usuario.id > 0) {
                     this.alert('Usuário Editado', 'Usuário ' + res.data.username + ' editado com sucesso!', 'success');
                 } else {
@@ -208,7 +215,7 @@ export default {
     margin-top: 20px;
     margin-left: 20px;
     color: #0b4d75;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 #botao {
@@ -216,7 +223,7 @@ export default {
     background-color: rgba(200, 230, 255, 0.699);
     border: #0b4d75 1px solid;
     color: #0b4d75;
-    border-radius: 20px;
+    border-radius: 5px;
     text-align: center;
     padding: 5px;
     cursor: pointer;
@@ -227,7 +234,7 @@ export default {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    border-radius: 15px;
+    border-radius: 5px;
     padding: 10px 15px;
     color: white;
 }

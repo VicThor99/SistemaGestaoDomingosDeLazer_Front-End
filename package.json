@@ -1,5 +1,5 @@
 {
-  "name": "sistemagestaoparaisopolis",
+  "name": "sistemagestaodomingodelazer",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "@mdi/font": "^7.2.96",
     "axios": "^1.5.0",
     "core-js": "^3.8.3",
+    "cors": "^2.8.5",
     "read-excel-file": "^5.6.1",
     "vue": "^3.2.13",
     "vue-cookies": "^1.8.3",
