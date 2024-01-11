@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
-                <h2 style="margin-top: 3px;width: 60%">Listagem de Alunos</h2>
+                <h2 style="margin-top: 3px; width: 60%">Listagem de Alunos</h2>
                 <input
                     style="width: 40%;margin-right: 20px; padding-left: 15px; border-radius: 5px; background-color: white; opacity: 0.7;"
                     type="text" placeholder="Pesquisa" v-model="search" />
@@ -34,12 +34,32 @@
                 </div>
             </div>
             <div style="margin: 0px 0px 10px 30px; display: flex; justify-content: flex-start;">
-                <h2 style="margin-top: 3px;width: 60%">Cadastro de Alunos - {{ title }}</h2>
+                <h2 style="margin-top: 3px; width: 90%">Cadastro de Alunos - {{ title }}</h2>
+                <v-dialog width="500" style="margin-top: 10px;" v-if="this.temMatricula">
+                    <template v-slot:activator="{ props }">
+                        <v-btn v-bind="props" text="Ver Matrícula"> </v-btn>
+                    </template>
+
+                    <template v-slot:default="{ isActive }">
+                        <v-card title="Matrícula">
+                            <img :src="this.matricula" alt="">
+
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+
+                                <v-btn text="Fechar" @click="isActive.value = false"></v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </template>
+                </v-dialog>
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <div
                 style="background-color: white; font-size: 22px; border-radius: 5px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
-                <div style="display: flex; justify-content: start; width: 100%; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: start; width: 100%; margin-top: 20px;">
+
+                    <img :src="this.fotoAluno" alt="" v-if="this.temFoto"
+                        style="height: 110px; width: 110px; margin-right: 10px; margin-top: -30px; border-radius: 5px; border: #0b4d75 1px solid;" />
 
                     <div style="display: flex; flex-direction: column; width: 250px; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Id</p>
@@ -58,25 +78,25 @@
 
                     <div style="display: flex; flex-direction: column; width: 250px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Número da Sacolinha</p>
-                        <input type="text" disabled="true"
-                            style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px; border: 0px;"
+                        <input type="text"
+                            style="text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px; border:#3f799c69 1px solid;"
                             v-model="aluno.numeroSacolinha" />
                     </div>
                     <v-spacer></v-spacer>
 
-                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 170px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Aluno ativo</p>
                         <v-switch color="info" v-model="aluno.ativo" hide-details inset style="width: 100%;"></v-switch>
                     </div>
 
-                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 170px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Sair sozinho</p>
                         <v-switch color="info" v-model="aluno.sairSo" hide-details inset style="width: 100%;"></v-switch>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
 
-                <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: center; width: 100%;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Nome</p>
                         <input type="text"
@@ -90,7 +110,7 @@
                             style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="aluno.nascimento" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 170px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Série</p>
                         <v-select density="comfortable" variant="outlined" v-model="aluno.serie"
                             :items="seriesDisponiveis"></v-select>
@@ -101,7 +121,7 @@
                             :items="['F', 'M']"></v-select>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-evenly; width: 100%;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Endereço</p>
                         <input type="text"
@@ -147,6 +167,71 @@
                             v-model="aluno.telefoneResponsavel" />
                     </div>
                 </div>
+                <div style="display: flex; justify-content: center; border-radius: 5px 5px 0px 0px; margin-top: 20px; background-color: #d7effd; color: #0b4d75; height: 40px;"
+                    class="elevation-1">
+                    <h3>Presenças do Aluno</h3>
+                </div>
+                <div style="border-radius: 0px 0px 5px 5px;" class="elevation-1">
+                    <div
+                        style="background-color: white; font-size: 22px; border-radius: 5px; margin: 5px 5px 0px 0px; padding: 10px 20px; color: #0b4d75;">
+                        <div style="display: flex; justify-content: center; width: 100%; margin-bottom: 10px;">
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Fevereiro</p>
+                                <v-select variant="solo-filled" v-model="registro.fevereiro" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Março</p>
+                                <v-select variant="solo-filled" v-model="registro.marco" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Abril</p>
+                                <v-select variant="solo-filled" v-model="registro.abril" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Maio</p>
+                                <v-select variant="solo-filled" v-model="registro.maio" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Junho</p>
+                                <v-select variant="solo-filled" v-model="registro.junho" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Agosto</p>
+                                <v-select variant="solo-filled" v-model="registro.agosto" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Setembro</p>
+                                <v-select variant="solo-filled" v-model="registro.setembro" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; margin-right: 15px; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Outubro</p>
+                                <v-select variant="solo-filled" v-model="registro.outubro" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                            <div style="display: flex; flex-direction: column; width: 11%">
+                                <p style="color: #5a5a5a; margin-left: 5px;">Novembro</p>
+                                <v-select variant="solo-filled" v-model="registro.novembro" style="width: 100%"
+                                    bg-color="#f0f6fa" hide-details="true"
+                                    :items="['', 'P', 'M', 'A', 'E', 'F']"></v-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
                 <div style="display: flex; justify-content: center;">
                     <v-spacer></v-spacer>
@@ -155,7 +240,7 @@
                     <button id="botao" @click="aluno = null; this.alertAtivo = false;"><i class="mdi mdi-cancel"></i>
                         Cancelar</button>
                     <v-spacer></v-spacer>
-                    <button id="botao" @click="salvarAluno"><i class="mdi mdi-check"></i> Salvar</button>
+                    <button id="botao" @click="salvarAluno()"><i class="mdi mdi-check"></i> Salvar</button>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
                     <v-spacer></v-spacer>
@@ -180,6 +265,7 @@ export default {
             headers: [
                 { title: 'Id', key: 'id', align: 'start', type: Number },
                 { title: 'Código', key: 'codigo', align: 'start' },
+                { title: 'Nº Sacolinha', key: 'numeroSacolinha', align: 'start' },
                 { title: 'Nome', key: 'nome', align: 'start' },
                 { title: 'Sexo', key: 'sexo', align: 'start' },
                 { title: 'Série', key: 'serie', align: 'start' },
@@ -192,13 +278,13 @@ export default {
                 { title: 'Nome do Responsável', key: 'nomeResponsavel', align: ' d-none' },
                 { title: 'Telefone do Responsável', key: 'telefoneResponsavel', align: ' d-none' },
                 { title: 'Email do Responsável', key: 'emailResponsavel', align: ' d-none' },
-                { title: 'Número da Sacolinha', key: 'numeroSacolinha', align: ' d-none' },
                 { title: 'Aluno Ativo', key: 'ativo', align: ' d-none' },
                 { title: 'Sair Só', key: 'sairSo', align: ' d-none' },
             ],
             alunos: [],
             search: '',
             aluno: null,
+            registro: null,
             title: '',
             alertAtivo: false,
             alertTitle: '',
@@ -206,47 +292,116 @@ export default {
             alertClass: '',
             seriesDisponiveis: [],
             tamanhos: [],
-            token: cookies.get('token')
+            fotoAluno: '',
+            matricula: '',
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida'),
+            temFoto: false,
+            temMatricula: false
         }
     },
     methods: {
         async recarregaLista() {
-            const resAlunos = await axios.get('http://localhost:8080/api/alunos/', { headers: { 'Authorization': this.token } });
-            const resSeries = await axios.get('http://localhost:8080/api/series/listaString', { headers: { 'Authorization': this.token } });
+            const resAlunos = await axios.get('http://192.168.15.40:8080/api/alunos/' + this.escola, { headers: { 'Authorization': this.token } });
+            const resSeries = await axios.get('http://192.168.15.40:8080/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
             this.alunos = resAlunos.data;
             this.seriesDisponiveis = resSeries.data;
             for (let i = 20; i < 46; i++) {
                 this.tamanhos.push(i);
             }
         },
-        salvarAluno() {
+        async salvarAluno() {
             this.aluno.nome = this.aluno.nome.toUpperCase();
-            axios.post('http://localhost:8080/api/alunos/save', this.aluno, {
+            if (this.aluno.id > 0) {
+                await axios.post('http://192.168.15.40:8080/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { headers: { 'Authorization': this.token } }).then(res => {
+                    console.log(res);
+                    axios.post('http://192.168.15.40:8080/api/alunos/save', this.aluno, {
+                        headers: {
+                            'Authorization': this.token
+                        }
+                    }).then(res => {
+                        if (this.aluno.sexo === 'M') {
+                            this.alert('Aluno Editado', 'Aluno ' + res.data.nome + ' editado com sucesso!', 'success');
+                        } else {
+                            this.alert('Aluna Editada', 'Aluna ' + res.data.nome + ' editada com sucesso!', 'success');
+                        }
+                        this.recarregaLista();
+                        this.aluno = null;
+                    }).catch(rej => {
+                        this.alert('Erro', rej.response.data, 'error');
+                    });
+                }).catch(rej => console.log(rej));
+            } else {
+                await axios.post('http://192.168.15.40:8080/api/alunos/save', this.aluno, { headers: { 'Authorization': this.token } }).then(res => {
+                    console.log(res);
+                    axios.post('http://192.168.15.40:8080/api/registros/' + res.data.codigo + '/' + this.escola, this.registro, {
+                        headers: {
+                            'Authorization': this.token
+                        }
+                    }).then(res => {
+                        if (this.aluno.sexo === 'M') {
+                            this.alert('Aluno Adicionado', 'Aluno ' + res.data.nome + ' adicionado com sucesso!', 'success');
+                        } else {
+                            this.alert('Aluna Adicionada', 'Aluna ' + res.data.nome + ' adicionada com sucesso!', 'success');
+                        }
+                        this.recarregaLista();
+                        this.aluno = null;
+                    }).catch(rej => {
+                        this.alert('Erro', rej.response.data, 'error');
+                    });
+                }).catch(rej => console.log(rej));
+            }
+        },
+        async clickRow(item, row) {
+            const dateVet = row.item.columns.nascimento.split("/");
+
+            await axios.get('http://192.168.15.40:8080/api/registros/' + row.item.columns.codigo + "/" + this.escola, { headers: { 'Authorization': this.token } })
+                .then(res => {
+                    this.registro = {
+                        fevereiro: res.data.fevereiro !== null ? res.data.fevereiro : '',
+                        marco: res.data.marco !== null ? res.data.marco : '',
+                        abril: res.data.abril !== null ? res.data.abril : '',
+                        maio: res.data.maio !== null ? res.data.maio : '',
+                        junho: res.data.junho !== null ? res.data.junho : '',
+                        agosto: res.data.agosto !== null ? res.data.agosto : '',
+                        setembro: res.data.setembro !== null ? res.data.setembro : '',
+                        outubro: res.data.outubro !== null ? res.data.outubro : '',
+                        novembro: res.data.novembro !== null ? res.data.novembro : ''
+                    }
+                })
+                .catch(rej => console.log(rej));
+
+            await axios.get('http://192.168.15.40:8080/api/arquivos/foto/' + row.item.columns.id, {
                 headers: {
                     'Authorization': this.token
                 }
-            }).then(res => {
-                if (this.aluno.sexo === 'M') {
-                    if (this.aluno.id > 0) {
-                        this.alert('Aluno Editado', 'Aluno ' + res.data.nome + ' editado com sucesso!', 'success');
+            })
+                .then(res => {
+                    if (res.data !== null && res.data !== '') {
+                        this.fotoAluno = 'data:image/jpeg;base64,' + res.data;
+                        this.temFoto = true;
                     } else {
-                        this.alert('Aluno Adicionado', 'Aluno ' + res.data.nome + ' adicionado com sucesso!', 'success');
+                        this.fotoAluno = '';
+                        this.temFoto = false;
                     }
-                } else {
-                    if (this.aluno.id > 0) {
-                        this.alert('Aluna Editada', 'Aluna ' + res.data.nome + ' editada com sucesso!', 'success');
-                    } else {
-                        this.alert('Aluna Adicionada', 'Aluna ' + res.data.nome + ' adicionada com sucesso!', 'success');
-                    }
+                })
+                .catch(rej => console.log(rej))
+
+            await axios.get('http://192.168.15.40:8080/api/arquivos/matricula/' + row.item.columns.id, {
+                headers: {
+                    'Authorization': this.token
                 }
-                this.recarregaLista();
-                this.aluno = null;
-            }).catch(rej => {
-                this.alert('Erro', rej.response.data, 'error');
-            });
-        },
-        clickRow(item, row) {
-            const dateVet = row.item.columns.nascimento.split("/");
+            })
+                .then(res => {
+                    if (res.data !== null && res.data !== '') {
+                        this.matricula = 'data:image/jpeg;base64,' + res.data;
+                        this.temMatricula = true;
+                    } else {
+                        this.matricula = '';
+                        this.temMatricula = false;
+                    }
+                })
+                .catch(rej => console.log(rej))
 
             this.aluno = {
                 id: row.item.columns.id,
@@ -264,7 +419,8 @@ export default {
                 emailResponsavel: row.item.columns.emailResponsavel,
                 numeroSacolinha: row.item.columns.numeroSacolinha,
                 ativo: row.item.columns.ativo,
-                sairSo: row.item.columns.sairSo
+                sairSo: row.item.columns.sairSo,
+                escolaId: this.escola
             }
 
             this.title = "Editar Aluno";
@@ -287,8 +443,26 @@ export default {
                 emailResponsavel: '',
                 numeroSacolinha: '',
                 ativo: false,
-                sairSo: false
+                sairSo: false,
+                escolaId: this.escola
             }
+
+            this.registro = {
+                fevereiro: '',
+                marco: '',
+                abril: '',
+                maio: '',
+                junho: '',
+                agosto: '',
+                setembro: '',
+                outubro: '',
+                novembro: ''
+            }
+
+            this.temFoto = false;
+            this.temMatricula = false;
+            this.fotoAluno = '';
+            this.matricula = '';
 
             this.title = "Novo Aluno";
             this.alertAtivo = false;
@@ -378,4 +552,5 @@ export default {
 
 .success {
     background-color: rgb(120, 200, 120);
-}</style>
+}
+</style>

@@ -323,7 +323,8 @@ export default {
             carregando: false,
             cadastro: 'Datas',
             mensagem: '',
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
@@ -375,7 +376,7 @@ export default {
 
             console.log(this.json);
 
-            await axios.post('http://localhost:8080/api/datas/emMassa', this.json, {
+            await axios.post('http://192.168.15.40:8080/api/datas/emMassa/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token
                 }

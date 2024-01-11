@@ -54,7 +54,7 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 200px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Domingo</p>
-                        <v-select variant="outlined" v-model="dataAula.domingo" :items="['A', 'B']"></v-select>
+                        <v-select variant="outlined" v-model="dataAula.domingo" :items="['A', 'B', 'C', 'D']"></v-select>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
@@ -100,16 +100,17 @@ export default {
             alertTitle: '',
             alertText: '',
             alertClass: '',
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/datas/', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://192.168.15.40:8080/api/datas/' + this.escola, { headers: { 'Authorization': this.token } });
             this.datas = res.data;
         },
         salvarData() {
-            axios.post('http://localhost:8080/api/datas', this.dataAula, {
+            axios.post('http://192.168.15.40:8080/api/datas/'+ this.escola, this.dataAula, {
                 headers: {
                     'Authorization': this.token
                 }
@@ -181,7 +182,7 @@ export default {
 #data {
     background-color: rgb(230, 243, 255);
     width: 98%;
-    height: 795px;
+    height: 100%;
     font-size: 20px;
     padding: 10px;
     margin-top: 20px;

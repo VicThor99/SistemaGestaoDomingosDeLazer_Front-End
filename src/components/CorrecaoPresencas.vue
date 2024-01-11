@@ -155,16 +155,17 @@ export default {
             alertTitle: '',
             alertText: '',
             alertClass: '',
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/registros', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://192.168.15.40:8080/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
             this.registros = res.data;
         },
         salvarRegistro() {
-            axios.post('http://localhost:8080/api/registros', this.registro, {
+            axios.post('http://192.168.15.40:8080/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
                 headers: {
                     'Authorization': this.token
                 }
@@ -249,7 +250,7 @@ export default {
 #registro {
     background-color: rgb(230, 243, 255);
     width: 98%;
-    height: 795px;
+    height: 100%;
     font-size: 17px;
     padding: 10px;
     margin-top: 20px;

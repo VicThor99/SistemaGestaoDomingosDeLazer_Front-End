@@ -49,7 +49,8 @@ export default {
             total: null,
             erro: null,
             series: [],
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
@@ -64,7 +65,7 @@ export default {
                 }
             });
 
-            axios.post('http://localhost:8080/api/alunos/import', this.json, {
+            axios.post('http://192.168.15.40:8080/api/alunos/import/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token
                 }

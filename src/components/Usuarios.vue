@@ -127,11 +127,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/users/', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://192.168.15.40:8080/api/users', { headers: { 'Authorization': this.token } });
             this.usuarios = res.data;
         },
         salvarUsuario() {
-            axios.post('http://localhost:8080/api/users', this.usuario, {
+            axios.post('http://192.168.15.40:8080/api/users', this.usuario, {
                 headers: {
                     'Authorization': this.token
                 }
@@ -209,7 +209,7 @@ export default {
 #usuario {
     background-color: rgb(230, 243, 255);
     width: 98%;
-    height: 795px;
+    height: 100%;
     font-size: 20px;
     padding: 10px;
     margin-top: 20px;

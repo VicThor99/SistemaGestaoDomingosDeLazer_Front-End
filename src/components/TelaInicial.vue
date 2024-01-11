@@ -129,7 +129,7 @@
                 </div>
                 <div style="width: 1%;"></div>
                 <div style="display: flex; flex-direction: column; width: 66%;">
-                    <div style="background-color: white; border-radius: 5px; padding: 10px;">
+                    <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
                         <div id="chartContainer" style="height: 360px; width: 100%;"></div>
                     </div>
                     <div
@@ -218,6 +218,16 @@ export default {
                 aptas: 0,
                 risco: 0
             },
+            domingoc: {
+                total: 0,
+                aptas: 0,
+                risco: 0
+            },
+            domingod: {
+                total: 0,
+                aptas: 0,
+                risco: 0
+            },
             domingos: {
                 total: 0,
                 aptas: 0,
@@ -225,10 +235,13 @@ export default {
             },
             proximaDataDomA: '',
             proximaDataDomB: '',
+            proximaDataDomC: '',
+            proximaDataDomD: '',
             lista: null,
             tituloListagem: '',
             search: '',
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
@@ -236,29 +249,39 @@ export default {
 
             var dadosGraficoA = [];
             var dadosGraficoB = [];
+            var dadosGraficoC = [];
+            var dadosGraficoD = [];
 
-            const res = await axios.get('http://localhost:8080/api/dashboard/', {
+            const res = await axios.get('http://192.168.15.40:8080/api/dashboard/' + this.escola, {
                 headers: {
                     Authorization: this.token,
                 }
             });
 
-            this.domingoa = res.data.domingoa;
-            this.domingob = res.data.domingob;
+            this.domingoa = res.data.domingoA;
+            this.domingob = res.data.domingoB;
+            this.domingoc = res.data.domingoC;
+            this.domingod = res.data.domingoD;
             this.domingos = res.data.domingos;
 
             dadosGraficoA = res.data.dadosGraficoA;
             dadosGraficoB = res.data.dadosGraficoB;
+            dadosGraficoC = res.data.dadosGraficoC;
+            dadosGraficoD = res.data.dadosGraficoD;
 
             this.proximaDataDomA = res.data.proximaDataDomA;
             this.proximaDataDomB = res.data.proximaDataDomB;
+            this.proximaDataDomC = res.data.proximaDataDomC;
+            this.proximaDataDomD = res.data.proximaDataDomD;
 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: true,
-                exportEnabled: true,
-                theme: "light2",
+                exportEnabled: false,
+                theme: "light1",
+                backgroundColor: "#E4EDF7",
                 title: {
-                    text: "Presenças em cada mês"
+                    text: "Presenças por mês",
+                    fontFamily:"Times New Roman"
                 },
                 axisY: {
                     tickLength: 0,
@@ -275,16 +298,30 @@ export default {
                     {
                         type: "column",
                         name: "Domingo A",
-                        showInLegend: true,
-                        color: "rgb(120, 160, 230)",
+                        showInLegend: dadosGraficoA !== null,
+                        color: "#78A0E6",
                         dataPoints: dadosGraficoA
                     },
                     {
                         type: "column",
                         name: "Domingo B",
-                        showInLegend: true,
-                        color: "#0B4D75",
+                        showInLegend: dadosGraficoB !== null,
+                        color: "#2C6F99",
                         dataPoints: dadosGraficoB
+                    },
+                    {
+                        type: "column",
+                        name: "Domingo C",
+                        showInLegend: dadosGraficoC !== null,
+                        color: "#0B4D75",
+                        dataPoints: dadosGraficoC
+                    },
+                    {
+                        type: "column",
+                        name: "Domingo D",
+                        showInLegend: dadosGraficoD !== null,
+                        color: "#243B4A",
+                        dataPoints: dadosGraficoD
                     }
                 ]
             });
@@ -295,37 +332,61 @@ export default {
             switch (opcao) {
                 case "DomAAptas":
                     this.tituloListagem = 'Domingo A Aptas';
-                    axios.get('http://localhost:8080/api/dashboard/domAAptas', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domAAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomARisco":
                     this.tituloListagem = 'Domingo A em Risco';
-                    axios.get('http://localhost:8080/api/dashboard/domARisco', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domARisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBAptas":
                     this.tituloListagem = 'Domingo B Aptas';
-                    axios.get('http://localhost:8080/api/dashboard/domBAptas', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domBAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBRisco":
                     this.tituloListagem = 'Domingo B em Risco';
-                    axios.get('http://localhost:8080/api/dashboard/domBRisco', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domBRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomCAptas":
+                    this.tituloListagem = 'Domingo C Aptas';
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domCAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomCRisco":
+                    this.tituloListagem = 'Domingo C em Risco';
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domCRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomDAptas":
+                    this.tituloListagem = 'Domingo D Aptas';
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domDAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                        .then(res => this.lista = res.data)
+                        .catch(rej => console.log(rej));
+                    break;
+                case "DomDRisco":
+                    this.tituloListagem = 'Domingo D em Risco';
+                    axios.get('http://192.168.15.40:8080/api/dashboard/domDRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosAptos":
                     this.tituloListagem = 'Todos Alunos Aptos';
-                    axios.get('http://localhost:8080/api/dashboard/todosAptos', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/todosAptos/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosRisco":
                     this.tituloListagem = 'Todos Alunos em Risco';
-                    axios.get('http://localhost:8080/api/dashboard/todosRisco', { headers: { 'Authorization': this.token } })
+                    axios.get('http://192.168.15.40:8080/api/dashboard/todosRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;

@@ -17,7 +17,18 @@
       </div>
       <div></div>
     </div>
-    <div v-if="logado" id="divPrincipal">
+
+    <div v-if="logado && !escolaEscolhida" id="divPrincipal">
+      <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div style="display: flex; justify-content: space-around;">
+          <div v-for="e in escolas" :key="e">
+            <button id="selecionar" @click="selecionarEscola(e.idEscola)">{{ e.escola }}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="logado && escolaEscolhida" id="divPrincipal">
       <header id="header" style="font-size: 22px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);">
         <div style="width: 70%; height: 100%; display: flex; justify-content: flex-start;">
           <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
@@ -34,7 +45,7 @@
         </div>
       </header>
       <div
-        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 655px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 856px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="cadastros">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
             class="mdi mdi-account-school"></i> Alunos</a>
@@ -44,6 +55,8 @@
             class="mdi mdi-google-classroom"></i> Séries</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
             class="mdi mdi-account-multiple-outline"></i> Usuários</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ArquivosAluno')"><i
+            class="mdi mdi-file-upload"></i> Arquivos do Aluno</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CadastroEmMassa')"><i
             class="mdi mdi-group"></i> Cadastros em Massa</a>
       </div>
@@ -91,6 +104,7 @@
       <ImpressaoMatriculas v-if="telaAtual === 'ImpressaoMatriculas'" />
       <ImpressaoProtocolos v-if="telaAtual === 'ImpressaoProtocolos'" />
       <CadastroEmMassa v-if="telaAtual === 'CadastroEmMassa'" />
+      <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
     </div>
   </div>
 </template>
@@ -112,6 +126,7 @@ import ImpressaoListas from './components/ImpressaoListas.vue';
 import ImpressaoMatriculas from './components/ImpressaoMatriculas.vue';
 import ImpressaoProtocolos from './components/ImpressaoProtocolos.vue';
 import CadastroEmMassa from './components/CadastrosEmMassa.vue';
+import ArquivosAluno from './components/ArquivosAluno.vue';
 
 export default {
   name: 'App',
@@ -128,8 +143,9 @@ export default {
     ImpressaoListas,
     ImpressaoProtocolos,
     ImpressaoMatriculas,
-    CadastroEmMassa
-  },
+    CadastroEmMassa,
+    ArquivosAluno
+},
   data() {
     return {
       user: {
@@ -140,20 +156,23 @@ export default {
       username: cookies.get('user_name'),
       listaCriancas: [],
       logado: cookies.get('token') !== null,
+      escolaEscolhida: cookies.get('escolaEscolhida') !== null,
       telaAtual: 'TelaInicial',
       cadastros: false,
       registroPresencas: false,
       impressoes: false,
       opcoes: false,
-      token: cookies.get('token')
+      token: cookies.get('token'),
+      escolas: [],
+      escola: cookies.get('escolaEscolhida')
     }
   },
   methods: {
-    submit() {
-      axios.post('http://localhost:8080/api/auth', this.user)
+    async submit() {
+      await axios.post('http://192.168.15.40:8080/api/auth', this.user)
         .then(res => {
           var date = new Date();
-          date.setUTCMinutes(date.getUTCMinutes() + 30);
+          date.setUTCMinutes(date.getUTCMinutes() + 60);
           cookies.set('token', 'Bearer ' + res.data.token, date);
           cookies.set('admin', res.data.admin, date);
           cookies.set('user_name', res.data.username, date);
@@ -161,18 +180,42 @@ export default {
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
+          axios.get('http://192.168.15.40:8080/api/access/' + this.username, {
+            headers: {
+              'Authorization': 'Bearer ' + res.data.token
+            }
+          })
+            .then(res => {
+              if (res.data.length === 1) {
+                cookies.set('escolaEscolhida', res.data[0].idEscola, date);
+                this.escolaEscolhida = true;
+              } else {
+                this.escolas = res.data;
+              }
+            })
+            .catch(rej => {
+              console.log(rej)
+              cookies.remove('token');
+              cookies.remove('admin');
+              cookies.remove('user_name');
+              cookies.remove('escola');
+              this.logado = false;
+              this.erro = 'Algo de errado ocorreu, por favor tente novamente';
+            })
         })
         .catch(rej => {
           console.log(rej)
           cookies.remove('token');
           cookies.remove('admin');
           cookies.remove('user_name');
-          this.logado = cookies.get('token') != null;
+          cookies.remove('escola');
+          this.escolaEscolhida = false;
+          this.logado = false;
           this.erro = 'Usuário e senha não compatíveis';
         })
     },
     download() {
-      axios.get('http://localhost:8080/api/alunos/export', {
+      axios.get('http://192.168.15.40:8080/api/alunos/export/' + this.escola, {
         headers: {
           'Authorization': this.token
         }
@@ -201,6 +244,8 @@ export default {
       cookies.remove('token');
       cookies.remove('admin');
       cookies.remove('user_name');
+      cookies.remove('escola');
+      this.escolaEscolhida = false;
       this.logado = cookies.get('token') != null;
       this.user.username = '';
       this.user.senha = '';
@@ -232,6 +277,12 @@ export default {
       this.cadastros = false;
       this.registroPresencas = false;
       this.impressoes = !this.impressoes;
+    },
+    selecionarEscola(id) {
+      var date = new Date();
+      date.setUTCMinutes(date.getUTCMinutes() + 60);
+      cookies.set('escolaEscolhida', id, date);
+      this.escolaEscolhida = true;
     }
   }
 }
@@ -317,6 +368,20 @@ export default {
   background-color: white;
   color: #0b4d75;
   font-size: 20px;
+  border: 0;
+  border-radius: 5px;
+  text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+#selecionar {
+  width: 250px;
+  background-color: white;
+  color: #0b4d75;
+  font-size: 30px;
   border: 0;
   border-radius: 5px;
   text-align: center;

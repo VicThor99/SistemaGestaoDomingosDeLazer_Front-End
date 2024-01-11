@@ -20,7 +20,7 @@
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <v-data-table @click:row="clickRow" items-per-page="11" :headers="headers" :items="series"
-                style="padding: 5px 10px 10px 10px;" :search="search" class="elevation-1" v-if="series.length > 0" />
+                style="padding: 5px 10px 10px 10px;" :search="search" v-if="series.length > 0" />
         </div>
         <div id="serie" v-if="serie != null">
             <div id="alert" :class="alertClass" v-if="alertAtivo">
@@ -58,7 +58,7 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Domingo</p>
-                        <v-select variant="outlined" v-model="serie.domingo" :items="['A', 'B']"></v-select>
+                        <v-select variant="outlined" v-model="serie.domingo" :items="['A', 'B', 'C', 'D']"></v-select>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
@@ -106,19 +106,20 @@ export default {
             alertText: '',
             alertClass: '',
             salas: [],
-            token: cookies.get('token')
+            token: cookies.get('token'),
+            escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://localhost:8080/api/series/', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://192.168.15.40:8080/api/series/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series = res.data;
             for (let i = 2; i < 20; i++) {
                 this.salas.push('Sala ' + i);
             }
         },
         salvarSerie() {
-            axios.post('http://localhost:8080/api/series', this.serie, {
+            axios.post('http://192.168.15.40:8080/api/series/'+ this.escola, this.serie, {
                 headers: {
                     'Authorization': this.token
                 }
@@ -190,7 +191,7 @@ export default {
 #serie {
     background-color: rgb(230, 243, 255);
     width: 98%;
-    height: 795px;
+    height: 100%;
     font-size: 20px;
     padding: 10px;
     margin-top: 20px;
