@@ -54,7 +54,7 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 200px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Domingo</p>
-                        <v-select variant="outlined" v-model="dataAula.domingo" :items="['A', 'B', 'C', 'D']"></v-select>
+                        <v-select variant="outlined" v-model="dataAula.domingo" :items="['A', 'B', 'C', 'D', 'E']"></v-select>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
