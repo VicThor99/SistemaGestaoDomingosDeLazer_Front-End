@@ -376,7 +376,7 @@ export default {
 
             console.log(this.json);
 
-            await axios.post('http://192.168.15.40:8080/api/datas/emMassa/'+ this.escola, this.json, {
+            await axios.post('http://44.207.8.162:8080/api/datas/emMassa/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token
                 }

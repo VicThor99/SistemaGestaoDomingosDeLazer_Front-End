@@ -61,10 +61,12 @@
             class="mdi mdi-group"></i> Cadastros em Massa</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 320px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 519px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
             class="mdi mdi-calendar-plus"></i> Registro (Leitor)</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
+            class="mdi mdi-cellphone"></i> Registro (Celular)</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CorrecaoPresenca')"><i
             class="mdi mdi-calendar-sync"></i> Correção</a>
       </div>
@@ -105,6 +107,7 @@
       <ImpressaoProtocolos v-if="telaAtual === 'ImpressaoProtocolos'" />
       <CadastroEmMassa v-if="telaAtual === 'CadastroEmMassa'" />
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
+      <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
     </div>
   </div>
 </template>
@@ -127,6 +130,7 @@ import ImpressaoMatriculas from './components/ImpressaoMatriculas.vue';
 import ImpressaoProtocolos from './components/ImpressaoProtocolos.vue';
 import CadastroEmMassa from './components/CadastrosEmMassa.vue';
 import ArquivosAluno from './components/ArquivosAluno.vue';
+import PresencaCelular from './components/PresencaCelular.vue';
 
 export default {
   name: 'App',
@@ -144,7 +148,8 @@ export default {
     ImpressaoProtocolos,
     ImpressaoMatriculas,
     CadastroEmMassa,
-    ArquivosAluno
+    ArquivosAluno,
+    PresencaCelular
 },
   data() {
     return {
@@ -169,7 +174,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post('http://192.168.15.40:8080/api/auth', this.user)
+      await axios.post('http://44.207.8.162:8080/api/auth', this.user)
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 60);
@@ -180,7 +185,7 @@ export default {
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
-          axios.get('http://192.168.15.40:8080/api/access/' + this.username, {
+          axios.get('http://44.207.8.162:8080/api/access/' + this.username, {
             headers: {
               'Authorization': 'Bearer ' + res.data.token
             }
@@ -215,7 +220,7 @@ export default {
         })
     },
     download() {
-      axios.get('http://192.168.15.40:8080/api/alunos/export/' + this.escola, {
+      axios.get('http://44.207.8.162:8080/api/alunos/export/' + this.escola, {
         headers: {
           'Authorization': this.token
         }
