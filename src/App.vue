@@ -174,7 +174,7 @@ export default {
   },
   methods: {
     async submit() {
-      await axios.post('http://18.205.24.68:8080/api/auth', this.user)
+      await axios.post('http://44.207.8.162:8080/api/auth', this.user)
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 60);
@@ -185,7 +185,7 @@ export default {
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
-          axios.get('http://18.205.24.68:8080/api/access/' + this.username, {
+          axios.get('http://44.207.8.162:8080/api/access/' + this.username, {
             headers: {
               'Authorization': 'Bearer ' + res.data.token
             }
@@ -220,7 +220,7 @@ export default {
         })
     },
     download() {
-      axios.get('http://18.205.24.68:8080/api/alunos/export/' + this.escola, {
+      axios.get('http://44.207.8.162:8080/api/alunos/export/' + this.escola, {
         headers: {
           'Authorization': this.token
         }

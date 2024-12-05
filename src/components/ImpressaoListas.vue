@@ -12,7 +12,7 @@
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Alunos Ativos</p>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 1000px;">
-                    <v-select v-model="domingo" :items="['', 'A', 'B']" variant="solo-filled"
+                    <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
                     <v-select v-model="serie" :items="this.series" variant="solo-filled"
@@ -58,8 +58,8 @@ export default {
     },
     methods: {
         async carregarListas() {
-            const axSeries = await axios.get('http://18.205.24.68:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('http://18.205.24.68:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('http://44.207.8.162:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('http://44.207.8.162:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
@@ -67,7 +67,7 @@ export default {
             this.carregando = true;
 
             if (this.domingo != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/listas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/listas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -85,7 +85,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.serie != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/listas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/listas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -103,7 +103,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.sala != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/listas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/listas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -121,7 +121,7 @@ export default {
                         this.carregando = false;
                     });
             } else {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/listas/'+ this.escola + '?ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/listas/'+ this.escola + '?ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })

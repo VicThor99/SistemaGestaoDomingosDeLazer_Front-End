@@ -58,7 +58,7 @@ export default {
             formData.append('image', document.getElementById("foto").files[0]);
 
             if (this.tipo === 'Foto') {
-                axios.post('http://18.205.24.68:8080/api/arquivos/foto/' + this.codigoAluno + '/' + this.escola, formData, {
+                axios.post('http://44.207.8.162:8080/api/arquivos/foto/' + this.codigoAluno + '/' + this.escola, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': this.token
@@ -67,7 +67,7 @@ export default {
                     .then(res => { console.log(res); this.carregando = false; this.concluido = true })
                     .catch(rej => { console.log(rej); this.carregando = false });
             } else if (this.tipo === 'Matricula') {
-                axios.post('http://18.205.24.68:8080/api/arquivos/matricula/' + this.codigoAluno + '/' + this.escola, formData, {
+                axios.post('http://44.207.8.162:8080/api/arquivos/matricula/' + this.codigoAluno + '/' + this.escola, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': this.token

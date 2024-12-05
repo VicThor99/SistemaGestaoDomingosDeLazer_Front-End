@@ -13,7 +13,7 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 240px;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Domingo</p>
-                        <v-select v-model="domingo" :items="['', 'A', 'B']" variant="solo-filled"
+                        <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                             style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 240px;">
@@ -68,8 +68,8 @@ export default {
     },
     methods: {
         async carregarListas() {
-            const axSeries = await axios.get('http://18.205.24.68:8080/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('http://18.205.24.68:8080/api/series/listaStringSalas/' + this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('http://44.207.8.162:8080/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('http://44.207.8.162:8080/api/series/listaStringSalas/' + this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
@@ -77,7 +77,7 @@ export default {
             this.carregando = true;
 
             if (this.domingo != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/crachas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/crachas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -95,7 +95,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.serie != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/crachas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/crachas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -113,7 +113,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.sala != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/crachas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/crachas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -131,7 +131,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.codigo != '') {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/crachas/'+ this.escola + '?codigo=' + this.codigo, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/crachas/'+ this.escola + '?codigo=' + this.codigo, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -149,7 +149,7 @@ export default {
                         this.carregando = false;
                     });
             } else {
-                await axios.get('http://18.205.24.68:8080/api/jaspers/crachas/'+ this.escola + '?ativos=' + this.ativos, {
+                await axios.get('http://44.207.8.162:8080/api/jaspers/crachas/'+ this.escola + '?ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })

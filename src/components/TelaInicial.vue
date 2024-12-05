@@ -1,9 +1,14 @@
 <template>
     <div id="principal">
         <div id="telaInicial" v-if="this.lista == null">
-            <div style="width: 100%; margin: 20px; display: flex; justify-content: space-around;">
-                <div style="display: flex; justify-content: center; flex-direction: column; width: 32.5%;">
-                    <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 10px; ">
+            <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;">
+                    <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
+                        <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
+                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 49.5%  ">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo A</p>
@@ -44,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  ">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo B</p>
@@ -85,10 +90,12 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ;">
+                </div>
+                <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  ">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
-                            <p style="color: white; font-size: 30px;">Todos Domingos</p>
+                            <p style="color: white; font-size: 30px;">Domingo C</p>
                         </div>
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
@@ -99,68 +106,171 @@
                                 </div>
                                 <div
                                     style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                    <p>{{ domingos.total }}</p>
+                                    <p>{{ domingoc.total }}</p>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
-                                @click="carregarLista('TodosAptos')">
+                                @click="carregarLista('DomCAptas')">
                                 <div
                                     style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-check"></i> Aptas</p>
                                 </div>
                                 <div
                                     style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                    <p>{{ domingos.aptas }}</p>
+                                    <p>{{ domingoc.aptas }}</p>
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
-                                @click="carregarLista('TodosRisco')">
+                                @click="carregarLista('DomCRisco')">
                                 <div
                                     style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-account-alert"></i> Risco</p>
                                 </div>
                                 <div
                                     style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                    <p>{{ domingos.risco }}</p>
+                                    <p>{{ domingoc.risco }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; flex-direction: column ;width: 49.5%  ">
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                            <p style="color: white; font-size: 30px;">Domingo D</p>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account"></i> Total</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingod.total }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomDAptas')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-check"></i> Aptas</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingod.aptas }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomDRisco')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-alert"></i> Risco</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingod.risco }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style="width: 1%;"></div>
-                <div style="display: flex; flex-direction: column; width: 66%;">
-                    <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
-                        <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+                <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 5px;">
+                    <div
+                        style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                        <p style="color: white; font-size: 30px;">Todos Domingos</p>
                     </div>
                     <div
-                        style="display: flex; justify-content: space-around; width: 100%; margin-top: 10px; height: 185px;">
+                        style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                        <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                            <div
+                                style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                <p><i class="mdi mdi-account"></i> Total</p>
+                            </div>
+                            <div
+                                style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                <p>{{ domingos.total }}</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                            @click="carregarLista('TodosAptos')">
+                            <div
+                                style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                <p><i class="mdi mdi-account-check"></i> Aptas</p>
+                            </div>
+                            <div
+                                style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                <p>{{ domingos.aptas }}</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                            @click="carregarLista('TodosRisco')">
+                            <div
+                                style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                <p><i class="mdi mdi-account-alert"></i> Risco</p>
+                            </div>
+                            <div
+                                style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                <p>{{ domingos.risco }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;">
+                    <div
+                        style="display: flex; justify-content: space-around; width: 100%; margin-top: 10px;">
                         <div
-                            style="display: flex; justify-content: center; flex-direction: column; width: 100%; height: 185px;">
+                            style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                             <div
                                 style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                                 <p style="color: white; font-size: 30px;">Próximas Datas</p>
                             </div>
                             <div
-                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
-                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                    <div
-                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
+                                style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                                <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomA }}</p>
+                                        </div>
                                     </div>
-                                    <div
-                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                        <p>{{ this.proximaDataDomA }}</p>
+                                    <div style="width: 2%;"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomB }}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div style="width: 2%;"></div>
-                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                    <div
-                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
+                                <div style="display: flex; justify-content: space-between; width: 100%; ">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomC }}</p>
+                                        </div>
                                     </div>
-                                    <div
-                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                        <p>{{ this.proximaDataDomB }}</p>
+                                    <div style="width: 2%;"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomD }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +362,7 @@ export default {
             var dadosGraficoC = [];
             var dadosGraficoD = [];
 
-            const res = await axios.get('http://18.205.24.68:8080/api/dashboard/' + this.escola, {
+            const res = await axios.get('http://44.207.8.162:8080/api/dashboard/' + this.escola, {
                 headers: {
                     Authorization: this.token,
                 }
@@ -332,61 +442,61 @@ export default {
             switch (opcao) {
                 case "DomAAptas":
                     this.tituloListagem = 'Domingo A Aptas';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domAAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domAAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomARisco":
                     this.tituloListagem = 'Domingo A em Risco';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domARisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domARisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBAptas":
                     this.tituloListagem = 'Domingo B Aptas';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domBAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domBAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBRisco":
                     this.tituloListagem = 'Domingo B em Risco';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domBRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domBRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomCAptas":
                     this.tituloListagem = 'Domingo C Aptas';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domCAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domCAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomCRisco":
                     this.tituloListagem = 'Domingo C em Risco';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domCRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domCRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomDAptas":
                     this.tituloListagem = 'Domingo D Aptas';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domDAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domDAptas/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomDRisco":
                     this.tituloListagem = 'Domingo D em Risco';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/domDRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/domDRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosAptos":
                     this.tituloListagem = 'Todos Alunos Aptos';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/todosAptos/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/todosAptos/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosRisco":
                     this.tituloListagem = 'Todos Alunos em Risco';
-                    axios.get('http://18.205.24.68:8080/api/dashboard/todosRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('http://44.207.8.162:8080/api/dashboard/todosRisco/' + this.escola, { headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
@@ -411,14 +521,14 @@ export default {
     justify-content: center;
     text-align: center;
     flex-direction: column;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 #telaInicial {
     background-color: rgb(230, 243, 255);
     width: 99%;
     margin-top: 15px;
-    margin-left: 20px;
+    margin-left: 15px;
     color: #0b4d75;
     border-radius: 5px;
     display: flex;
