@@ -302,8 +302,8 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const resAlunos = await axios.get('http://44.207.8.162:8080/api/alunos/' + this.escola, { headers: { 'Authorization': this.token } });
-            const resSeries = await axios.get('http://44.207.8.162:8080/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
+            const resAlunos = await axios.get('http://172.31.87.236:8080/api/alunos/' + this.escola, { headers: { 'Authorization': this.token } });
+            const resSeries = await axios.get('http://172.31.87.236:8080/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
             this.alunos = resAlunos.data;
             this.seriesDisponiveis = resSeries.data;
             for (let i = 20; i < 46; i++) {
@@ -313,9 +313,9 @@ export default {
         async salvarAluno() {
             this.aluno.nome = this.aluno.nome.toUpperCase();
             if (this.aluno.id > 0) {
-                await axios.post('http://44.207.8.162:8080/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { headers: { 'Authorization': this.token } }).then(res => {
+                await axios.post('http://172.31.87.236:8080/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { headers: { 'Authorization': this.token } }).then(res => {
                     console.log(res);
-                    axios.post('http://44.207.8.162:8080/api/alunos/save', this.aluno, {
+                    axios.post('http://172.31.87.236:8080/api/alunos/save', this.aluno, {
                         headers: {
                             'Authorization': this.token
                         }
@@ -332,9 +332,9 @@ export default {
                     });
                 }).catch(rej => console.log(rej));
             } else {
-                await axios.post('http://44.207.8.162:8080/api/alunos/save', this.aluno, { headers: { 'Authorization': this.token } }).then(res => {
+                await axios.post('http://172.31.87.236:8080/api/alunos/save', this.aluno, { headers: { 'Authorization': this.token } }).then(res => {
                     console.log(res);
-                    axios.post('http://44.207.8.162:8080/api/registros/' + res.data.codigo + '/' + this.escola, this.registro, {
+                    axios.post('http://172.31.87.236:8080/api/registros/' + res.data.codigo + '/' + this.escola, this.registro, {
                         headers: {
                             'Authorization': this.token
                         }
@@ -355,7 +355,7 @@ export default {
         async clickRow(item, row) {
             const dateVet = row.item.columns.nascimento.split("/");
 
-            await axios.get('http://44.207.8.162:8080/api/registros/' + row.item.columns.codigo + "/" + this.escola, { headers: { 'Authorization': this.token } })
+            await axios.get('http://172.31.87.236:8080/api/registros/' + row.item.columns.codigo + "/" + this.escola, { headers: { 'Authorization': this.token } })
                 .then(res => {
                     this.registro = {
                         fevereiro: res.data.fevereiro !== null ? res.data.fevereiro : '',
@@ -371,7 +371,7 @@ export default {
                 })
                 .catch(rej => console.log(rej));
 
-            await axios.get('http://44.207.8.162:8080/api/arquivos/foto/' + row.item.columns.id, {
+            await axios.get('http://172.31.87.236:8080/api/arquivos/foto/' + row.item.columns.id, {
                 headers: {
                     'Authorization': this.token
                 }
@@ -387,7 +387,7 @@ export default {
                 })
                 .catch(rej => console.log(rej))
 
-            await axios.get('http://44.207.8.162:8080/api/arquivos/matricula/' + row.item.columns.id, {
+            await axios.get('http://172.31.87.236:8080/api/arquivos/matricula/' + row.item.columns.id, {
                 headers: {
                     'Authorization': this.token
                 }
