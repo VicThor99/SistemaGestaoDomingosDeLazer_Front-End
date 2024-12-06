@@ -161,11 +161,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://172.31.87.236:8080/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://54.87.114.106:8080/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
             this.registros = res.data;
         },
         salvarRegistro() {
-            axios.post('http://172.31.87.236:8080/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
+            axios.post('http://54.87.114.106:8080/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
                 headers: {
                     'Authorization': this.token
                 }

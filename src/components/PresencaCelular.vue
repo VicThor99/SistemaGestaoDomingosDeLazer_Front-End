@@ -45,7 +45,7 @@ export default {
             this.initReader();
         },
         concluir() {
-            axios.post('http://172.31.87.236:8080/api/registros/celular/' + this.escola, this.alunos,
+            axios.post('http://54.87.114.106:8080/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
 
         }

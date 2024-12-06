@@ -59,8 +59,8 @@ export default {
     },
     methods: {
         async carregarListas() {
-            const axSeries = await axios.get('http://172.31.87.236:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('http://172.31.87.236:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('http://54.87.114.106:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('http://54.87.114.106:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
@@ -68,7 +68,7 @@ export default {
             this.carregando = true;
 
             if (this.domingo != '') {
-                await axios.get('http://172.31.87.236:8080/api/jaspers/matriculas/'+ this.escola + '?domingo=' + this.domingo, {
+                await axios.get('http://54.87.114.106:8080/api/jaspers/matriculas/'+ this.escola + '?domingo=' + this.domingo, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -86,7 +86,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.serie != '') {
-                await axios.get('http://172.31.87.236:8080/api/jaspers/matriculas/'+ this.escola + '?serie=' + this.serie, {
+                await axios.get('http://54.87.114.106:8080/api/jaspers/matriculas/'+ this.escola + '?serie=' + this.serie, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -104,7 +104,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.sala != '') {
-                await axios.get('http://172.31.87.236:8080/api/jaspers/matriculas/'+ this.escola + '?sala=' + this.sala, {
+                await axios.get('http://54.87.114.106:8080/api/jaspers/matriculas/'+ this.escola + '?sala=' + this.sala, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -122,7 +122,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.codigo != '') {
-                await axios.get('http://172.31.87.236:8080/api/jaspers/matriculas/'+ this.escola + '?codigo=' + this.codigo, {
+                await axios.get('http://54.87.114.106:8080/api/jaspers/matriculas/'+ this.escola + '?codigo=' + this.codigo, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -140,7 +140,7 @@ export default {
                         this.carregando = false;
                     });
             } else {
-                await axios.get('http://172.31.87.236:8080/api/jaspers/matriculas/'+ this.escola, {
+                await axios.get('http://54.87.114.106:8080/api/jaspers/matriculas/'+ this.escola, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })

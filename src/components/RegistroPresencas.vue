@@ -61,7 +61,7 @@ export default {
                     const result = reader.result;
                     this.json.codigos = result.split(/\r?\n/);
 
-                    axios.post('http://172.31.87.236:8080/api/registros/leitor/'+ this.escola, this.json, {
+                    axios.post('http://54.87.114.106:8080/api/registros/leitor/'+ this.escola, this.json, {
                         headers: {
                             'Authorization': this.token
                         }
