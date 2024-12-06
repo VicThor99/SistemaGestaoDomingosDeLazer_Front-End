@@ -58,8 +58,8 @@ export default {
     },
     methods: {
         async carregarListas() {
-            const axSeries = await axios.get('http://54.87.114.106:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('http://54.87.114.106:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('http://3.95.225.147:8080/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('http://3.95.225.147:8080/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
@@ -67,7 +67,7 @@ export default {
             this.carregando = true;
 
             if (this.domingo != '') {
-                await axios.get('http://54.87.114.106:8080/api/jaspers/listas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
+                await axios.get('http://3.95.225.147:8080/api/jaspers/listas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -85,7 +85,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.serie != '') {
-                await axios.get('http://54.87.114.106:8080/api/jaspers/listas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
+                await axios.get('http://3.95.225.147:8080/api/jaspers/listas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -103,7 +103,7 @@ export default {
                         this.carregando = false;
                     });
             } else if (this.sala != '') {
-                await axios.get('http://54.87.114.106:8080/api/jaspers/listas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
+                await axios.get('http://3.95.225.147:8080/api/jaspers/listas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -121,7 +121,7 @@ export default {
                         this.carregando = false;
                     });
             } else {
-                await axios.get('http://54.87.114.106:8080/api/jaspers/listas/'+ this.escola + '?ativos=' + this.ativos, {
+                await axios.get('http://3.95.225.147:8080/api/jaspers/listas/'+ this.escola + '?ativos=' + this.ativos, {
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
