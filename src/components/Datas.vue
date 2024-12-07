@@ -106,11 +106,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('https://127.0.0.1:8443/api/datas/' + this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://www.domingodelazer.click:8443/api/datas/' + this.escola, { headers: { 'Authorization': this.token } });
             this.datas = res.data;
         },
         salvarData() {
-            axios.post('https://127.0.0.1:8443/api/datas/'+ this.escola, this.dataAula, {
+            axios.post('https://www.domingodelazer.click:8443/api/datas/'+ this.escola, this.dataAula, {
                 headers: {
                     'Authorization': this.token
                 }

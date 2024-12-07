@@ -127,11 +127,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('https://127.0.0.1:8443/api/users', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://www.domingodelazer.click:8443/api/users', { headers: { 'Authorization': this.token } });
             this.usuarios = res.data;
         },
         salvarUsuario() {
-            axios.post('https://127.0.0.1:8443/api/users', this.usuario, {
+            axios.post('https://www.domingodelazer.click:8443/api/users', this.usuario, {
                 headers: {
                     'Authorization': this.token
                 }

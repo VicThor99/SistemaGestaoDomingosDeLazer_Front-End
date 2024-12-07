@@ -161,11 +161,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('https://127.0.0.1:8443/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://www.domingodelazer.click:8443/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
             this.registros = res.data;
         },
         salvarRegistro() {
-            axios.post('https://127.0.0.1:8443/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
+            axios.post('https://www.domingodelazer.click:8443/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
                 headers: {
                     'Authorization': this.token
                 }

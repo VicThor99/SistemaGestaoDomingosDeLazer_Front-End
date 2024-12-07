@@ -5,12 +5,14 @@ module.exports = defineConfig({
     server: true, 
     client: {
         webSocketURL: {
-            protocol: 'wss'
+            protocol: 'wss',
+            port:8443
         },
     },
     allowedHosts: [
       'domingodelazer.click', 
-      'www.domingodelazer.click' 
+      'www.domingodelazer.click',
+      'localhost', 
     ], 
   },
 })
