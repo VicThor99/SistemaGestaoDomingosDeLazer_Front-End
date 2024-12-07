@@ -127,11 +127,11 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://3.95.225.147:8080/api/users', { headers: { 'Authorization': this.token } });
+            const res = await axios.get('http://54.167.78.156:8080/api/users', { headers: { 'Authorization': this.token } });
             this.usuarios = res.data;
         },
         salvarUsuario() {
-            axios.post('http://3.95.225.147:8080/api/users', this.usuario, {
+            axios.post('http://54.167.78.156:8080/api/users', this.usuario, {
                 headers: {
                     'Authorization': this.token
                 }
