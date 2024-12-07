@@ -376,6 +376,7 @@ export default {
 
             console.log(this.json);
 
+            axios.defaults.withCredentials = true;
             await axios.post('https://www.domingodelazer.click:8443/api/datas/emMassa/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token

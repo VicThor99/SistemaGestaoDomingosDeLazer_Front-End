@@ -63,6 +63,7 @@ export default {
     },
     methods: {
         async carregarListas() {
+            axios.defaults.withCredentials = true;
             const axSeries = await axios.get('https://www.domingodelazer.click:8443/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
             const axSalas = await axios.get('https://www.domingodelazer.click:8443/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
@@ -70,6 +71,7 @@ export default {
         },
         async imprimir() {
             this.carregando = true;
+            axios.defaults.withCredentials = true;
 
             if (this.domingo != '') {
                 await axios.get('https://www.domingodelazer.click:8443/api/jaspers/protocolos/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {

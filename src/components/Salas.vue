@@ -112,6 +112,7 @@ export default {
     },
     methods: {
         async recarregaLista() {
+            axios.defaults.withCredentials = true;
             const res = await axios.get('https://www.domingodelazer.click:8443/api/series/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series = res.data;
             for (let i = 2; i < 20; i++) {

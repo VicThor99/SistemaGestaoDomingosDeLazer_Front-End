@@ -127,10 +127,12 @@ export default {
     },
     methods: {
         async recarregaLista() {
+            axios.defaults.withCredentials = true;
             const res = await axios.get('https://www.domingodelazer.click:8443/api/users', { headers: { 'Authorization': this.token } });
             this.usuarios = res.data;
         },
         salvarUsuario() {
+            axios.defaults.withCredentials = true;
             axios.post('https://www.domingodelazer.click:8443/api/users', this.usuario, {
                 headers: {
                     'Authorization': this.token

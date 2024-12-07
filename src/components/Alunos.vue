@@ -302,6 +302,7 @@ export default {
     },
     methods: {
         async recarregaLista() {
+            axios.defaults.withCredentials = true;
             const resAlunos = await axios.get('https://www.domingodelazer.click:8443/api/alunos/' + this.escola, { headers: { 'Authorization': this.token } });
             const resSeries = await axios.get('https://www.domingodelazer.click:8443/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
             this.alunos = resAlunos.data;
@@ -311,6 +312,7 @@ export default {
             }
         },
         async salvarAluno() {
+            axios.defaults.withCredentials = true;
             this.aluno.nome = this.aluno.nome.toUpperCase();
             if (this.aluno.id > 0) {
                 await axios.post('https://www.domingodelazer.click:8443/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { headers: { 'Authorization': this.token } }).then(res => {
@@ -353,6 +355,7 @@ export default {
             }
         },
         async clickRow(item, row) {
+            axios.defaults.withCredentials = true;
             const dateVet = row.item.columns.nascimento.split("/");
 
             await axios.get('https://www.domingodelazer.click:8443/api/registros/' + row.item.columns.codigo + "/" + this.escola, { headers: { 'Authorization': this.token } })

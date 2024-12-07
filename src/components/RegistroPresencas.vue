@@ -47,6 +47,7 @@ export default {
     },
     methods: {
         async iniciarProcessoPresencas() {
+            axios.defaults.withCredentials = true;
             this.carregando = true;
             this.json.codigos = new Array();
             this.json.data = new Date();

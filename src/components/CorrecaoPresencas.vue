@@ -161,10 +161,12 @@ export default {
     },
     methods: {
         async recarregaLista() {
+            axios.defaults.withCredentials = true;
             const res = await axios.get('https://www.domingodelazer.click:8443/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
             this.registros = res.data;
         },
         salvarRegistro() {
+            axios.defaults.withCredentials = true;
             axios.post('https://www.domingodelazer.click:8443/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
                 headers: {
                     'Authorization': this.token

@@ -55,6 +55,7 @@ export default {
         async iniciarUpload() {
             this.carregando = true;
             let formData = new FormData();
+            axios.defaults.withCredentials = true;
             formData.append('image', document.getElementById("foto").files[0]);
 
             if (this.tipo === 'Foto') {

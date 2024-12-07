@@ -356,6 +356,7 @@ export default {
     },
     methods: {
         async carregarDashboard() {
+            axios.defaults.withCredentials = true;
 
             var dadosGraficoA = [];
             var dadosGraficoB = [];
@@ -439,6 +440,7 @@ export default {
             chart.render();
         },
         carregarLista(opcao) {
+            axios.defaults.withCredentials = true;
             switch (opcao) {
                 case "DomAAptas":
                     this.tituloListagem = 'Domingo A Aptas';

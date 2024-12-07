@@ -45,6 +45,7 @@ export default {
             this.initReader();
         },
         concluir() {
+            axios.defaults.withCredentials = true;
             axios.post('https://www.domingodelazer.click:8443/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
 

@@ -174,6 +174,7 @@ export default {
   },
   methods: {
     async submit() {
+      axios.defaults.withCredentials = true;
       await axios.post('https://www.domingodelazer.click:8443/api/auth', this.user)
         .then(res => {
           var date = new Date();
@@ -220,6 +221,7 @@ export default {
         })
     },
     download() {
+      axios.defaults.withCredentials = true;
       axios.get('https://www.domingodelazer.click:8443/api/alunos/export/' + this.escola, {
         headers: {
           'Authorization': this.token
