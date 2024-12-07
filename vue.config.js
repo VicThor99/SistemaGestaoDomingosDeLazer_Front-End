@@ -2,19 +2,19 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
-    https: true, // Serve the development server over HTTPS
-    host: 'www.domingodelazer.click', // Specify the host (default is localhost)
-    port: 8443, // Specify the port
+    server: true, 
+    host: '127.0.0.1', 
+    port: 8443, 
     client: {
         webSocketURL: {
-            protocol: 'wss', // Use WSS for WebSocket
-            host: 'www.domingodelazer.click',
+            protocol: 'wss', 
+            hostname: '127.0.0.1',
             port: 8443,
         },
     },
     proxy: {
         '/api': {
-            target: 'https://www.domingodelazer.click:8443', // Proxy API requests to your backend
+            target: 'https://www.domingodelazer.click:8443',
             changeOrigin: true,
         },
     },
