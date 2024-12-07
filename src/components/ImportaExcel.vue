@@ -65,7 +65,7 @@ export default {
                 }
             });
 
-            axios.post('http://54.167.78.156:8080/api/alunos/import/'+ this.escola, this.json, {
+            axios.post('https://54.167.78.156:8443/api/alunos/import/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token
                 }

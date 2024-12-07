@@ -112,14 +112,14 @@ export default {
     },
     methods: {
         async recarregaLista() {
-            const res = await axios.get('http://54.167.78.156:8080/api/series/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://54.167.78.156:8443/api/series/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series = res.data;
             for (let i = 2; i < 20; i++) {
                 this.salas.push('Sala ' + i);
             }
         },
         salvarSerie() {
-            axios.post('http://54.167.78.156:8080/api/series/'+ this.escola, this.serie, {
+            axios.post('https://54.167.78.156:8443/api/series/'+ this.escola, this.serie, {
                 headers: {
                     'Authorization': this.token
                 }
