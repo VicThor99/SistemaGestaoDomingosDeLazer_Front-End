@@ -175,7 +175,12 @@ export default {
   methods: {
     async submit() {
       axios.defaults.withCredentials = true;
-      await axios.post('https://api.domingodelazer.click/api/auth', this.user)
+      await axios.post('https://api.domingodelazer.click/api/auth', this.user, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 60);
