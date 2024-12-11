@@ -107,12 +107,12 @@ export default {
     methods: {
         async recarregaLista() {
             axios.defaults.withCredentials = true;
-            const res = await axios.get('https://www.domingodelazer.click:8443/api/datas/' + this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://api.domingodelazer.click/api/datas/' + this.escola, { headers: { 'Authorization': this.token } });
             this.datas = res.data;
         },
         salvarData() {
             axios.defaults.withCredentials = true;
-            axios.post('https://www.domingodelazer.click:8443/api/datas/'+ this.escola, this.dataAula, {
+            axios.post('https://api.domingodelazer.click/api/datas/'+ this.escola, this.dataAula, {
                 headers: {
                     'Authorization': this.token
                 }

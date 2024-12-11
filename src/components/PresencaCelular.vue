@@ -46,7 +46,7 @@ export default {
         },
         concluir() {
             axios.defaults.withCredentials = true;
-            axios.post('https://www.domingodelazer.click:8443/api/registros/celular/' + this.escola, this.alunos,
+            axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
 
         }

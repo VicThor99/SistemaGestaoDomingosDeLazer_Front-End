@@ -175,7 +175,7 @@ export default {
   methods: {
     async submit() {
       axios.defaults.withCredentials = true;
-      await axios.post('https://www.domingodelazer.click:8443/api/auth', this.user)
+      await axios.post('https://api.domingodelazer.click/api/auth', this.user)
         .then(res => {
           var date = new Date();
           date.setUTCMinutes(date.getUTCMinutes() + 60);
@@ -186,7 +186,7 @@ export default {
           this.logado = cookies.get('token') != null;
           this.erro = null;
           this.telaAtual = 'TelaInicial';
-          axios.get('https://www.domingodelazer.click:8443/api/access/' + this.username, {
+          axios.get('https://api.domingodelazer.click/api/access/' + this.username, {
             headers: {
               'Authorization': 'Bearer ' + res.data.token
             }
@@ -222,7 +222,7 @@ export default {
     },
     download() {
       axios.defaults.withCredentials = true;
-      axios.get('https://www.domingodelazer.click:8443/api/alunos/export/' + this.escola, {
+      axios.get('https://api.domingodelazer.click/api/alunos/export/' + this.escola, {
         headers: {
           'Authorization': this.token
         }

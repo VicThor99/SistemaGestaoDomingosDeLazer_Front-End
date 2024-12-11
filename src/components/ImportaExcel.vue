@@ -66,7 +66,7 @@ export default {
                 }
             });
 
-            axios.post('https://www.domingodelazer.click:8443/api/alunos/import/'+ this.escola, this.json, {
+            axios.post('https://api.domingodelazer.click/api/alunos/import/'+ this.escola, this.json, {
                 headers: {
                     'Authorization': this.token
                 }
