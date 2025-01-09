@@ -6,7 +6,7 @@ module.exports = defineConfig({
     client: {
         webSocketURL: {
             protocol: 'wss',
-            hostname: 'https://api.domingodelazer.click',
+            hostname: 'api.domingodelazer.click',
             port:8443
         },
     },
