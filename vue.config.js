@@ -11,7 +11,7 @@ module.exports = defineConfig({
     },
     proxy: {
       '/api': {
-        target: 'https://domingodelazer.click',
+        target: 'https://api.domingodelazer.click',
         port: 8443,
         changeOrigin: true,
         secure: false,
@@ -19,6 +19,7 @@ module.exports = defineConfig({
     },
     allowedHosts: [
       'domingodelazer.click', 
+      'api.domingodelazer.click',
       'www.domingodelazer.click',
       'localhost', 
     ], 
