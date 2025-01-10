@@ -63,6 +63,7 @@ export default {
                     this.json.codigos = result.split(/\r?\n/);
 
                     axios.post('https://api.domingodelazer.click/api/registros/leitor/'+ this.escola, this.json, {
+                        withCredentials: true,
                         headers: {
                             'Authorization': this.token
                         }

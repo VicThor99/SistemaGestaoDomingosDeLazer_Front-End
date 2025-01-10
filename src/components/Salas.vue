@@ -113,7 +113,7 @@ export default {
     methods: {
         async recarregaLista() {
             axios.defaults.withCredentials = true;
-            const res = await axios.get('https://api.domingodelazer.click/api/series/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://api.domingodelazer.click/api/series/'+ this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
             this.series = res.data;
             for (let i = 2; i < 20; i++) {
                 this.salas.push('Sala ' + i);
@@ -121,6 +121,7 @@ export default {
         },
         salvarSerie() {
             axios.post('https://api.domingodelazer.click/api/series/'+ this.escola, this.serie, {
+                withCredentials: true,
                 headers: {
                     'Authorization': this.token
                 }

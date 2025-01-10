@@ -364,6 +364,7 @@ export default {
             var dadosGraficoD = [];
 
             const res = await axios.get('https://api.domingodelazer.click/api/dashboard/' + this.escola, {
+                withCredentials: true,
                 headers: {
                     Authorization: this.token,
                 }
@@ -444,61 +445,61 @@ export default {
             switch (opcao) {
                 case "DomAAptas":
                     this.tituloListagem = 'Domingo A Aptas';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domAAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domAAptas/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomARisco":
                     this.tituloListagem = 'Domingo A em Risco';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domARisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domARisco/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBAptas":
                     this.tituloListagem = 'Domingo B Aptas';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domBAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domBAptas/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomBRisco":
                     this.tituloListagem = 'Domingo B em Risco';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domBRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domBRisco/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomCAptas":
                     this.tituloListagem = 'Domingo C Aptas';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domCAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domCAptas/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomCRisco":
                     this.tituloListagem = 'Domingo C em Risco';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domCRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domCRisco/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomDAptas":
                     this.tituloListagem = 'Domingo D Aptas';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domDAptas/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domDAptas/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "DomDRisco":
                     this.tituloListagem = 'Domingo D em Risco';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/domDRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/domDRisco/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosAptos":
                     this.tituloListagem = 'Todos Alunos Aptos';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/todosAptos/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/todosAptos/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;
                 case "TodosRisco":
                     this.tituloListagem = 'Todos Alunos em Risco';
-                    axios.get('https://api.domingodelazer.click/api/dashboard/todosRisco/' + this.escola, { headers: { 'Authorization': this.token } })
+                    axios.get('https://api.domingodelazer.click/api/dashboard/todosRisco/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                         .then(res => this.lista = res.data)
                         .catch(rej => console.log(rej));
                     break;

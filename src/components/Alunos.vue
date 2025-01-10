@@ -303,8 +303,8 @@ export default {
     methods: {
         async recarregaLista() {
             axios.defaults.withCredentials = true;
-            const resAlunos = await axios.get('https://api.domingodelazer.click/api/alunos/' + this.escola, { headers: { 'Authorization': this.token } });
-            const resSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
+            const resAlunos = await axios.get('https://api.domingodelazer.click/api/alunos/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
+            const resSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
             this.alunos = resAlunos.data;
             this.seriesDisponiveis = resSeries.data;
             for (let i = 20; i < 46; i++) {
@@ -315,9 +315,10 @@ export default {
             axios.defaults.withCredentials = true;
             this.aluno.nome = this.aluno.nome.toUpperCase();
             if (this.aluno.id > 0) {
-                await axios.post('https://api.domingodelazer.click/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { headers: { 'Authorization': this.token } }).then(res => {
+                await axios.post('https://api.domingodelazer.click/api/registros/' + this.aluno.codigo + '/' + this.escola, this.registro, { withCredentials: true, headers: { 'Authorization': this.token } }).then(res => {
                     console.log(res);
                     axios.post('https://api.domingodelazer.click/api/alunos/save', this.aluno, {
+                        withCredentials: true,
                         headers: {
                             'Authorization': this.token
                         }
@@ -334,9 +335,10 @@ export default {
                     });
                 }).catch(rej => console.log(rej));
             } else {
-                await axios.post('https://api.domingodelazer.click/api/alunos/save', this.aluno, { headers: { 'Authorization': this.token } }).then(res => {
+                await axios.post('https://api.domingodelazer.click/api/alunos/save', this.aluno, { withCredentials: true, headers: { 'Authorization': this.token } }).then(res => {
                     console.log(res);
                     axios.post('https://api.domingodelazer.click/api/registros/' + res.data.codigo + '/' + this.escola, this.registro, {
+                        withCredentials: true,
                         headers: {
                             'Authorization': this.token
                         }
@@ -358,7 +360,7 @@ export default {
             axios.defaults.withCredentials = true;
             const dateVet = row.item.columns.nascimento.split("/");
 
-            await axios.get('https://api.domingodelazer.click/api/registros/' + row.item.columns.codigo + "/" + this.escola, { headers: { 'Authorization': this.token } })
+            await axios.get('https://api.domingodelazer.click/api/registros/' + row.item.columns.codigo + "/" + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } })
                 .then(res => {
                     this.registro = {
                         fevereiro: res.data.fevereiro !== null ? res.data.fevereiro : '',
@@ -375,6 +377,7 @@ export default {
                 .catch(rej => console.log(rej));
 
             await axios.get('https://api.domingodelazer.click/api/arquivos/foto/' + row.item.columns.id, {
+                withCredentials: true,
                 headers: {
                     'Authorization': this.token
                 }
@@ -391,6 +394,7 @@ export default {
                 .catch(rej => console.log(rej))
 
             await axios.get('https://api.domingodelazer.click/api/arquivos/matricula/' + row.item.columns.id, {
+                withCredentials: true,
                 headers: {
                     'Authorization': this.token
                 }

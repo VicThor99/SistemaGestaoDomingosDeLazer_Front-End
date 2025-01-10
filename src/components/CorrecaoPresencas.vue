@@ -162,12 +162,13 @@ export default {
     methods: {
         async recarregaLista() {
             axios.defaults.withCredentials = true;
-            const res = await axios.get('https://api.domingodelazer.click/api/registros/' + this.escola, { headers: { 'Authorization': this.token } });
+            const res = await axios.get('https://api.domingodelazer.click/api/registros/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
             this.registros = res.data;
         },
         salvarRegistro() {
             axios.defaults.withCredentials = true;
             axios.post('https://api.domingodelazer.click/api/registros/' + this.registro.codigo + '/'+ this.escola, this.registro, {
+                withCredentials: true,
                 headers: {
                     'Authorization': this.token
                 }
