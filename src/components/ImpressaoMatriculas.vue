@@ -12,16 +12,16 @@
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Sala</p>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 1000px;">
-                    <input v-model="codigo"
+                    <input v-model="parametros.codigo"
                         style="width: 240px; height: 60px; font-size:30px; padding: 20px; border-radius: 5px; background-color: white; margin-right: 20px;" />
                     
-                    <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
+                    <v-select v-model="parametros.domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="serie" :items="this.series" variant="solo-filled"
+                    <v-select v-model="parametros.serie" :items="this.series" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="sala" :items="this.salas" variant="solo-filled"
+                    <v-select v-model="parametros.sala" :items="this.salas" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
                 </div>
                 <br />
@@ -47,10 +47,12 @@ export default {
     data() {
         return {
             carregando: false,
-            codigo: '',
-            serie: '',
-            sala: '',
-            domingo: '',
+            parametros: {
+                serie: '',
+                sala: '',
+                domingo: '',
+                codigo: '',
+            },
             series: [''],
             salas: [''],
             token: cookies.get('token'),
@@ -68,98 +70,24 @@ export default {
         async imprimir() {
             this.carregando = true;
             
-
-            if (this.domingo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola + '?domingo=' + this.domingo, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'MatriculasDomingo' + this.domingo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.serie != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola + '?serie=' + this.serie, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'MatriculaSerie' + this.serie + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.sala != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola + '?sala=' + this.sala, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'Matricula' + this.sala.replace(/\s/g, '') + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.codigo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola + '?codigo=' + this.codigo, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'MatriculaCodigo' + this.codigo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'MatriculasGerais.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            }
+            await axios.post('https://api.domingodelazer.click/api/jaspers/matriculas/'+ this.escola, this.parametros, {
+                responseType: 'blob',
+                headers: { 'Authorization': this.token }
+            })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                const complementoNome = (this.parametros.codigo ? this.parametros.codigo : this.parametros.domingo ? 'Domingo' + this.parametros.domingo : this.parametros.serie ? this.parametros.serie : this.parametros.sala ? this.parametros.sala : '');
+                link.setAttribute('download', 'Matriculas' + complementoNome + '.pdf');
+                document.body.appendChild(link);
+                link.click();
+                this.carregando = false;
+            })
+            .catch(rej => {
+                console.log(rej);
+                this.carregando = false;
+            });
         }
     },
     mounted() {

@@ -13,19 +13,19 @@
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Alunos Ativos</p>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 1250px;">
-                    <input v-model="codigo"
+                    <input v-model="parametros.codigo"
                         style="width: 240px; height: 60px; font-size:30px; padding: 20px; border-radius: 5px; background-color: white; margin-right: 20px;" />
                     
-                    <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
+                    <v-select v-model="parametros.domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="serie" :items="this.series" variant="solo-filled"
+                    <v-select v-model="parametros.serie" :items="this.series" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="sala" :items="this.salas" variant="solo-filled"
+                    <v-select v-model="parametros.sala" :items="this.salas" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-switch color="info" v-model="ativos" hide-details inset style="width: 250px;"></v-switch>
+                    <v-switch color="info" v-model="parametros.ativos" hide-details inset style="width: 250px;"></v-switch>
                 </div>
                 <br />
                 <button id="btnProcesso" @click="imprimir()"><i class="mdi mdi-printer"></i> Imprimir</button>
@@ -50,11 +50,13 @@ export default {
     data() {
         return {
             carregando: false,
-            codigo: '',
-            serie: '',
-            sala: '',
-            domingo: '',
-            ativos: false,
+            parametros: {
+                ativos: false,
+                serie: '',
+                sala: '',
+                domingo: '',
+                codigo: '',
+            },
             series: [''],
             salas: [''],
             token: cookies.get('token'),
@@ -72,98 +74,24 @@ export default {
         async imprimir() {
             this.carregando = true;
             
-
-            if (this.domingo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ProtocolosDomingo' + this.domingo + 'Ativos.pdf' : 'ProtocolosDomingo' + this.domingo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.serie != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ProtocolosSerie' + this.serie + 'Ativos.pdf' : 'ProtocolosSerie' + this.serie + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.sala != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'Protocolos' + this.sala.replace(/\s/g, '') + 'Ativos.pdf' : 'Protocolos' + this.sala.replace(/\s/g, '') + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.codigo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola + '?codigo=' + this.codigo, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'ProtocoloCodigo' + this.codigo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola + '?ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ProtocolosAlunosAtivos.pdf' : 'ProtocolosGerais.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            }
+            await axios.post('https://api.domingodelazer.click/api/jaspers/protocolos/'+ this.escola, this.parametros, {
+                responseType: 'blob',
+                headers: { 'Authorization': this.token }
+            })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                const complementoNome = (this.parametros.codigo ? this.parametros.codigo : this.parametros.domingo ? 'Domingo' + this.parametros.domingo : this.parametros.serie ? this.parametros.serie : this.parametros.sala ? this.parametros.sala : '') + (this.parametros.ativos ? 'Ativos' : '');
+                link.setAttribute('download', 'Protocolos' + complementoNome + '.pdf');
+                document.body.appendChild(link);
+                link.click();
+                this.carregando = false;
+            })
+            .catch(rej => {
+                console.log(rej);
+                this.carregando = false;
+            });
         }
     },
     mounted() {

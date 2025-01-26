@@ -8,28 +8,28 @@
                 <div style="display: flex; justify-content: space-between; width: 1250px;">
                     <div style="display: flex; width: 240px; flex-direction: column;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Código</p>
-                        <input v-model="codigo"
+                        <input v-model="parametros.codigo"
                             style="height: 60px; font-size:30px; padding: 20px; border-radius: 5px; background-color: white; margin-right: 20px; width: 100%;" />
                     </div>
                     <div style="display: flex; flex-direction: column; width: 240px;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Domingo</p>
-                        <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
+                        <v-select v-model="parametros.domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                             style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 240px;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Série</p>
-                        <v-select v-model="serie" :items="this.series" variant="solo-filled"
+                        <v-select v-model="parametros.serie" :items="this.series" variant="solo-filled"
                             style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 240px;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Sala</p>
-                        <v-select v-model="sala" :items="this.salas" variant="solo-filled"
+                        <v-select v-model="parametros.sala" :items="this.salas" variant="solo-filled"
                             style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 240px; justify-content: center; align-content: center;">
                         <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Alunos Ativos</p>
-                        <v-switch color="info" v-model="ativos" inset style="width: 250px;"></v-switch>
+                        <v-switch color="info" v-model="parametros.ativos" inset style="width: 250px;"></v-switch>
                     </div>
                 </div>
                 <br />
@@ -55,11 +55,13 @@ export default {
     data() {
         return {
             carregando: false,
-            codigo: '',
-            serie: '',
-            sala: '',
-            domingo: '',
-            ativos: false,
+            parametros: {
+                ativos: false,
+                serie: '',
+                sala: '',
+                domingo: '',
+                codigo: '',
+            },
             series: [''],
             salas: [''],
             token: cookies.get('token'),
@@ -76,97 +78,24 @@ export default {
         async imprimir() {
             this.carregando = true;
 
-            if (this.domingo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'CrachasDomingo' + this.domingo + 'Ativos.pdf' : 'CrachasDomingo' + this.domingo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.serie != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'CrachasSerie' + this.serie + 'Ativos.pdf' : 'CrachaSerie' + this.serie + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.sala != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'Crachas' + this.sala.replace(/\s/g, '') + 'Ativos.pdf' : 'Crachas' + this.sala.replace(/\s/g, '') + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.codigo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?codigo=' + this.codigo, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', 'CrachaCodigo' + this.codigo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'CrachaAlunosAtivos.pdf' : 'CrachaGerais.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            }
+            await axios.post('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola, this.parametros, {
+                responseType: 'blob',
+                headers: { 'Authorization': this.token }
+            })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                const complementoNome = (this.parametros.codigo ? this.parametros.codigo : this.parametros.domingo ? 'Domingo' + this.parametros.domingo : this.parametros.serie ? this.parametros.serie : this.parametros.sala ? this.parametros.sala : '') + (this.parametros.ativos ? 'Ativos' : '');
+                link.setAttribute('download', 'Crachas' + complementoNome + '.pdf');
+                document.body.appendChild(link);
+                link.click();
+                this.carregando = false;
+            })
+            .catch(rej => {
+                console.log(rej);
+                this.carregando = false;
+            });
         }
     },
     mounted() {
