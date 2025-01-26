@@ -12,16 +12,16 @@
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Alunos Ativos</p>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 1000px;">
-                    <v-select v-model="domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
+                    <v-select v-model="parametros.domingo" :items="['', 'A', 'B', 'C', 'D']" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="serie" :items="this.series" variant="solo-filled"
+                    <v-select v-model="parametros.serie" :items="this.series" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-select v-model="sala" :items="this.salas" variant="solo-filled"
+                    <v-select v-model="parametros.sala" :items="this.salas" variant="solo-filled"
                         style="width: 240px; height: 60px; font-size:30px; margin-right: 20px;"></v-select>
 
-                    <v-switch color="info" v-model="ativos" hide-details inset style="width: 250px;"></v-switch>
+                    <v-switch color="info" v-model="parametros.ativos" hide-details inset style="width: 250px;"></v-switch>
                 </div>
                 <br />
                 <button id="btnProcesso" @click="imprimir()"><i class="mdi mdi-printer"></i> Imprimir</button>
@@ -46,10 +46,12 @@ export default {
     data() {
         return {
             carregando: false,
-            serie: '',
-            sala: '',
-            domingo: '',
-            ativos: false,
+            parametros: {
+                ativos: false,
+                serie: '',
+                sala: '',
+                domingo: '',
+            },
             series: [''],
             salas: [''],
             token: cookies.get('token'),
@@ -59,88 +61,31 @@ export default {
     methods: {
         async carregarListas() {
             
-            const axSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('https://api.domingodelazer.click/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.post('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.post('https://api.domingodelazer.click/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
         async imprimir() {
             this.carregando = true;
-            
 
-            if (this.domingo != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/listas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ListasDomingo' + this.domingo + 'Ativos.pdf' : 'ListasDomingo' + this.domingo + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.serie != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/listas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ListasSerie' + this.serie + 'Ativos.pdf' : 'ListasSerie' + this.serie + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else if (this.sala != '') {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/listas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'Listas' + this.sala.replace(/\s/g, '') + 'Ativos.pdf' : 'Listas' + this.sala.replace(/\s/g, '') + '.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            } else {
-                await axios.get('https://api.domingodelazer.click/api/jaspers/listas/'+ this.escola + '?ativos=' + this.ativos, {
-                    responseType: 'blob',
-                    headers: { 'Authorization': this.token }
-                })
-                    .then((response) => {
-                        const url = window.URL.createObjectURL(new Blob([response.data]));
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.setAttribute('download', this.ativos ? 'ListasApenasAtivos.pdf' : 'ListasGerais.pdf');
-                        document.body.appendChild(link);
-                        link.click();
-                        this.carregando = false;
-                    })
-                    .catch(rej => {
-                        console.log(rej);
-                        this.carregando = false;
-                    });
-            }
+            await axios.post('https://api.domingodelazer.click/api/jaspers/listas/'+ this.escola, this.parametros, {
+                responseType: 'blob',
+                headers: { 'Authorization': this.token }
+            })
+            .then((response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', this.ativos ? 'ListasDomingo' + this.domingo + 'Ativos.pdf' : 'ListasDomingo' + this.domingo + '.pdf');
+                document.body.appendChild(link);
+                link.click();
+                this.carregando = false;
+            })
+            .catch(rej => {
+                console.log(rej);
+                this.carregando = false;
+            });
         }
     },
     mounted() {
