@@ -77,7 +77,8 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', this.ativos ? 'ListasDomingo' + this.domingo + 'Ativos.pdf' : 'ListasDomingo' + this.domingo + '.pdf');
+                const complementoNome = this.parametros.domingo ? 'Domingo' + this.parametros.domingo : this.parametros.serie ? this.parametros.serie : this.parametros.sala ? this.parametros.sala : '' + this.parametros.ativos ? 'Ativos' : '';
+                link.setAttribute('download', 'Listas' + complementoNome + '.pdf');
                 document.body.appendChild(link);
                 link.click();
                 this.carregando = false;
