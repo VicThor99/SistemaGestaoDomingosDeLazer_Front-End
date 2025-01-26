@@ -61,8 +61,8 @@ export default {
     methods: {
         async carregarListas() {
             
-            const axSeries = await axios.post('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            const axSalas = await axios.post('https://api.domingodelazer.click/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('https://api.domingodelazer.click/api/series/listaStringSalas/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
