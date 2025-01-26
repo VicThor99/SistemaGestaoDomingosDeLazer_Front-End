@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         async iniciarProcessoPresencas() {
-            axios.defaults.withCredentials = true;
+            
             this.carregando = true;
             this.json.codigos = new Array();
             this.json.data = new Date();
@@ -63,7 +63,6 @@ export default {
                     this.json.codigos = result.split(/\r?\n/);
 
                     axios.post('https://api.domingodelazer.click/api/registros/leitor/'+ this.escola, this.json, {
-                        withCredentials: true,
                         headers: {
                             'Authorization': this.token
                         }

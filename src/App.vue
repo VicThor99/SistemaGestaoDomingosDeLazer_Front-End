@@ -174,9 +174,7 @@ export default {
   },
   methods: {
     async submit() {
-      axios.defaults.withCredentials = true;
       await axios.post('https://api.domingodelazer.click/api/auth', this.user, {
-        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         }
@@ -192,7 +190,6 @@ export default {
           this.erro = null;
           this.telaAtual = 'TelaInicial';
           axios.get('https://api.domingodelazer.click/api/access/' + this.username, {
-            withCredentials: true,
             headers: {
               'Authorization': 'Bearer ' + res.data.token
             }
@@ -227,9 +224,7 @@ export default {
         })
     },
     download() {
-      axios.defaults.withCredentials = true;
       axios.get('https://api.domingodelazer.click/api/alunos/export/' + this.escola, {
-        withCredentials: true,
         headers: {
           'Authorization': this.token
         }

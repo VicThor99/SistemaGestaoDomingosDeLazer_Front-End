@@ -68,19 +68,16 @@ export default {
     },
     methods: {
         async carregarListas() {
-            axios.defaults.withCredentials = true;
-            const axSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
-            const axSalas = await axios.get('https://api.domingodelazer.click/api/series/listaStringSalas/' + this.escola, { withCredentials: true, headers: { 'Authorization': this.token } });
+            const axSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
+            const axSalas = await axios.get('https://api.domingodelazer.click/api/series/listaStringSalas/' + this.escola, { headers: { 'Authorization': this.token } });
             this.series.push(...axSeries.data);
             this.salas.push(...axSalas.data);
         },
         async imprimir() {
             this.carregando = true;
-            axios.defaults.withCredentials = true;
 
             if (this.domingo != '') {
                 await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?domingo=' + this.domingo + '&ativos=' + this.ativos, {
-                    withCredentials: true,
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -99,7 +96,6 @@ export default {
                     });
             } else if (this.serie != '') {
                 await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?serie=' + this.serie + '&ativos=' + this.ativos, {
-                    withCredentials: true,
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -118,7 +114,6 @@ export default {
                     });
             } else if (this.sala != '') {
                 await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?sala=' + this.sala + '&ativos=' + this.ativos, {
-                    withCredentials: true,
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -137,7 +132,6 @@ export default {
                     });
             } else if (this.codigo != '') {
                 await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?codigo=' + this.codigo, {
-                    withCredentials: true,
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })
@@ -156,7 +150,6 @@ export default {
                     });
             } else {
                 await axios.get('https://api.domingodelazer.click/api/jaspers/crachas/'+ this.escola + '?ativos=' + this.ativos, {
-                    withCredentials: true,
                     responseType: 'blob',
                     headers: { 'Authorization': this.token }
                 })

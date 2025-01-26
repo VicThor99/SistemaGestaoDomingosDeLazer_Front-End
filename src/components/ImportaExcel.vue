@@ -57,7 +57,7 @@ export default {
         async iniciarImport() {
             this.carregando = true;
             this.json.alunos = [];
-            axios.defaults.withCredentials = true;
+            
             let input = document.getElementById("arquivoExcel");
 
             await readXlsxFile(input.files[0]).then((rows) => {
@@ -67,7 +67,6 @@ export default {
             });
 
             axios.post('https://api.domingodelazer.click/api/alunos/import/'+ this.escola, this.json, {
-                withCredentials: true,
                 headers: {
                     'Authorization': this.token
                 }

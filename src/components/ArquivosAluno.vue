@@ -55,12 +55,11 @@ export default {
         async iniciarUpload() {
             this.carregando = true;
             let formData = new FormData();
-            axios.defaults.withCredentials = true;
+            
             formData.append('image', document.getElementById("foto").files[0]);
 
             if (this.tipo === 'Foto') {
                 axios.post('https://api.domingodelazer.click/api/arquivos/foto/' + this.codigoAluno + '/' + this.escola, formData, {
-                    withCredentials: true,
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': this.token
@@ -70,7 +69,6 @@ export default {
                     .catch(rej => { console.log(rej); this.carregando = false });
             } else if (this.tipo === 'Matricula') {
                 axios.post('https://api.domingodelazer.click/api/arquivos/matricula/' + this.codigoAluno + '/' + this.escola, formData, {
-                    withCredentials: true,
                     headers: {
                         'Content-Type': 'multipart/form-data',
                         'Authorization': this.token
