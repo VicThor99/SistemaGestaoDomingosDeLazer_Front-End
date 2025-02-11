@@ -16,7 +16,7 @@
                 </div>
                 <div style="width: 49.5%; text-align: left; font-size: 15pt; border-left: #0b4d75 1px solid;">
                     <p style="font-weight: bold; text-align: center; font-size: 18pt;">Lista de Alunos Captados</p>
-                    <p v-for="a in alunosPorNome" :key="a">  - {{ a }}</p>
+                    <p v-for="a in alunosPorNome" :key="a" style="margin-left: 20px;">- {{ a }}</p>
                 </div>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
