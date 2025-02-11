@@ -88,6 +88,11 @@ export default {
                     type: "LiveStream",
                     target: document.querySelector('#reader')
                 },
+                constraints: {
+                    width: 640,
+                    height: 480,
+                    facingMode: "environment" // Usa a câmera traseira do dispositivo
+                },
                 decoder: {
                     readers: ["2of5_reader"]
                 },
@@ -181,5 +186,14 @@ export default {
     text-align: center;
     padding: 5px;
     cursor: pointer;
+}
+
+.drawingBuffer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Garante que não atrapalhe cliques */
 }
 </style>
