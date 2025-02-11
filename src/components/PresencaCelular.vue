@@ -4,7 +4,7 @@
             <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: space-between;">
-                <div style="width: 49.5vh;">
+                <div style="width: 49.5%; display: flex; justify-content: center;">
                     <div class="text-center">
                         <button id="botao" @click="initReader">Iniciar detecção</button>
                     </div>
@@ -14,8 +14,8 @@
                         <button id="botao" @click="adicionarAoVetor()">Dar presença</button>
                     </div>
                 </div>
-                <div style="width: 49.5vh; text-align: left; font-size: 15pt;">
-                    <p>Lista de Alunos Captados</p>
+                <div style="width: 49.5%; text-align: left; font-size: 15pt;">
+                    <p style="font-weight: bold; text-align: center; font-size: 18pt;">Lista de Alunos Captados</p>
                     <p v-for="a in alunosPorNome" :key="a">  - {{ a }}</p>
                 </div>
             </div>
@@ -152,7 +152,6 @@ export default {
     display: flex;
     text-align: center;
     justify-content: center;
-    width: 150%;
 }
 
 #botao {
