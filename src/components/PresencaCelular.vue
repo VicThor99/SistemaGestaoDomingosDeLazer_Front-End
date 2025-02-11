@@ -3,13 +3,21 @@
         <div id="presencaCelular" v-if="!this.carregando">
             <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
-            <div class="text-center">
-                <button id="botao" @click="initReader">Iniciar detecção</button>
-            </div>
-            <div v-show="cameraStatus" id="reader"></div>
-            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="code !== ''">
-                <p>O código detectado foi {{ code }}, deseja dar presença?</p>
-                <button id="botao" @click="adicionarAoVetor()">Dar presença</button>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 49.5vh;">
+                    <div class="text-center">
+                        <button id="botao" @click="initReader">Iniciar detecção</button>
+                    </div>
+                    <div v-show="cameraStatus" id="reader"></div>
+                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="code !== ''">
+                        <p>O código detectado foi {{ code }}, deseja dar presença?</p>
+                        <button id="botao" @click="adicionarAoVetor()">Dar presença</button>
+                    </div>
+                </div>
+                <div style="width: 49.5vh; text-align: left; font-size: 15pt;">
+                    <p>Lista de Alunos Captados</p>
+                    <p v-for="a in alunosPorNome" :key="a">  - {{ a }}</p>
+                </div>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: center; width: 100%;">
@@ -17,7 +25,12 @@
             </div>
         </div>
         <div id="presencaCelular" v-if="this.carregando">
-
+            <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
+            <hr style="opacity: 0.2; width: 99.86%;" />
+            <div
+                style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%; padding: 20px;">
+                <img src="../assets/carregando.gif" v-if="this.carregando">
+            </div>
         </div>
     </div>
 </template>
@@ -34,20 +47,32 @@ export default {
     data() {
         return {
             alunos: [],
+            alunosPorNome: [],
             carregando: false,
             token: cookies.get('token'),
             escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
+        resgatarNomeDoAluno(code){
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+                { headers: { 'Authorization': this.token } })
+            .then(res => {
+                this.alunosPorNome.push(res.data)
+            })
+        },
         adicionarAoVetor() {
             this.alunos.push(this.code);
+            this.resgatarNomeDoAluno(this.code);
             this.initReader();
         },
         concluir() {
-            
             axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
+            .then(res => {
+                console.log(this.res);
+                this.carregando = false;
+            })
 
         }
     },
