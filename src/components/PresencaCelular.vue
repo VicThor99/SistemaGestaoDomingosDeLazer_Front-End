@@ -4,7 +4,7 @@
             <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: space-between;">
-                <div style="width: 49.5%; display: flex; justify-content: center;">
+                <div style="width: 49.5%; display: flex; justify-content: center; flex-direction: column;">
                     <div class="text-center">
                         <button id="botao" @click="initReader">Iniciar detecção</button>
                     </div>
@@ -90,6 +90,10 @@ export default {
                 },
                 decoder: {
                     readers: ["2of5_reader"]
+                },
+                locate: false,
+                debug: {
+                    drawScanline: true
                 }
             }, function (err) {
                 if (err) {
