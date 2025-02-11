@@ -70,7 +70,7 @@ export default {
             axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
-                console.log(this.res);
+                console.log(res);
                 this.carregando = false;
             })
 
