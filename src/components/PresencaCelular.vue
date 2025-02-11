@@ -106,6 +106,10 @@ export default {
                     return
                 }
                 Quagga.start();
+                Quagga.onProcessed(() => {
+                    const canvases = document.querySelectorAll("canvas");
+                    canvases.forEach(canvas => canvas.remove()); // Remove todos os canvases
+                });
                 Quagga.onDetected((data) => {
                     if (data.codeResult.code.length === 6) {
                         code.value = data.codeResult.code;
@@ -186,14 +190,5 @@ export default {
     text-align: center;
     padding: 5px;
     cursor: pointer;
-}
-
-.drawingBuffer{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0px !important;
-    height: 0px !important;
-    pointer-events: none; /* Garante que não atrapalhe cliques */
 }
 </style>
