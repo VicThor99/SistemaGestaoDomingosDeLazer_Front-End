@@ -192,8 +192,8 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 0px !important;
+    height: 0px !important;
     pointer-events: none; /* Garante que não atrapalhe cliques */
 }
 </style>
