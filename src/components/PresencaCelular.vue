@@ -14,7 +14,7 @@
                         <button id="botao" @click="adicionarAoVetor()">Dar presença</button>
                     </div>
                 </div>
-                <div style="width: 49.5%; text-align: left; font-size: 15pt;">
+                <div style="width: 49.5%; text-align: left; font-size: 15pt; border-left: #0b4d75 1px solid;">
                     <p style="font-weight: bold; text-align: center; font-size: 18pt;">Lista de Alunos Captados</p>
                     <p v-for="a in alunosPorNome" :key="a">  - {{ a }}</p>
                 </div>
