@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div style="display: flex; justify-content: space-between; width: 100%; ">
-                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''" >
                                     <div
                                         style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                         <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
@@ -67,7 +67,7 @@
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
                 <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []">
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
-                        <div id="chartContainer" style="height: 360px; width: 100%;"></div>
+                        <div id="chartContainer" style="height: 360px; width: 100%;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
@@ -396,7 +396,7 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; width: 100%; ">
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
