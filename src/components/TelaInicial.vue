@@ -577,8 +577,12 @@ export default {
                 ]
             });
 
-            if(dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []) {
-                chart.render();
+            chart.render();
+
+            if(dadosGraficoA == [] || dadosGraficoB == [] || dadosGraficoC == [] || dadosGraficoD == [] || 
+                dadosGraficoA == null || dadosGraficoB == null || dadosGraficoC == null || dadosGraficoD == null) {
+                chart.destroy();
+                chart = null;
             }
         },
         carregarLista(opcao) {
