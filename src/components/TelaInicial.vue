@@ -65,9 +65,9 @@
         </div>
         <div id="telaInicial" v-if="this.lista == null && admin">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
-                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []">
-                    <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []">
-                        <div id="chartContainer" style="height: 360px; width: 100%;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []"></div>
+                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="chart != null">
+                    <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;" v-if="chart != null">
+                        <div id="chartContainer" style="height: 360px; width: 100%;" v-if="chart != null"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
@@ -509,24 +509,29 @@ export default {
                 }
             });
 
+            var dadosGraficoA = null;
+            var dadosGraficoB = null;
+            var dadosGraficoC = null;
+            var dadosGraficoD = null;
+
             this.domingoa = res.data.domingoA;
             this.domingob = res.data.domingoB;
             this.domingoc = res.data.domingoC;
             this.domingod = res.data.domingoD;
             this.domingos = res.data.domingos;
 
-            var dadosGraficoA = res.data.dadosGraficoA;
-            var dadosGraficoB = res.data.dadosGraficoB;
-            var dadosGraficoC = res.data.dadosGraficoC;
-            var dadosGraficoD = res.data.dadosGraficoD;
+            dadosGraficoA = res.data.dadosGraficoA;
+            dadosGraficoB = res.data.dadosGraficoB;
+            dadosGraficoC = res.data.dadosGraficoC;
+            dadosGraficoD = res.data.dadosGraficoD;
 
             this.proximaDataDomA = res.data.proximaDataDomA;
             this.proximaDataDomB = res.data.proximaDataDomB;
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            if(dadosGraficoA == [] || dadosGraficoB == [] || dadosGraficoC == [] || dadosGraficoD == [] || 
-                dadosGraficoA == null || dadosGraficoB == null || dadosGraficoC == null || dadosGraficoD == null) {
+            if(dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != [] || 
+                dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     exportEnabled: false,
@@ -580,6 +585,8 @@ export default {
                 });
 
                 chart.render();
+            } else {
+                chart = null;
             }
         },
         carregarLista(opcao) {
