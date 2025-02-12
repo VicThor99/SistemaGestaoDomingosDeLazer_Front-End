@@ -577,7 +577,9 @@ export default {
                 ]
             });
 
-            chart.render();
+            if(dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []) {
+                chart.render();
+            }
         },
         carregarLista(opcao) {
             
