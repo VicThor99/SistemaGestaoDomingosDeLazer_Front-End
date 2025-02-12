@@ -1,14 +1,77 @@
 <template>
     <div id="principal">
-        <div id="telaInicial" v-if="this.lista == null">
+        <div id="telaInicial" v-if="this.lista == null && !admin">
+            <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;">
+                <div
+                    style="display: flex; justify-content: space-around; width: 100%; margin-top: 10px;">
+                    <div
+                        style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                            <p style="color: white; font-size: 30px;">Próximas Datas</p>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                    <div
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
+                                    </div>
+                                    <div
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        <p>{{ this.proximaDataDomA }}</p>
+                                    </div>
+                                </div>
+                                <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
+                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
+                                    <div
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
+                                    </div>
+                                    <div
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        <p>{{ this.proximaDataDomB }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; width: 100%; ">
+                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                    <div
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
+                                    </div>
+                                    <div
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        <p>{{ this.proximaDataDomC }}</p>
+                                    </div>
+                                </div>
+                                <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
+                                <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
+                                    <div
+                                        style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                        <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
+                                    </div>
+                                    <div
+                                        style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                        <p>{{ this.proximaDataDomD }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="telaInicial" v-if="this.lista == null && admin">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
-                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != []">
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
                         <div id="chartContainer" style="height: 360px; width: 100%;"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 49.5%  ">
+                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 99%" v-if="domingoa.total > 0 && domingob.total <= 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo A</p>
@@ -49,7 +112,48 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  ">
+                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 49.5%  " v-if="domingoa.total > 0 && domingob.total > 0">
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                            <p style="color: white; font-size: 30px;">Domingo A</p>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account"></i> Total</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoa.total }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomAAptas')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-check"></i> Aptas</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoa.aptas }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomARisco')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-alert"></i> Risco</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoa.risco }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  " v-if="domingoa.total > 0 && domingob.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo B</p>
@@ -92,7 +196,7 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  ">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 99%" v-if="domingoc.total > 0 && domingod.total == 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo C</p>
@@ -133,7 +237,48 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ;width: 49.5%  ">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%" v-if="domingoc.total > 0 && domingod.total > 0">
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                            <p style="color: white; font-size: 30px;">Domingo C</p>
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-around; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%;">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account"></i> Total</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoc.total }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomCAptas')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-check"></i> Aptas</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoc.aptas }}</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 32%; cursor: pointer;"
+                                @click="carregarLista('DomCRisco')">
+                                <div
+                                    style="font-size: 25px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-account-alert"></i> Risco</p>
+                                </div>
+                                <div
+                                    style="font-size: 40pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    <p>{{ domingoc.risco }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: center; flex-direction: column ;width: 49.5%"  v-if="domingoc.total > 0 && domingod.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo D</p>
@@ -175,7 +320,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 5px;">
+                <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 5px;"  v-if="domingoa.total > 0 && (domingob.total > 0 || domingoc.total > 0 || domingod.total > 0)">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Todos Domingos</p>
@@ -238,8 +383,8 @@
                                             <p>{{ this.proximaDataDomA }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                    <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
@@ -261,8 +406,8 @@
                                             <p>{{ this.proximaDataDomC }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                    <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
@@ -351,17 +496,12 @@ export default {
             tituloListagem: '',
             search: '',
             token: cookies.get('token'),
+            admin: cookies.get('admin'),
             escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
         async carregarDashboard() {
-            
-
-            var dadosGraficoA = [];
-            var dadosGraficoB = [];
-            var dadosGraficoC = [];
-            var dadosGraficoD = [];
 
             const res = await axios.get('https://api.domingodelazer.click/api/dashboard/' + this.escola, {
                 headers: {
@@ -375,10 +515,10 @@ export default {
             this.domingod = res.data.domingoD;
             this.domingos = res.data.domingos;
 
-            dadosGraficoA = res.data.dadosGraficoA;
-            dadosGraficoB = res.data.dadosGraficoB;
-            dadosGraficoC = res.data.dadosGraficoC;
-            dadosGraficoD = res.data.dadosGraficoD;
+            var dadosGraficoA = res.data.dadosGraficoA;
+            var dadosGraficoB = res.data.dadosGraficoB;
+            var dadosGraficoC = res.data.dadosGraficoC;
+            var dadosGraficoD = res.data.dadosGraficoD;
 
             this.proximaDataDomA = res.data.proximaDataDomA;
             this.proximaDataDomB = res.data.proximaDataDomB;
@@ -397,7 +537,7 @@ export default {
                 axisY: {
                     tickLength: 0,
                     title: "Presenças",
-                    includeZero: true
+                    includeZero: false
                 },
                 legend: {
                     cursor: "pointer"
