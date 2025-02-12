@@ -509,29 +509,23 @@ export default {
                 }
             });
 
-            var dadosGraficoA = null;
-            var dadosGraficoB = null;
-            var dadosGraficoC = null;
-            var dadosGraficoD = null;
-
             this.domingoa = res.data.domingoA;
             this.domingob = res.data.domingoB;
             this.domingoc = res.data.domingoC;
             this.domingod = res.data.domingoD;
             this.domingos = res.data.domingos;
 
-            dadosGraficoA = res.data.dadosGraficoA;
-            dadosGraficoB = res.data.dadosGraficoB;
-            dadosGraficoC = res.data.dadosGraficoC;
-            dadosGraficoD = res.data.dadosGraficoD;
+            var dadosGraficoA = res.data.dadosGraficoA;
+            var dadosGraficoB = res.data.dadosGraficoB;
+            var dadosGraficoC = res.data.dadosGraficoC;
+            var dadosGraficoD = res.data.dadosGraficoD;
 
             this.proximaDataDomA = res.data.proximaDataDomA;
             this.proximaDataDomB = res.data.proximaDataDomB;
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            if(dadosGraficoA != [] || dadosGraficoB != [] || dadosGraficoC != [] || dadosGraficoD != [] || 
-                dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
+            if(dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
                     exportEnabled: false,
