@@ -525,64 +525,61 @@ export default {
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                exportEnabled: false,
-                theme: "light1",
-                backgroundColor: "#E4EDF7",
-                title: {
-                    text: "Presenças por mês",
-                    fontFamily:"Times New Roman"
-                },
-                axisY: {
-                    tickLength: 0,
-                    title: "Presenças",
-                    includeZero: false
-                },
-                legend: {
-                    cursor: "pointer"
-                },
-                toolTip: {
-                    shared: true
-                },
-                data: [
-                    {
-                        type: "column",
-                        name: "Domingo A",
-                        showInLegend: dadosGraficoA !== null,
-                        color: "#78A0E6",
-                        dataPoints: dadosGraficoA
-                    },
-                    {
-                        type: "column",
-                        name: "Domingo B",
-                        showInLegend: dadosGraficoB !== null,
-                        color: "#2C6F99",
-                        dataPoints: dadosGraficoB
-                    },
-                    {
-                        type: "column",
-                        name: "Domingo C",
-                        showInLegend: dadosGraficoC !== null,
-                        color: "#0B4D75",
-                        dataPoints: dadosGraficoC
-                    },
-                    {
-                        type: "column",
-                        name: "Domingo D",
-                        showInLegend: dadosGraficoD !== null,
-                        color: "#243B4A",
-                        dataPoints: dadosGraficoD
-                    }
-                ]
-            });
-
-            chart.render();
-
             if(dadosGraficoA == [] || dadosGraficoB == [] || dadosGraficoC == [] || dadosGraficoD == [] || 
                 dadosGraficoA == null || dadosGraficoB == null || dadosGraficoC == null || dadosGraficoD == null) {
-                chart.destroy();
-                chart = null;
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    exportEnabled: false,
+                    theme: "light1",
+                    backgroundColor: "#E4EDF7",
+                    title: {
+                        text: "Presenças por mês",
+                        fontFamily:"Times New Roman"
+                    },
+                    axisY: {
+                        tickLength: 0,
+                        title: "Presenças",
+                        includeZero: false
+                    },
+                    legend: {
+                        cursor: "pointer"
+                    },
+                    toolTip: {
+                        shared: true
+                    },
+                    data: [
+                        {
+                            type: "column",
+                            name: "Domingo A",
+                            showInLegend: dadosGraficoA !== null,
+                            color: "#78A0E6",
+                            dataPoints: dadosGraficoA
+                        },
+                        {
+                            type: "column",
+                            name: "Domingo B",
+                            showInLegend: dadosGraficoB !== null,
+                            color: "#2C6F99",
+                            dataPoints: dadosGraficoB
+                        },
+                        {
+                            type: "column",
+                            name: "Domingo C",
+                            showInLegend: dadosGraficoC !== null,
+                            color: "#0B4D75",
+                            dataPoints: dadosGraficoC
+                        },
+                        {
+                            type: "column",
+                            name: "Domingo D",
+                            showInLegend: dadosGraficoD !== null,
+                            color: "#243B4A",
+                            dataPoints: dadosGraficoD
+                        }
+                    ]
+                });
+
+                chart.render();
             }
         },
         carregarLista(opcao) {
