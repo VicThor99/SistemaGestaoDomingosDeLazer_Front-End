@@ -33,9 +33,9 @@
         <div style="width: 70%; height: 100%; display: flex; justify-content: flex-start;">
           <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
               src="./assets/logo.png"></a>
-          <a class="headerButton" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" v-if="admin == 'true'" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
           <a class="headerButton" @click="abrirOuFecharPresencas">Presenças <i class="mdi mdi-menu-down"></i></a>
-          <a class="headerButton" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" v-if="admin == 'true'" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
         </div>
         <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
           <div style="width: 300px; text-align: right;">
@@ -62,13 +62,19 @@
       </div>
       <div
         style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 519px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
-        v-if="registroPresencas">
+        v-if="registroPresencas && admin == 'true'">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
             class="mdi mdi-calendar-plus"></i> Registro (Leitor)</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
             class="mdi mdi-cellphone"></i> Registro (Celular)</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CorrecaoPresenca')"><i
             class="mdi mdi-calendar-sync"></i> Correção</a>
+      </div>
+      <div
+        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 213px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        v-if="registroPresencas && admin != 'true'">
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
+            class="mdi mdi-cellphone"></i> Registro (Celular)</a>
       </div>
       <div
         style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 491px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
@@ -108,6 +114,7 @@
       <CadastroEmMassa v-if="telaAtual === 'CadastroEmMassa'" />
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
+      <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
     </div>
   </div>
 </template>
@@ -131,6 +138,7 @@ import ImpressaoProtocolos from './components/ImpressaoProtocolos.vue';
 import CadastroEmMassa from './components/CadastrosEmMassa.vue';
 import ArquivosAluno from './components/ArquivosAluno.vue';
 import PresencaCelular from './components/PresencaCelular.vue';
+import PlanoAula from './components/PlanoAula.vue';
 
 export default {
   name: 'App',
@@ -149,7 +157,8 @@ export default {
     ImpressaoMatriculas,
     CadastroEmMassa,
     ArquivosAluno,
-    PresencaCelular
+    PresencaCelular,
+    PlanoAula
 },
   data() {
     return {
@@ -163,6 +172,7 @@ export default {
       logado: cookies.get('token') !== null,
       escolaEscolhida: cookies.get('escolaEscolhida') !== null,
       telaAtual: 'TelaInicial',
+      admin: false,
       cadastros: false,
       registroPresencas: false,
       impressoes: false,
@@ -187,6 +197,7 @@ export default {
           cookies.set('user_name', res.data.username, date);
           this.username = cookies.get('user_name');
           this.logado = cookies.get('token') != null;
+          this.admin = cookies.get('admin');
           this.erro = null;
           this.telaAtual = 'TelaInicial';
           axios.get('https://api.domingodelazer.click/api/access/' + this.username, {
