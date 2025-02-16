@@ -164,6 +164,7 @@ export default {
                     'Authorization': this.token
                 }
             }).then(res => {
+                console.log(res);
                 if (this.planoAula.id > 0) {
                     this.alert('Plano de Aula Editado', 'Plano de Aula editado com sucesso!', 'success');
                 } else {
