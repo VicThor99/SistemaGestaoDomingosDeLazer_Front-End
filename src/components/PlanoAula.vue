@@ -20,7 +20,7 @@
             </div>
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <v-data-table @click:row="clickRow" items-per-page="11" :headers="headers" :items="planosAulas"
-                style="padding: 5px 10px 10px 10px;" :search="search" v-if="planoAulas.length > 0" />
+                style="padding: 5px 10px 10px 10px;" :search="search" v-if="planosAulas.length > 0" />
         </div>
         <div id="planoAula" v-if="planoAula != null">
             <div id="alert" :class="alertClass" v-if="alertAtivo">
