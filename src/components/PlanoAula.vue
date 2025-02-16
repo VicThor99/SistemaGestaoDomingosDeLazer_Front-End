@@ -46,7 +46,7 @@
                             style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.id" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 20%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Mês</p>                            
                         <input type="date"
                             style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
@@ -58,7 +58,7 @@
                             style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.tema" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 40%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Séries</p>
                         <v-select variant="outlined" v-model="this.planoAula.series" :items="this.series" multiple></v-select>
                     </div>
@@ -183,8 +183,7 @@ export default {
             this.planoAula = res.data;
 
             this.planoAula.mes = this.traduzirMes(this.planoAula.mes).toISOString().split('T')[0];
-            this.planoAula.series = this.planoAula.series != null ? this.planoAula.series.split(",") : null;
-
+            
             this.title = "Editar Plano de Aula";
             this.alertAtivo = false;
         },
