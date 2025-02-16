@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="this.planoaula != null">
+            <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="this.planoAulaVisivel()">
                 <div
                     style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                     <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
@@ -699,6 +699,9 @@ export default {
             } else {
                 chart = null;
             }
+        },
+        planoAulaVisivel() {
+            return this.planoaula.mes != null && this.planoaula.tema != null;
         },
         carregarLista(opcao) {
             
