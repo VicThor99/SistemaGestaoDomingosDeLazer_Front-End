@@ -134,7 +134,7 @@ export default {
                 { title: 'Séries', key: 'series', align: 'end' },
             ],
             series: [],
-            seriesString: '',
+            seriesString: null,
             planosAulas: [],
             search: '',
             planoAula: null,
