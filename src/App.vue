@@ -45,7 +45,7 @@
         </div>
       </header>
       <div
-        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 856px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 1020px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="cadastros">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
             class="mdi mdi-account-school"></i> Alunos</a>
@@ -55,6 +55,8 @@
             class="mdi mdi-google-classroom"></i> Séries</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Usuarios')"><i
             class="mdi mdi-account-multiple-outline"></i> Usuários</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PlanoAula')"><i
+            class="mdi mdi-file-document-multiple-outline"></i> Plano de Aula</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ArquivosAluno')"><i
             class="mdi mdi-file-upload"></i> Arquivos do Aluno</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('CadastroEmMassa')"><i
