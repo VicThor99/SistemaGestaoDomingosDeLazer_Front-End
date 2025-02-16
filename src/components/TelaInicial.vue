@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 100%; margin: 15px; margin-top: 0px; text-align: justify" v-if="this.planoAula != null">
+                <div style="display: flex; flex-direction: column; width: 100%; margin: 15px; margin-top: 0px;" v-if="this.planoAula != null">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
@@ -78,7 +78,7 @@
                                 </div>
                                 <div style="width: 2%;"></div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p>{{ this.planoAula.mes }}</p>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                     <p><i class="mdi mdi-bullseye-arrow"></i> Tema</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p>{{ this.planoAula.tema }}</p>
                                 </div>
                             </div>
@@ -100,7 +100,7 @@
                                     <p><i class="mdi mdi-bullseye-arrow"></i> Objetivos</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p>{{ this.planoAula.objetivos }}</p>
                                 </div>
                             </div>
@@ -112,8 +112,8 @@
                                     <p><i class="mdi mdi-cards-playing-heart-outline"></i> Quebra-Gelo</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                    <p>{{ this.planoAula.quebragelo }}</p>
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p>{{ this.planoAula.quebraGelo }}</p>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                                     <p><i class="mdi mdi-book-open-page-variant"></i> História</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p style="font-weight: bold;">{{ this.planoAula.tituloHistoria }}</p>
                                     <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 5px; margin-top: 5px;" />
                                     <p>{{ this.planoAula.historia }}</p>
@@ -138,7 +138,7 @@
                                     <p><i class="mdi mdi-kabaddi"></i> Atividade</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p>{{ this.planoAula.atividade }}</p>
                                 </div>
                             </div>
@@ -150,7 +150,7 @@
                                     <p><i class="mdi mdi-sack"></i> Lista de Materiais</p>
                                 </div>
                                 <div
-                                    style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p>{{ this.planoAula.material }}</p>
                                 </div>
                             </div>
