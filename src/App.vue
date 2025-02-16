@@ -172,7 +172,7 @@ export default {
       logado: cookies.get('token') !== null,
       escolaEscolhida: cookies.get('escolaEscolhida') !== null,
       telaAtual: 'TelaInicial',
-      admin: false,
+      admin: cookies.get('admin'),
       cadastros: false,
       registroPresencas: false,
       impressoes: false,
