@@ -160,6 +160,7 @@ export default {
             this.series = resSeries.data;
         },
         salvarPlanoAula() {
+            console.log(this.seriesString);
             this.planoAula.series = this.seriesString.split(",");
             axios.post('https://api.domingodelazer.click/api/planoaula/'+ this.escola, this.planoAula, {
                 headers: {
