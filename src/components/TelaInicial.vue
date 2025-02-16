@@ -597,7 +597,7 @@ export default {
     },
     methods: {
         async planoAulaVisivel() {
-            return this.planoaula.mes != null && this.planoaula.tema != null;
+            return this.planoaula.mes && this.planoaula.tema;
         },
         async comumOuAdmin(){
             if(this.admin == 'true'){
