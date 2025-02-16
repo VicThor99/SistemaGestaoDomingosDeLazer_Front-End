@@ -183,7 +183,7 @@ export default {
             this.planoAula = res.data;
 
             this.planoAula.mes = this.traduzirMes(this.planoAula.mes).toISOString().split('T')[0];
-            this.planoAula.series = res.data.series != null ? res.data.series.split(",") : null;
+            this.planoAula.series = this.planoAula.series != null ? this.planoAula.series.split(",") : null;
 
             this.title = "Editar Plano de Aula";
             this.alertAtivo = false;
