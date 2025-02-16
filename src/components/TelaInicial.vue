@@ -101,7 +101,7 @@
                                 </div>
                                 <div
                                     style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p>{{ this.planoAula.objetivos }}</p>
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.objetivos }}</p>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 </div>
                                 <div
                                     style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p>{{ this.planoAula.quebraGelo }}</p>
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.quebraGelo }}</p>
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                                     style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
                                     <p style="font-weight: bold;">{{ this.planoAula.tituloHistoria }}</p>
                                     <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 5px; margin-top: 5px;" />
-                                    <p>{{ this.planoAula.historia }}</p>
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.historia }}</p>
                                 </div>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                                 </div>
                                 <div
                                     style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p>{{ this.planoAula.atividade }}</p>
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.atividade }}</p>
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                                 </div>
                                 <div
                                     style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p>{{ this.planoAula.material }}</p>
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.material }}</p>
                                 </div>
                             </div>
                         </div>
@@ -617,16 +617,8 @@ export default {
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            this.planoAula = {
-                mes: res.data.planoAula.mes,
-                tema: res.data.planoAula.tema,
-                objetivos: res.data.planoAula.objetivos.replace('\\n', '</p><br/><p>'),
-                quebraGelo: res.data.planoAula.quebraGelo.replace('\\n', '</p><br/><p>'),
-                tituloHistoria: res.data.planoAula.tituloHistoria,
-                historia: res.data.planoAula.historia.replace('\\n', '</p><br/><p>'),
-                atividade: res.data.planoAula.atividade.replace('\\n', '</p><br/><p>'),
-                material: res.data.planoAula.material.replace('\\n', '</p><br/><p>'),
-            };
+            this.planoAula = res.data.planoAula;
+            console.log(this.planoAula);
 
         },
         async carregarDashboardAdmin() {
