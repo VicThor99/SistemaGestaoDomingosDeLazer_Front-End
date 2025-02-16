@@ -60,21 +60,19 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Séries</p>
-                        <v-select variant="outlined" v-model="planoAula.series" :items="series" multiple></v-select>
+                        <v-select variant="outlined" v-model="planoAula.series" :items="this.series" multiple></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Objetivos</p>
-                        <v-textarea :model-value="planoAula.objetivos" rows="5" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                        <v-textarea variant="outlined" :model-value="planoAula.objetivos" rows="5" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Quebra-Gelo</p>
-                        <v-textarea :model-value="planoAula.quebraGelo" rows="15" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                        <v-textarea variant="outlined" :model-value="planoAula.quebraGelo" rows="15" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
@@ -83,25 +81,20 @@
                         <input type="text"
                             style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.tituloHistoria" />
-                    </div>
-                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">História</p>
-                        <v-textarea :model-value="planoAula.historia" rows="20" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                        <v-textarea variant="outlined" :model-value="planoAula.historia" rows="20" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Atividade</p>
-                        <v-textarea :model-value="planoAula.atividade" rows="15" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                        <v-textarea variant="outlined" :model-value="planoAula.atividade" rows="15" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Material Necessário</p>
-                        <v-textarea :model-value="planoAula.material" rows="10" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                        <v-textarea variant="outlined" :model-value="planoAula.material" rows="10" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
@@ -157,6 +150,9 @@ export default {
         async recarregaLista() {
             const res = await axios.get('https://api.domingodelazer.click/api/planoaula/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.planosAulas = res.data;
+            
+            const resSeries = axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            this.series = resSeries.data;
         },
         salvarPlanoAula() {
             axios.post('https://api.domingodelazer.click/api/planoaula/'+ this.escola, this.planoAula, {
@@ -177,9 +173,6 @@ export default {
             });
         },
         clickRow(item, row) {
-            const res = axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            this.series = res.data;
-
             const resPlanoAula = axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
             this.planoAula = resPlanoAula.data;
 
@@ -187,13 +180,17 @@ export default {
             this.alertAtivo = false;
         },
         novoPlanoAula() {
-            const res = axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
-            this.series = res.data;
             this.planoAula = {
                 id: 0,
-                serie: '',
-                sala: '',
-                domingo: ''
+                mes: '',
+                tema: '',
+                objetivos: '',
+                quebraGelo: '',
+                tituloHistoria: '',
+                historia: '',
+                atividade: '',
+                material: '',
+                series: ''
             }
 
             this.title = "Novo Plano de Aula";
