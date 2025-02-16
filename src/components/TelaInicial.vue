@@ -597,7 +597,7 @@ export default {
     },
     methods: {
         async comumOuAdmin(){
-            if(admin == 'true'){
+            if(this.admin == 'true'){
                 this.carregarDashboardAdmin();
             } else {
                 this.carregarDashboardComum();
