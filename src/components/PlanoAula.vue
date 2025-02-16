@@ -153,6 +153,7 @@ export default {
             
             const resSeries = axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series = resSeries.data;
+            console.log(resSeries.data);
             console.log(this.series);
         },
         salvarPlanoAula() {
