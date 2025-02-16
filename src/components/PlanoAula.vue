@@ -189,8 +189,7 @@ export default {
                 tituloHistoria: '',
                 historia: '',
                 atividade: '',
-                material: '',
-                series: ''
+                material: ''
             }
 
             this.title = "Novo Plano de Aula";
