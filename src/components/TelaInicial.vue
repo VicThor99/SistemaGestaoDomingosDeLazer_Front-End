@@ -1,9 +1,9 @@
 <template>
     <div id="principal">
         <div id="telaInicial" v-if="this.lista == null && admin != 'true'">
-            <div style="display: flex; flex-direction: column; margin: 15px; width: 100%; margin-bottom: 5px;">
+            <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
                 <div
-                    style="display: flex; justify-content: space-around; width: 100%; margin-top: 10px;">
+                    style="display: flex; justify-content: space-around; width: 100%;">
                     <div
                         style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                         <div
@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="this.planoaula != null">
+            <div style="display: flex; flex-direction: column; width: 100%; margin: 15px; margin-top: 0px;" v-if="this.planoaula != null">
                 <div
                     style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                     <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
