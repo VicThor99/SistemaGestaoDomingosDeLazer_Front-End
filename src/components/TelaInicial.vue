@@ -74,22 +74,22 @@
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                                 <div
                                     style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
-                                </div>
-                                <div style="width: 2%;"></div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p>{{ this.planoAula.mes }}</p>
-                                </div>
-                            </div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-bullseye-arrow"></i> Tema</p>
                                 </div>
                                 <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding: 15px;">
                                     <p>{{ this.planoAula.tema }}</p>
+                                </div>
+                            </div>
+                            <div style="width: 2%;"></div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding: 15px;">
+                                    <p>{{ this.planoAula.mes }}</p>
                                 </div>
                             </div>
                         </div>
@@ -617,7 +617,16 @@ export default {
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            this.planoAula = res.data.planoAula;
+            this.planoAula = {
+                mes: res.data.planoAula.mes,
+                tema: res.data.planoAula.tema,
+                objetivos: res.data.planoAula.objetivos.replace('\\n', '</p><br/><p>'),
+                quebraGelo: res.data.planoAula.quebraGelo.replace('\\n', '</p><br/><p>'),
+                tituloHistoria: res.data.planoAula.tituloHistoria,
+                historia: res.data.planoAula.historia.replace('\\n', '</p><br/><p>'),
+                atividade: res.data.planoAula.atividade.replace('\\n', '</p><br/><p>'),
+                material: res.data.planoAula.material.replace('\\n', '</p><br/><p>'),
+            };
 
         },
         async carregarDashboardAdmin() {
