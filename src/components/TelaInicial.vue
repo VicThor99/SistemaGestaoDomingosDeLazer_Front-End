@@ -62,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; flex-direction: column; width: 100%; margin: 15px; margin-top: 0px; text-align: justify" v-if="this.planoaula != null">
+            <div style="display: flex; flex-direction: column; width: 100%; margin: 15px; margin-top: 0px; text-align: justify" v-if="this.planoAula != null">
                 <div
                     style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                     <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
@@ -78,7 +78,7 @@
                             <div style="width: 2%;"></div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.mes }}</p>
+                                <p>{{ this.planoAula.mes }}</p>
                             </div>
                         </div>
                         <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
@@ -88,7 +88,7 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.tema }}</p>
+                                <p>{{ this.planoAula.tema }}</p>
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.objetivos }}</p>
+                                <p>{{ this.planoAula.objetivos }}</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.quebragelo }}</p>
+                                <p>{{ this.planoAula.quebragelo }}</p>
                             </div>
                         </div>
                     </div>
@@ -124,9 +124,9 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p style="font-weight: bold;">{{ this.planoaula.tituloHistoria }}</p>
+                                <p style="font-weight: bold;">{{ this.planoAula.tituloHistoria }}</p>
                                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 5px; margin-top: 5px;" />
-                                <p>{{ this.planoaula.historia }}</p>
+                                <p>{{ this.planoAula.historia }}</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.atividade }}</p>
+                                <p>{{ this.planoAula.atividade }}</p>
                             </div>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                             </div>
                             <div
                                 style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                <p>{{ this.planoaula.material }}</p>
+                                <p>{{ this.planoAula.material }}</p>
                             </div>
                         </div>
                     </div>
@@ -586,7 +586,7 @@ export default {
             proximaDataDomB: '',
             proximaDataDomC: '',
             proximaDataDomD: '',
-            planoaula: null,
+            planoAula: null,
             lista: null,
             tituloListagem: '',
             search: '',
@@ -615,7 +615,7 @@ export default {
             this.proximaDataDomC = res.data.proximaDataDomC;
             this.proximaDataDomD = res.data.proximaDataDomD;
 
-            this.planoaula = res.data.planoaula;
+            this.planoAula = res.data.planoAula;
 
         },
         async carregarDashboardAdmin() {
