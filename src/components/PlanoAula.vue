@@ -172,8 +172,8 @@ export default {
                 this.alert('Erro', rej.response.data, 'error');
             });
         },
-        clickRow(item, row) {
-            const resPlanoAula = axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
+        async clickRow(item, row) {
+            const resPlanoAula = await axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
             this.planoAula = resPlanoAula.data;
 
             this.title = "Editar Plano de Aula";
