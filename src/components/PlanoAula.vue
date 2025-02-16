@@ -151,10 +151,8 @@ export default {
             const res = await axios.get('https://api.domingodelazer.click/api/planoaula/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.planosAulas = res.data;
             
-            const resSeries = axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
+            const resSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.series = resSeries.data;
-            console.log(resSeries);
-            console.log(this.series);
         },
         salvarPlanoAula() {
             axios.post('https://api.domingodelazer.click/api/planoaula/'+ this.escola, this.planoAula, {
