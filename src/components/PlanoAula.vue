@@ -60,7 +60,7 @@
                     </div>
                     <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Séries</p>
-                        <v-select variant="outlined" v-model="planoAula.series" :items="this.series" multiple></v-select>
+                        <v-select variant="outlined" v-model="this.seriesString" :items="this.series" multiple></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
@@ -134,6 +134,7 @@ export default {
                 { title: 'Séries', key: 'series', align: 'end' },
             ],
             series: [],
+            seriesString: '',
             planosAulas: [],
             search: '',
             planoAula: null,
@@ -183,6 +184,7 @@ export default {
             this.series = resSeries.data;
         },
         salvarPlanoAula() {
+            this.planoAula.series = this.seriesString.split(",");
             axios.post('https://api.domingodelazer.click/api/planoaula/'+ this.escola, this.planoAula, {
                 headers: {
                     'Authorization': this.token
