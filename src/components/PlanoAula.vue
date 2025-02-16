@@ -66,13 +66,13 @@
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Objetivos</p>
-                        <v-textarea variant="outlined" :model-value="planoAula.objetivos" rows="5" no-resize hide-details="true"></v-textarea>
+                        <v-textarea variant="outlined" v-model="planoAula.objetivos" rows="5" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Quebra-Gelo</p>
-                        <v-textarea variant="outlined" :model-value="planoAula.quebraGelo" rows="15" no-resize hide-details="true"></v-textarea>
+                        <v-textarea variant="outlined" v-model="planoAula.quebraGelo" rows="15" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
@@ -82,19 +82,19 @@
                             style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.tituloHistoria" />
                         <p style="color: #5a5a5a; margin-left: 5px;">História</p>
-                        <v-textarea variant="outlined" :model-value="planoAula.historia" rows="20" no-resize hide-details="true"></v-textarea>
+                        <v-textarea variant="outlined" v-model="planoAula.historia" rows="20" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Atividade</p>
-                        <v-textarea variant="outlined" :model-value="planoAula.atividade" rows="15" no-resize hide-details="true"></v-textarea>
+                        <v-textarea variant="outlined" v-model="planoAula.atividade" rows="15" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
                     <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Material Necessário</p>
-                        <v-textarea variant="outlined" :model-value="planoAula.material" rows="10" no-resize hide-details="true"></v-textarea>
+                        <v-textarea variant="outlined" v-model="planoAula.material" rows="10" no-resize hide-details="true"></v-textarea>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
