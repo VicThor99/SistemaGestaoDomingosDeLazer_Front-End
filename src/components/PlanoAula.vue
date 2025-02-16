@@ -172,11 +172,12 @@ export default {
                 this.alert('Erro', rej.response.data, 'error');
             });
         },
-        clickRow(item, row) {
-            const res = axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
+        async clickRow(item, row) {
+            const res = await axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
             this.planoAula = res.data;
 
             console.log(res.data);
+            console.log(this.planoAula);
 
             this.title = "Editar Plano de Aula";
             this.alertAtivo = false;
