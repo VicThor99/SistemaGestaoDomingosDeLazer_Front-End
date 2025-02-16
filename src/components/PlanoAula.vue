@@ -147,6 +147,34 @@ export default {
         }
     },
     methods: {
+        traduzirMes(mesEAno){
+            switch(mesEAno.split("/")[0]){
+                case "JANEIRO":
+                    return new Date(mesEAno.split("/")[1], 0, 1);
+                case "FEVEREIRO":
+                    return new Date(mesEAno.split("/")[1], 1, 1);
+                case "MARÇO":
+                    return new Date(mesEAno.split("/")[1], 2, 1);
+                case "ABRIL":
+                    return new Date(mesEAno.split("/")[1], 3, 1);
+                case "MAIO":
+                    return new Date(mesEAno.split("/")[1], 4, 1);
+                case "JUNHO":
+                    return new Date(mesEAno.split("/")[1], 5, 1);
+                case "JULHO":
+                    return new Date(mesEAno.split("/")[1], 6, 1);
+                case "AGOSTO":
+                    return new Date(mesEAno.split("/")[1], 7, 1);
+                case "SETEMBRO":
+                    return new Date(mesEAno.split("/")[1], 8, 1);
+                case "OUTUBRO":
+                    return new Date(mesEAno.split("/")[1], 9, 1);
+                case "NOVEMBRO":
+                    return new Date(mesEAno.split("/")[1], 10, 1);
+                default:
+                    return new Date(mesEAno.split("/")[1], 11, 1);
+            }
+        },
         async recarregaLista() {
             const res = await axios.get('https://api.domingodelazer.click/api/planoaula/'+ this.escola, { headers: { 'Authorization': this.token } });
             this.planosAulas = res.data;
@@ -176,8 +204,7 @@ export default {
             const res = await axios.get('https://api.domingodelazer.click/api/planoaula/' + row.item.columns.id + '/' + this.escola, { headers: { 'Authorization': this.token } });
             this.planoAula = res.data;
 
-            console.log(res.data);
-            console.log(this.planoAula);
+            this.planoAula.mes = this.traduzirMes(this.planoAula.mes);
 
             this.title = "Editar Plano de Aula";
             this.alertAtivo = false;
