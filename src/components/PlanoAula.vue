@@ -40,68 +40,68 @@
             <div
                 style="background-color: white; font-size: 25px; border-radius: 5px; margin: 5px 5px 0px 0px; padding: 20px 30px 20px 30px; color: #0b4d75;">
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-right: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 10%; margin-right: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Id</p>
                         <input type="text" disabled="true"
                             style="background-color: rgba(211, 211, 211, 0.363); text-align: end; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.id" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Mês</p>                            
                         <input type="date"
                             style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.mes" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 150px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Tema</p>
                         <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.tema" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 30%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Séries</p>
                         <v-select variant="outlined" v-model="planoAula.series" :items="series" multiple></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Objetivos</p>
                         <v-textarea :model-value="planoAula.objetivos" rows="5" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Quebra-Gelo</p>
                         <v-textarea :model-value="planoAula.quebraGelo" rows="15" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Título da História</p>
                         <input type="text"
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
                             v-model="planoAula.tituloHistoria" />
                     </div>
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">História</p>
                         <v-textarea :model-value="planoAula.historia" rows="20" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Atividade</p>
                         <v-textarea :model-value="planoAula.atividade" rows="15" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: flex-start; margin-bottom: 10px;">
-                    <div style="display: flex; flex-direction: column; width: 100px; margin-left: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Material Necessário</p>
                         <v-textarea :model-value="planoAula.material" rows="10" no-resize 
-                            style="border:#3f799c69 1px solid; text-align: center; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
+                            style="border:#3f799c69 1px solid; text-align: left; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"></v-textarea>
                     </div>
                 </div>
                 <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 20px; margin-top: 20px;" />
