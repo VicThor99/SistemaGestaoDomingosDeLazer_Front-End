@@ -618,8 +618,6 @@ export default {
             this.proximaDataDomD = res.data.proximaDataDomD;
 
             this.planoAula = res.data.planoAula;
-            
-            console.log(this.planoAula);
 
         },
         async carregarDashboardAdmin() {
