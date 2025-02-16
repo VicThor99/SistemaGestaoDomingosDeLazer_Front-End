@@ -73,7 +73,7 @@
             class="mdi mdi-calendar-sync"></i> Correção</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 213px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 213px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas && admin != 'true'">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
             class="mdi mdi-cellphone"></i> Registro (Celular)</a>
