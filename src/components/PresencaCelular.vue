@@ -10,8 +10,8 @@
                     </div>
                     <div v-show="cameraStatus" id="reader"></div>
                     <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="code !== ''">
-                        <p>O código detectado foi </p><h2>{{ code }}</h2><p>, deseja adicioná-lo na lista?</p>
-                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <h2>O código detectado foi {{ code }}, deseja adicioná-lo na lista?</h2>
+                        <div style="display: flex; width: 100%; justify-content: space-evenly;">
                             <button id="botao" @click="adicionarAoVetor()">Sim</button>
                             <button id="botao" @click="initReader()">Não</button>
                         </div>
