@@ -37,7 +37,7 @@
         </div>
         <div id="presencaCelular" v-if="this.concluido">
             <div style="display: flex; justify-content: stretch; text-align: left; flex-direction: row;">
-                <a style="margin-left: 30px;" @click="concluido = false"><i class="mdi mdi-chevron-left"></i>Voltar</a>
+                <a id="voltar" style="margin-left: 30px;" @click="concluido = false"><i class="mdi mdi-chevron-left"></i>Voltar</a>
                 <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
@@ -207,5 +207,10 @@ export default {
     text-align: center;
     padding: 5px;
     cursor: pointer;
+}
+
+#voltar {
+  font-weight: bolder;
+  cursor: pointer;
 }
 </style>
