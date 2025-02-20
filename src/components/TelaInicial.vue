@@ -88,10 +88,10 @@
                                     <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
                                 </div>
                                 <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding-left:15px; padding-right: 15px; display: flex; flex-direction: column; height: 100%;">
-                                    <div style="height: 33.33%;"></div>
-                                    <p style="height: 33.34%;">{{ this.planoAula.mes }}</p>
-                                    <div style="height: 33.33%;"></div>
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding-left:15px; padding-right: 15px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+                                    <div></div>
+                                    <p>{{ this.planoAula.mes }}</p>
+                                    <div></div>
                                 </div>
                             </div>
                         </div>
