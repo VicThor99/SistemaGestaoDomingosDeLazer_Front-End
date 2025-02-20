@@ -37,7 +37,7 @@
         </div>
         <div id="presencaCelular" v-if="this.concluido">
             <div style="display: flex; justify-content: stretch; text-align: left; flex-direction: row;">
-                <a id="voltar" style="margin-left: 30px;" @click="concluido = false"><i class="mdi mdi-chevron-left"></i>Voltar</a>
+                <a id="voltar" style="margin-left: 30px;" @click="voltar()"><i class="mdi mdi-chevron-left"></i>Voltar</a>
                 <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
@@ -91,6 +91,11 @@ export default {
                 this.concluido = true;
             })
 
+        },
+        voltar(){
+            this.code = '';
+            this.carregando = false;
+            this.concluido = false;
         }
     },
     setup() {
