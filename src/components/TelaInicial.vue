@@ -70,7 +70,7 @@
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; width: 70%;  margin-bottom: 10px;">
                             <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                                 <div
                                     style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
@@ -82,14 +82,16 @@
                                 </div>
                             </div>
                             <div style="width: 2%;"></div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 30%;">
                                 <div
                                     style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                     <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
                                 </div>
                                 <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding: 15px;">
-                                    <p>{{ this.planoAula.mes }}</p>
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding-left:15px; padding-right: 15px; display: flex; flex-direction: column; height: 100%;">
+                                    <div style="height: 33.33%;"></div>
+                                    <p style="height: 33.34%;">{{ this.planoAula.mes }}</p>
+                                    <div style="height: 33.33%;"></div>
                                 </div>
                             </div>
                         </div>
