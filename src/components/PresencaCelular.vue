@@ -36,7 +36,7 @@
             </div>
         </div>
         <div id="presencaCelular" v-if="this.concluido">
-            <div style="display: flex; justify-content: space-between; text-align: center; flex-direction: row;">
+            <div style="display: flex; justify-content: stretch; text-align: left; flex-direction: row;">
                 <a style="margin-left: 30px;" @click="concluido = false"><i class="mdi mdi-chevron-left"></i>Voltar</a>
                 <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             </div>
