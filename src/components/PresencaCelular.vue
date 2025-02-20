@@ -32,7 +32,7 @@
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
                 style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%; padding: 20px;">
-                <img src="../assets/carregando.gif" v-if="this.carregando">
+                <img src="../assets/carregando.gif">
             </div>
         </div>
         <div id="presencaCelular" v-if="this.concluido">
@@ -86,8 +86,7 @@ export default {
             axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
-                console.log(res);
-
+                this.numeroPresencas = res.data;
                 this.carregando = false;
                 this.concluido = true;
             })
