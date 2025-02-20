@@ -1,17 +1,20 @@
 <template>
     <div id="principal">
-        <div id="presencaCelular" v-if="!this.carregando">
+        <div id="presencaCelular" v-if="!this.carregando && !this.concluido">
             <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 49.5%; display: flex; justify-content: center; flex-direction: column;">
-                    <div class="text-center">
+                    <div v-show="!cameraStatus && code == ''" class="text-center">
                         <button id="botao" @click="initReader">Iniciar detecção</button>
                     </div>
                     <div v-show="cameraStatus" id="reader"></div>
                     <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="code !== ''">
-                        <p>O código detectado foi {{ code }}, deseja dar presença?</p>
-                        <button id="botao" @click="adicionarAoVetor()">Dar presença</button>
+                        <p>O código detectado foi </p><h2>{{ code }}</h2><p>, deseja adicioná-lo na lista?</p>
+                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                            <button id="botao" @click="adicionarAoVetor()">Sim</button>
+                            <button id="botao" @click="initReader()">Não</button>
+                        </div>
                     </div>
                 </div>
                 <div style="width: 49.5%; text-align: left; font-size: 15pt; border-left: #0b4d75 1px solid;">
@@ -32,6 +35,17 @@
                 <img src="../assets/carregando.gif" v-if="this.carregando">
             </div>
         </div>
+        <div id="presencaCelular" v-if="this.concluido">
+            <div >
+                <a style="margin-left: 30px;" @click="concluido = false">< Voltar</a>
+                <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
+            </div>
+            <hr style="opacity: 0.2; width: 99.86%;" />
+            <div
+                style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%; padding: 20px;">
+                <h2>Foram dadas presenças para {{ this.numeroPresencas }} crianças</h2>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -49,6 +63,7 @@ export default {
             alunos: [],
             alunosPorNome: [],
             carregando: false,
+            concluido: false,
             token: cookies.get('token'),
             escola: cookies.get('escolaEscolhida')
         }
@@ -67,11 +82,14 @@ export default {
             this.initReader();
         },
         concluir() {
+            this.carregando = true;
             axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
                 console.log(res);
+
                 this.carregando = false;
+                this.concluido = true;
             })
 
         }
