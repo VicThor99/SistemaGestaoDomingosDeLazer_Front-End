@@ -38,7 +38,7 @@ export default {
         }
     },
     methods: {
-        carregarAlunosPorSala(){
+        async carregarAlunosPorSala(){
             axios.get('https://api.domingodelazer.click/api/alunos/contagem/' + this.escola,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
@@ -46,9 +46,9 @@ export default {
             })
         }
     },
-    created() {
+    async mounted() {
         this.carregarAlunosPorSala();
-        this.timer = setInterval(this.carregarAlunosPorSala(), 10000);
+        this.timer = await setInterval(this.carregarAlunosPorSala, 10000);
     }
 
 }
