@@ -46,9 +46,9 @@ export default {
             })
         }
     },
-    mounted() {
+    created() {
         this.carregarAlunosPorSala();
-        this.timer = setInterval(this.fetchEventsList, 10000);
+        this.timer = setInterval(this.carregarAlunosPorSala(), 60000);
     }
 
 }
