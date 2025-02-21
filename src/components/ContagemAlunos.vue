@@ -30,7 +30,7 @@ import axios from 'axios';
 export default {
 
     name: 'ContagemAlunos',
-    props: [timer],
+    props: ['timer'],
     data() {
         return {
             salas: null,
