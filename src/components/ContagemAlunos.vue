@@ -38,8 +38,8 @@ export default {
         }
     },
     methods: {
-        async carregarAlunosPorSala(){
-            await axios.get('https://api.domingodelazer.click/api/alunos/contagem/' + this.escola,
+        carregarAlunosPorSala(){
+            axios.get('https://api.domingodelazer.click/api/alunos/contagem/' + this.escola,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
                 this.salas = res.data;
