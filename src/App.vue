@@ -119,7 +119,7 @@
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
       <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
-      <ContagemAlunos :timer="timer" v-if="telaAtual === 'ContagemAlunos'"/>
+      <ContagemAlunos @trocarTimer="alterarTimer" v-if="telaAtual === 'ContagemAlunos'"/>
     </div>
   </div>
 </template>
@@ -261,9 +261,13 @@ export default {
           this.erro = rej;
         })
     },
+    alterarTimer(newTimer){
+        this.timer = newTimer;
+    },
     mudarPagina(tela) {
       if(this.timer != null){
         clearTimeout(this.timer);
+        this.timer = null;
       }
       this.telaAtual = tela;
       this.opcoes = false;
