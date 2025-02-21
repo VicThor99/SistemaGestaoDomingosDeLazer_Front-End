@@ -119,7 +119,7 @@
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
       <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
-      <ContagemAlunos v-if="telaAtual === 'ContagemAlunos'"/>
+      <ContagemAlunos :timer="timer" v-if="telaAtual === 'ContagemAlunos'"/>
     </div>
   </div>
 </template>
@@ -186,7 +186,8 @@ export default {
       opcoes: false,
       token: cookies.get('token'),
       escolas: [],
-      escola: cookies.get('escolaEscolhida')
+      escola: cookies.get('escolaEscolhida'),
+      timer: null
     }
   },
   methods: {
@@ -261,6 +262,9 @@ export default {
         })
     },
     mudarPagina(tela) {
+      if(this.timer != null){
+        clearTimeout(this.timer);
+      }
       this.telaAtual = tela;
       this.opcoes = false;
       this.cadastros = false;

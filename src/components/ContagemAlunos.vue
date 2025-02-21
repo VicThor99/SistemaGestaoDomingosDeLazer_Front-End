@@ -30,6 +30,7 @@ import axios from 'axios';
 export default {
 
     name: 'ContagemAlunos',
+    props: [timer],
     data() {
         return {
             salas: null,
@@ -48,7 +49,7 @@ export default {
     },
     async mounted() {
         this.carregarAlunosPorSala();
-        this.timer = await setInterval(this.carregarAlunosPorSala, 10000);
+        props.timer = await setInterval(this.carregarAlunosPorSala, 10000);
     }
 
 }
