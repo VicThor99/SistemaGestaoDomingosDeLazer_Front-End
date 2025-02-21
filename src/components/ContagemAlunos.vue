@@ -24,14 +24,12 @@
 </template>
 
 <script>
-import { defineEmits } from 'vue';
 import cookies from 'vue-cookies';
 import axios from 'axios';
 
 export default {
 
     name: 'ContagemAlunos',
-    emit: defineEmits(['trocarTimer']),
     data() {
         return {
             salas: null,
@@ -48,9 +46,8 @@ export default {
             })
         }
     },
-    async mounted() {
+    mounted() {
         this.carregarAlunosPorSala();
-        emit('trocarTimer', await setInterval(this.carregarAlunosPorSala, 10000));
     }
 
 }
