@@ -50,7 +50,7 @@ export default {
     },
     async mounted() {
         this.carregarAlunosPorSala();
-        emit(await setInterval(this.carregarAlunosPorSala, 10000));
+        emit('trocarTimer', await setInterval(this.carregarAlunosPorSala, 10000));
     }
 
 }
