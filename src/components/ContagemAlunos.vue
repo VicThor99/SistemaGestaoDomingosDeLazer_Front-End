@@ -48,7 +48,7 @@ export default {
     },
     created() {
         this.carregarAlunosPorSala();
-        this.timer = setInterval(this.carregarAlunosPorSala(), 60000);
+        this.timer = setInterval(this.carregarAlunosPorSala(), 10000);
     }
 
 }
