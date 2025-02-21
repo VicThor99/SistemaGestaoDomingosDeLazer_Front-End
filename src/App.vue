@@ -63,8 +63,10 @@
             class="mdi mdi-group"></i> Cadastros em Massa</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 519px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 740px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas && admin == 'true'">
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
+            class="mdi mdi-list-box-outline"></i> Contagem de Alunos</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
             class="mdi mdi-calendar-plus"></i> Registro (Leitor)</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
@@ -117,6 +119,7 @@
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
       <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
+      <ContagemAlunos v-if="telaAtual === 'ContagemAlunos'"/>
     </div>
   </div>
 </template>
@@ -141,6 +144,7 @@ import CadastroEmMassa from './components/CadastrosEmMassa.vue';
 import ArquivosAluno from './components/ArquivosAluno.vue';
 import PresencaCelular from './components/PresencaCelular.vue';
 import PlanoAula from './components/PlanoAula.vue';
+import ContagemAlunos from './components/ContagemAlunos.vue';
 
 export default {
   name: 'App',
@@ -160,7 +164,8 @@ export default {
     CadastroEmMassa,
     ArquivosAluno,
     PresencaCelular,
-    PlanoAula
+    PlanoAula,
+    ContagemAlunos
 },
   data() {
     return {
