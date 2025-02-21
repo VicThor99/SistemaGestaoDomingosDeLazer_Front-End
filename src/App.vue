@@ -65,7 +65,7 @@
       <div
         style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 740px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas && admin == 'true'">
-        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ContagemAlunos')"><i
             class="mdi mdi-list-box-outline"></i> Contagem de Alunos</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
             class="mdi mdi-calendar-plus"></i> Registro (Leitor)</a>
