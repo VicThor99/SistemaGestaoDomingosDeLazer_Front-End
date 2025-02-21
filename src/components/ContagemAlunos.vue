@@ -28,11 +28,10 @@ import { defineEmits } from 'vue';
 import cookies from 'vue-cookies';
 import axios from 'axios';
 
-const emit = defineEmits(['trocarTimer']);
-
 export default {
 
     name: 'ContagemAlunos',
+    emit: defineEmits(['trocarTimer']),
     data() {
         return {
             salas: null,
@@ -51,7 +50,7 @@ export default {
     },
     async mounted() {
         this.carregarAlunosPorSala();
-        emit('trocarTimer', await setInterval(this.carregarAlunosPorSala, 10000));
+        emit(await setInterval(this.carregarAlunosPorSala, 10000));
     }
 
 }
