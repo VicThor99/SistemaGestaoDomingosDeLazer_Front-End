@@ -69,8 +69,7 @@ export default {
     height: 100%;
     font-size: 20px;
     padding: 10px;
-    margin-top: 20px;
-    margin-left: 20px;
+    margin: 20px;
     color: #0b4d75;
     border-radius: 5px;
     display: flex;
