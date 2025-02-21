@@ -3,17 +3,19 @@
         <div id="contagemAlunos">
             <h2 style="margin-left: 30px;">Contagem de alunos</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
-            <div
-                style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 400px">
-                <div style="border: 1px solid #0b4d75; width: 100%; display: flex; justify-content: space-around; flex-direction: row;" v-for="sala in salas">
-                    <div style="border: 1px solid #0b4d75; padding: 5px; width: 25%;">
-                        <h3>{{ sala.sala }}</h3>
-                    </div>
-                    <div style="border: 1px solid #0b4d75; padding: 5px; width: 25%;">
-                        <h3>{{ sala.serie }}</h3>
-                    </div>
-                    <div style="border: 1px solid #0b4d75; padding: 5px; width: 50%;">
-                        <h3>{{ sala.quantidadeAlunos }}</h3>
+            <div style="height: 100%;">
+                <div
+                    style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 400px">
+                    <div style="border: 1px solid #0b4d75; width: 100%; display: flex; justify-content: space-around; flex-direction: row;" v-for="sala in salas">
+                        <div style="border: 1px solid #0b4d75; padding: 5px; width: 25%;">
+                            <h3>{{ sala.sala }}</h3>
+                        </div>
+                        <div style="border: 1px solid #0b4d75; padding: 5px; width: 25%;">
+                            <h3>{{ sala.serie }}</h3>
+                        </div>
+                        <div style="border: 1px solid #0b4d75; padding: 5px; width: 50%;">
+                            <h3>{{ sala.quantidadeAlunos }}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
