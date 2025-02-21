@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { defineEmits } from 'vue';
 import cookies from 'vue-cookies';
 import axios from 'axios';
 
