@@ -48,6 +48,7 @@ export default {
     },
     mounted() {
         this.carregarAlunosPorSala();
+        this.timer = setInterval(this.fetchEventsList, 10000);
     }
 
 }
