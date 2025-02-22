@@ -288,6 +288,7 @@ export default {
       this.cadastros = false;
       this.impressoes = false;
       this.registroPresencas = false;
+      window.location.reload(true);
     },
     abrirOuFecharCadastros() {
       this.opcoes = false;
