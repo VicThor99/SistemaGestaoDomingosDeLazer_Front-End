@@ -119,7 +119,7 @@
       <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
       <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
-      <ContagemAlunos @trocarTimer="alterarTimer(newTimer)" v-if="telaAtual === 'ContagemAlunos'"/>
+      <ContagemAlunos v-if="telaAtual === 'ContagemAlunos'"/>
     </div>
   </div>
 </template>
