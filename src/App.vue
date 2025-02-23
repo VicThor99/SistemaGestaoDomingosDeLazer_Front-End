@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-show="!logado" id="divPrincipal">
+    <div v-if="!logado" id="divPrincipal">
       <div></div>
       <div id="login">
         <img class="img" alt="Logo da Seara" src="./assets/logo.png">
@@ -13,12 +13,12 @@
 
         <button id="logar" @click="submit">Logar</button>
 
-        <h2 class="aviso" v-show="erro !== null">{{ erro }}</h2>
+        <h2 class="aviso" v-if="erro !== null">{{ erro }}</h2>
       </div>
       <div></div>
     </div>
 
-    <div v-show="logado && !escolaEscolhida" id="divPrincipal">
+    <div v-if="logado && !escolaEscolhida" id="divPrincipal">
       <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
         <div style="display: flex; justify-content: space-around;">
           <div v-for="e in escolas" :key="e">
@@ -28,14 +28,14 @@
       </div>
     </div>
 
-    <div v-show="logado && escolaEscolhida" id="divPrincipal">
+    <div v-if="logado && escolaEscolhida" id="divPrincipal">
       <header id="header" style="font-size: 22px; box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);">
         <div style="width: 70%; height: 100%; display: flex; justify-content: flex-start;">
           <a @click="mudarPagina('TelaInicial')" class="headerImg"><img class="logoInicial" alt="Logo da Seara"
               src="./assets/logo.png"></a>
-          <a class="headerButton" v-show="admin == 'true'" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" v-if="admin == 'true'" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
           <a class="headerButton" @click="abrirOuFecharPresencas">Presenças <i class="mdi mdi-menu-down"></i></a>
-          <a class="headerButton" v-show="admin == 'true'" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" v-if="admin == 'true'" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
         </div>
         <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
           <div style="width: 300px; text-align: right;">
@@ -46,7 +46,7 @@
       </header>
       <div
         style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 1020px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
-        v-show="cadastros">
+        v-if="cadastros">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Alunos')"><i
             class="mdi mdi-account-school"></i> Alunos</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('Datas')"><i
@@ -64,7 +64,7 @@
       </div>
       <div
         style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 740px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
-        v-show="registroPresencas && admin == 'true'">
+        v-if="registroPresencas && admin == 'true'">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ContagemAlunos')"><i
             class="mdi mdi-list-box-outline"></i> Contagem de Alunos</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('RegistroPresencas')"><i
@@ -76,13 +76,13 @@
       </div>
       <div
         style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 213px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
-        v-show="registroPresencas && admin != 'true'">
+        v-if="registroPresencas && admin != 'true'">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
             class="mdi mdi-cellphone"></i> Registro (Celular)</a>
       </div>
       <div
         style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 491px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
-        v-show="impressoes">
+        v-if="impressoes">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoMatriculas')"><i
             class="mdi mdi-file-document-edit"></i> Matrículas</a>
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('ImpressaoListas')"><i
@@ -95,7 +95,7 @@
 
       <div
         style="margin: -15px 15px 0px 0px; border-radius: 0px 0px 5px 5px;width: 430px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
-        v-show="opcoes">
+        v-if="opcoes">
         <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="download"><i
             class="mdi mdi-file-excel"></i> Exportar Excel</a>
         <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="mudarPagina('ImportExcel')"><i
@@ -103,23 +103,23 @@
         <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="sair"><i
             class="mdi mdi-exit-to-app"></i> Sair</a>
       </div>
-      <TelaInicial :user="user.username" v-show="telaAtual === 'TelaInicial'" />
-      <CadastroAlunos v-show="telaAtual === 'Alunos'" />
-      <CadastroDatas v-show="telaAtual === 'Datas'" />
-      <CadastroSalas v-show="telaAtual === 'Salas'" />
-      <CadastroUsuarios v-show="telaAtual === 'Usuarios'" />
-      <ImportExcel v-show="telaAtual === 'ImportExcel'" />
-      <RegistroPresencas v-show="telaAtual === 'RegistroPresencas'" />
-      <CorrecaoPresencas v-show="telaAtual === 'CorrecaoPresenca'" />
-      <ImpressaoCrachas v-show="telaAtual === 'ImpressaoCrachas'" />
-      <ImpressaoListas v-show="telaAtual === 'ImpressaoListas'" />
-      <ImpressaoMatriculas v-show="telaAtual === 'ImpressaoMatriculas'" />
-      <ImpressaoProtocolos v-show="telaAtual === 'ImpressaoProtocolos'" />
-      <CadastroEmMassa v-show="telaAtual === 'CadastroEmMassa'" />
-      <ArquivosAluno v-show="telaAtual === 'ArquivosAluno'" />
-      <PresencaCelular v-show="telaAtual === 'PresencaCelular'"/>
-      <PlanoAula v-show="telaAtual === 'PlanoAula'"/>
-      <ContagemAlunos v-show="telaAtual === 'ContagemAlunos'"/>
+      <TelaInicial :user="user.username" v-if="telaAtual === 'TelaInicial'" />
+      <CadastroAlunos v-if="telaAtual === 'Alunos'" />
+      <CadastroDatas v-if="telaAtual === 'Datas'" />
+      <CadastroSalas v-if="telaAtual === 'Salas'" />
+      <CadastroUsuarios v-if="telaAtual === 'Usuarios'" />
+      <ImportExcel v-if="telaAtual === 'ImportExcel'" />
+      <RegistroPresencas v-if="telaAtual === 'RegistroPresencas'" />
+      <CorrecaoPresencas v-if="telaAtual === 'CorrecaoPresenca'" />
+      <ImpressaoCrachas v-if="telaAtual === 'ImpressaoCrachas'" />
+      <ImpressaoListas v-if="telaAtual === 'ImpressaoListas'" />
+      <ImpressaoMatriculas v-if="telaAtual === 'ImpressaoMatriculas'" />
+      <ImpressaoProtocolos v-if="telaAtual === 'ImpressaoProtocolos'" />
+      <CadastroEmMassa v-if="telaAtual === 'CadastroEmMassa'" />
+      <ArquivosAluno v-if="telaAtual === 'ArquivosAluno'" />
+      <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
+      <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
+      <ContagemAlunos v-if="telaAtual === 'ContagemAlunos'"/>
     </div>
   </div>
 </template>
