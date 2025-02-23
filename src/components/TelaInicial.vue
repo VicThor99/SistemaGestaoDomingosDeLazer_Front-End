@@ -1,6 +1,6 @@
 <template>
     <div id="principal">
-        <div id="telaInicial" v-show="this.lista == null && admin != 'true'">
+        <div id="telaInicial" v-if="this.lista == null && admin != 'true'">
             <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
                 <div style="display: flex; flex-direction: column; margin-bottom: 15px; width: 100%;">
                     <div
@@ -161,7 +161,7 @@
                 </div>
             </div>
         </div>
-        <div id="telaInicial" v-show="this.lista == null && admin == 'true'">
+        <div id="telaInicial" v-if="this.lista == null && admin == 'true'">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
                 <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-show="chart != null">
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
