@@ -288,6 +288,7 @@ export default {
                 { title: 'Email do Responsável', key: 'emailResponsavel', align: ' d-none' },
                 { title: 'Aluno Ativo', key: 'ativo', align: ' d-none' },
                 { title: 'Sair Só', key: 'sairSo', align: ' d-none' },
+                { title: 'Observacoes', key: 'observacoes', align: ' d-none' },
             ],
             alunos: [],
             search: '',
