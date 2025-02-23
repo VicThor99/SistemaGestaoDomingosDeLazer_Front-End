@@ -167,6 +167,14 @@
                             v-model="aluno.telefoneResponsavel" />
                     </div>
                 </div>
+                <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
+                    <div style="display: flex; flex-direction: column; width: 100%; margin-right: 10px;">
+                        <p style="color: #5a5a5a; margin-left: 5px;">Observações:</p>
+                        <input type="text"
+                            style="border:#3f799c69 1px solid; padding: 7px 15px; align-self: center; width: 100%; border-radius: 5px;"
+                            v-model="aluno.observacoes" />
+                    </div>
+                </div>
                 <div style="display: flex; justify-content: center; border-radius: 5px 5px 0px 0px; margin-top: 20px; background-color: #d7effd; color: #0b4d75; height: 40px;"
                     class="elevation-1">
                     <h3>Presenças do Aluno</h3>
@@ -429,6 +437,7 @@ export default {
                 numeroSacolinha: row.item.columns.numeroSacolinha,
                 ativo: row.item.columns.ativo,
                 sairSo: row.item.columns.sairSo,
+                observacoes: row.item.columns.observacoes,
                 escolaId: this.escola
             }
 
@@ -453,6 +462,7 @@ export default {
                 numeroSacolinha: '',
                 ativo: false,
                 sairSo: false,
+                observacoes: '',
                 escolaId: this.escola
             }
 
