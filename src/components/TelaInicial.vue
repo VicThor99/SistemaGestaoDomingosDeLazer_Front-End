@@ -1,6 +1,6 @@
 <template>
     <div id="principal">
-        <div id="telaInicial" v-if="this.lista == null && admin != 'true'">
+        <div id="telaInicial" v-show="this.lista == null && admin != 'true'">
             <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
                 <div style="display: flex; flex-direction: column; margin-bottom: 15px; width: 100%;">
                     <div
@@ -24,8 +24,8 @@
                                             <p>{{ this.proximaDataDomA }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
+                                    <div style="width: 2%;" v-show="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-show="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
@@ -37,7 +37,7 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; width: 100%; ">
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''" >
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-show="this.proximaDataDomC != ''" >
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
@@ -47,8 +47,8 @@
                                             <p>{{ this.proximaDataDomC }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
+                                    <div style="width: 2%;" v-show="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-show="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-if="this.planoAula != null">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-show="this.planoAula != null">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
@@ -161,15 +161,15 @@
                 </div>
             </div>
         </div>
-        <div id="telaInicial" v-if="this.lista == null && admin == 'true'">
+        <div id="telaInicial" v-show="this.lista == null && admin == 'true'">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
-                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-if="chart != null">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" v-show="chart != null">
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
                         <div id="chartContainer" style="height: 360px; width: 100%;"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 100%" v-if="domingoa.total > 0 && domingob.total <= 0">
+                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 100%" v-show="domingoa.total > 0 && domingob.total <= 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo A</p>
@@ -210,7 +210,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 49.5%  " v-if="domingoa.total > 0 && domingob.total > 0">
+                    <div style="display: flex; justify-content: space-between; flex-direction: column ; width: 49.5%  " v-show="domingoa.total > 0 && domingob.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo A</p>
@@ -251,7 +251,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  " v-if="domingoa.total > 0 && domingob.total > 0">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%  " v-show="domingoa.total > 0 && domingob.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo B</p>
@@ -294,7 +294,7 @@
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
-                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 100%" v-if="domingoc.total > 0 && domingod.total == 0">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 100%" v-show="domingoc.total > 0 && domingod.total == 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo C</p>
@@ -335,7 +335,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%" v-if="domingoc.total > 0 && domingod.total > 0">
+                    <div style="display: flex; justify-content: center; flex-direction: column ; width: 49.5%" v-show="domingoc.total > 0 && domingod.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo C</p>
@@ -376,7 +376,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="display: flex; justify-content: center; flex-direction: column ;width: 49.5%"  v-if="domingoc.total > 0 && domingod.total > 0">
+                    <div style="display: flex; justify-content: center; flex-direction: column ;width: 49.5%"  v-show="domingoc.total > 0 && domingod.total > 0">
                         <div
                             style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                             <p style="color: white; font-size: 30px;">Domingo D</p>
@@ -418,7 +418,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 5px;"  v-if="domingoa.total > 0 && (domingob.total > 0 || domingoc.total > 0 || domingod.total > 0)">
+                <div style="display: flex; justify-content: center; flex-direction: column ; margin-bottom: 5px;"  v-show="domingoa.total > 0 && (domingob.total > 0 || domingoc.total > 0 || domingod.total > 0)">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Todos Domingos</p>
@@ -481,8 +481,8 @@
                                             <p>{{ this.proximaDataDomA }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
+                                    <div style="width: 2%;" v-show="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-show="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
@@ -494,7 +494,7 @@
                                     </div>
                                 </div>
                                 <div style="display: flex; justify-content: space-between; width: 100%; ">
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-show="this.proximaDataDomC != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
@@ -504,8 +504,8 @@
                                             <p>{{ this.proximaDataDomC }}</p>
                                         </div>
                                     </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
+                                    <div style="width: 2%;" v-show="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-show="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
                                         <div
                                             style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
                                             <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
@@ -522,7 +522,7 @@
                 </div>
             </div>
         </div>
-        <div id="listagemDashboard" v-if="this.lista != null">
+        <div id="listagemDashboard" v-show="this.lista != null">
             <div style="margin: 0px 0px 10px 10px; display: flex; justify-content: flex-start;">
                 <div style=" display: flex; justify-content: flex-start; width: 60%;">
                     <a style="font-size: 25pt; margin-right: 10px; cursor: pointer;" @click="voltar"><i
