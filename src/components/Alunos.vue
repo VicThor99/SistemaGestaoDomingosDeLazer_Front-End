@@ -132,18 +132,18 @@
                         style="display: flex; flex-direction: column; width: 125px; margin-right: 10px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Sapato</p>
                         <v-select density="comfortable" variant="outlined" v-model="aluno.sapato"
-                            :items="tamanhos"></v-select>
+                            :items="tamanhosCalcados"></v-select>
                     </div>
                     <div
                         style="display: flex; flex-direction: column; width: 125px; margin-right: 10px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Blusa</p>
                         <v-select density="comfortable" variant="outlined" v-model="aluno.blusa"
-                            :items="tamanhos"></v-select>
+                            :items="tamanhosBlusaCalca"></v-select>
                     </div>
                     <div style="display: flex; flex-direction: column; width: 125px; margin-left: 10px;">
                         <p style="color: #5a5a5a; margin-left: 5px;">Calça</p>
                         <v-select density="comfortable" variant="outlined" v-model="aluno.calca"
-                            :items="tamanhos"></v-select>
+                            :items="tamanhosBlusaCalca"></v-select>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-evenly; width: 100%; margin-bottom: 10px;">
@@ -291,7 +291,8 @@ export default {
             alertText: '',
             alertClass: '',
             seriesDisponiveis: [],
-            tamanhos: [],
+            tamanhosCalcados: [],
+            tamanhosBlusaCalca: [],
             fotoAluno: '',
             matricula: '',
             token: cookies.get('token'),
@@ -307,8 +308,13 @@ export default {
             const resSeries = await axios.get('https://api.domingodelazer.click/api/series/listaString/' + this.escola, { headers: { 'Authorization': this.token } });
             this.alunos = resAlunos.data;
             this.seriesDisponiveis = resSeries.data;
+            this.tamanhosCalcados = [];
+            this.tamanhosBlusaCalca = [];
             for (let i = 20; i < 46; i++) {
-                this.tamanhos.push(i);
+                this.tamanhosCalcados.push(i);
+            }
+            for (let i = 2; i < 48; i++) {
+                this.tamanhosBlusaCalca.push(i);
             }
         },
         async salvarAluno() {
