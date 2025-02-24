@@ -602,9 +602,9 @@ export default {
     methods: {
         async comumOuAdmin(){
             if(this.admin == 'true'){
-                this.carregarDashboardAdmin();
+                await this.carregarDashboardAdmin();
             } else {
-                this.carregarDashboardComum();
+                await this.carregarDashboardComum();
             }
         },
         async carregarDashboardComum(){
@@ -774,8 +774,8 @@ export default {
             this.comumOuAdmin();
         }
     },
-    mounted() {
-        this.comumOuAdmin();
+    async mounted() {
+        await this.comumOuAdmin();
     }
 }
 </script>
