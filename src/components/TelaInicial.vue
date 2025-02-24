@@ -165,7 +165,7 @@
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
                 <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" >
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
-                        <div id="chartContainer" style="height: 360px; width: 100%;" v-show="chart != null"></div>
+                        <div id="chartContainer" style="height: 360px; width: 100%;" v-if="chart != null"></div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-between; width: 100%; margin-bottom: 5px;">
