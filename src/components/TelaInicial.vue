@@ -3,16 +3,12 @@
         <div id="telaInicial" v-if="this.lista == null && admin != 'true'">
             <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
                 <div style="display: flex; flex-direction: column; margin-bottom: 15px; width: 100%;">
-                    <div
-                        style="display: flex; justify-content: space-around; width: 100%;">
-                        <div
-                            style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                            <div
-                                style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                    <div style="display: flex; justify-content: space-around; width: 100%;">
+                        <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                            <div style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                                 <p style="color: white; font-size: 30px;">Próximas Datas</p>
                             </div>
-                            <div
-                                style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                            <div style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
                                 <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
                                     <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
                                         <div
@@ -63,7 +59,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-if="this.planoAula != null">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-show="this.planoAula != null">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
