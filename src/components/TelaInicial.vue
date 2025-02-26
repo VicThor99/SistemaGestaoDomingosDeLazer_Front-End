@@ -1,162 +1,5 @@
 <template>
     <div id="principal">
-        <div id="telaInicial" v-if="this.lista == null && admin != 'true'">
-            <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
-                <div style="display: flex; flex-direction: column; margin-bottom: 15px; width: 100%;">
-                    <div style="display: flex; justify-content: space-around; width: 100%;">
-                        <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                            <div style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
-                                <p style="color: white; font-size: 30px;">Próximas Datas</p>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
-                                <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                        <div
-                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
-                                        </div>
-                                        <div
-                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                            <p>{{ this.proximaDataDomA }}</p>
-                                        </div>
-                                    </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
-                                        <div
-                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
-                                        </div>
-                                        <div
-                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                            <p>{{ this.proximaDataDomB }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; width: 100%; ">
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''" >
-                                        <div
-                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
-                                        </div>
-                                        <div
-                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                            <p>{{ this.proximaDataDomC }}</p>
-                                        </div>
-                                    </div>
-                                    <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
-                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
-                                        <div
-                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
-                                        </div>
-                                        <div
-                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
-                                            <p>{{ this.proximaDataDomD }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-show="this.planoAula != null">
-                    <div
-                        style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
-                        <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
-                    </div>
-                    <div
-                        style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-bullseye-arrow"></i> Tema</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding: 15px;">
-                                    <p>{{ this.planoAula.tema }}</p>
-                                </div>
-                            </div>
-                            <div style="width: 2%;"></div>
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding-left:15px; padding-right: 15px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
-                                    <div></div>
-                                    <p>{{ this.planoAula.mes }}</p>
-                                    <div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-bullseye-arrow"></i> Objetivos</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p style="white-space: pre-wrap;">{{ this.planoAula.objetivos }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-cards-playing-heart-outline"></i> Quebra-Gelo</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p style="white-space: pre-wrap;">{{ this.planoAula.quebraGelo }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-book-open-page-variant"></i> História</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p style="font-weight: bold;">{{ this.planoAula.tituloHistoria }}</p>
-                                    <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 5px; margin-top: 5px;" />
-                                    <p style="white-space: pre-wrap;">{{ this.planoAula.historia }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-kabaddi"></i> Atividade</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p style="white-space: pre-wrap;">{{ this.planoAula.atividade }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
-                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
-                                <div
-                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
-                                    <p><i class="mdi mdi-sack"></i> Lista de Materiais</p>
-                                </div>
-                                <div
-                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
-                                    <p style="white-space: pre-wrap;">{{ this.planoAula.material }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div id="telaInicial" v-if="this.lista == null && admin == 'true'">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
                 <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" >
@@ -518,7 +361,7 @@
                 </div>
             </div>
         </div>
-        <div id="listagemDashboard" v-if="this.lista != null">
+        <div id="listagemDashboard" v-else-if="this.lista != null">
             <div style="margin: 0px 0px 10px 10px; display: flex; justify-content: flex-start;">
                 <div style=" display: flex; justify-content: flex-start; width: 60%;">
                     <a style="font-size: 25pt; margin-right: 10px; cursor: pointer;" @click="voltar"><i
@@ -530,6 +373,163 @@
             <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 10px;" />
             <v-data-table items-per-page="11" :headers="headers" :items="lista" style="padding: 5px 10px 10px 10px;"
                 :search="search" class="elevation-1" />
+        </div>
+        <div id="telaInicial" v-else>
+            <div style="display: flex; flex-direction: column; margin: 15px; width: 100%;">
+                <div style="display: flex; flex-direction: column; margin-bottom: 15px; width: 100%;">
+                    <div style="display: flex; justify-content: space-around; width: 100%;">
+                        <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                            <div style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                                <p style="color: white; font-size: 30px;">Próximas Datas</p>
+                            </div>
+                            <div style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                                <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo A</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomA }}</p>
+                                        </div>
+                                    </div>
+                                    <div style="width: 2%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomA != '' && this.proximaDataDomB != ''">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo B</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomB }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; width: 100%; ">
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="this.proximaDataDomC != ''" >
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo C</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomC }}</p>
+                                        </div>
+                                    </div>
+                                    <div style="width: 2%;" v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''"></div>
+                                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;"  v-if="this.proximaDataDomC != '' && this.proximaDataDomD != ''">
+                                        <div
+                                            style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                            <p><i class="mdi mdi-calendar-month-outline"></i> Domingo D</p>
+                                        </div>
+                                        <div
+                                            style="font-size: 35pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75">
+                                            <p>{{ this.proximaDataDomD }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-show="this.planoAula != null">
+                    <div
+                        style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
+                        <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
+                    </div>
+                    <div
+                        style="display: flex; justify-content: space-between; flex-direction: column; width: 100%; border-radius: 0px 0px 5px 5px; background-color: #dbe7ee; border: 1px solid #0b4d75; padding: 10px 10px 10px 10px;">
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-bullseye-arrow"></i> Tema</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding: 15px;">
+                                    <p>{{ this.planoAula.tema }}</p>
+                                </div>
+                            </div>
+                            <div style="width: 2%;"></div>
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-bullseye-arrow"></i> Mês</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; padding-left:15px; padding-right: 15px; display: flex; flex-direction: column; height: 100%; justify-content: space-between;">
+                                    <div></div>
+                                    <p>{{ this.planoAula.mes }}</p>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-bullseye-arrow"></i> Objetivos</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.objetivos }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-cards-playing-heart-outline"></i> Quebra-Gelo</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.quebraGelo }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-book-open-page-variant"></i> História</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p style="font-weight: bold;">{{ this.planoAula.tituloHistoria }}</p>
+                                    <hr style="opacity: 0.2; width: 99.86%; margin-bottom: 5px; margin-top: 5px;" />
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.historia }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-kabaddi"></i> Atividade</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.atividade }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 100%;  margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;">
+                                <div
+                                    style="font-size: 30px; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; opacity: 0.9; color: white">
+                                    <p><i class="mdi mdi-sack"></i> Lista de Materiais</p>
+                                </div>
+                                <div
+                                    style="font-size: 25pt; border-radius: 0px 0px 5px 5px; background-color: #c0e2f7; opacity: 0.9; color: #0b4d75; text-align: justify; padding: 15px;">
+                                    <p style="white-space: pre-wrap;">{{ this.planoAula.material }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -596,109 +596,104 @@ export default {
         }
     },
     methods: {
-        async comumOuAdmin(){
-            if(this.admin == 'true'){
-                await this.carregarDashboardAdmin();
-            } else {
-                await this.carregarDashboardComum();
-            }
-        },
-        async carregarDashboardComum(){
-            const res = await axios.get('https://api.domingodelazer.click/api/dashboard/comuns/' + this.escola + '/' + cookies.get('user_name'), {
-                headers: {
-                    Authorization: this.token,
+        async carregarDashboard(){
+            if(this.admin == 'true') {
+                const res = await axios.get('https://api.domingodelazer.click/api/dashboard/admin/' + this.escola, {
+                    headers: {
+                        Authorization: this.token,
+                    }
+                });
+    
+                this.domingoa = res.data.domingoA;
+                this.domingob = res.data.domingoB;
+                this.domingoc = res.data.domingoC;
+                this.domingod = res.data.domingoD;
+                this.domingos = res.data.domingos;
+    
+                var dadosGraficoA = res.data.dadosGraficoA;
+                var dadosGraficoB = res.data.dadosGraficoB;
+                var dadosGraficoC = res.data.dadosGraficoC;
+                var dadosGraficoD = res.data.dadosGraficoD;
+    
+                this.proximaDataDomA = res.data.proximaDataDomA;
+                this.proximaDataDomB = res.data.proximaDataDomB;
+                this.proximaDataDomC = res.data.proximaDataDomC;
+                this.proximaDataDomD = res.data.proximaDataDomD;
+    
+                if(dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
+                    var chart = new CanvasJS.Chart("chartContainer", {
+                        animationEnabled: true,
+                        exportEnabled: false,
+                        theme: "light1",
+                        backgroundColor: "#E4EDF7",
+                        title: {
+                            text: "Presenças por mês",
+                            fontFamily:"Times New Roman"
+                        },
+                        axisY: {
+                            tickLength: 0,
+                            title: "Presenças",
+                            includeZero: false
+                        },
+                        legend: {
+                            cursor: "pointer"
+                        },
+                        toolTip: {
+                            shared: true
+                        },
+                        data: [
+                            {
+                                type: "column",
+                                name: "Domingo A",
+                                showInLegend: dadosGraficoA !== null,
+                                color: "#78A0E6",
+                                dataPoints: dadosGraficoA
+                            },
+                            {
+                                type: "column",
+                                name: "Domingo B",
+                                showInLegend: dadosGraficoB !== null,
+                                color: "#2C6F99",
+                                dataPoints: dadosGraficoB
+                            },
+                            {
+                                type: "column",
+                                name: "Domingo C",
+                                showInLegend: dadosGraficoC !== null,
+                                color: "#0B4D75",
+                                dataPoints: dadosGraficoC
+                            },
+                            {
+                                type: "column",
+                                name: "Domingo D",
+                                showInLegend: dadosGraficoD !== null,
+                                color: "#243B4A",
+                                dataPoints: dadosGraficoD
+                            }
+                        ]
+                    });
+    
+                    chart.render();
+                } else {
+                    chart = null;
                 }
-            });
-
-            this.proximaDataDomA = res.data.proximaDataDomA;
-            this.proximaDataDomB = res.data.proximaDataDomB;
-            this.proximaDataDomC = res.data.proximaDataDomC;
-            this.proximaDataDomD = res.data.proximaDataDomD;
-
-            this.planoAula = res.data.planoAula;
+            } else {
+                const res = await axios.get('https://api.domingodelazer.click/api/dashboard/comuns/' + this.escola + '/' + cookies.get('user_name'), {
+                    headers: {
+                        Authorization: this.token,
+                    }
+                });
+    
+                this.proximaDataDomA = res.data.proximaDataDomA;
+                this.proximaDataDomB = res.data.proximaDataDomB;
+                this.proximaDataDomC = res.data.proximaDataDomC;
+                this.proximaDataDomD = res.data.proximaDataDomD;
+    
+                this.planoAula = res.data.planoAula;
+            }
 
         },
         async carregarDashboardAdmin() {
-
-            const res = await axios.get('https://api.domingodelazer.click/api/dashboard/admin/' + this.escola, {
-                headers: {
-                    Authorization: this.token,
-                }
-            });
-
-            this.domingoa = res.data.domingoA;
-            this.domingob = res.data.domingoB;
-            this.domingoc = res.data.domingoC;
-            this.domingod = res.data.domingoD;
-            this.domingos = res.data.domingos;
-
-            var dadosGraficoA = res.data.dadosGraficoA;
-            var dadosGraficoB = res.data.dadosGraficoB;
-            var dadosGraficoC = res.data.dadosGraficoC;
-            var dadosGraficoD = res.data.dadosGraficoD;
-
-            this.proximaDataDomA = res.data.proximaDataDomA;
-            this.proximaDataDomB = res.data.proximaDataDomB;
-            this.proximaDataDomC = res.data.proximaDataDomC;
-            this.proximaDataDomD = res.data.proximaDataDomD;
-
-            if(dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
-                var chart = new CanvasJS.Chart("chartContainer", {
-                    animationEnabled: true,
-                    exportEnabled: false,
-                    theme: "light1",
-                    backgroundColor: "#E4EDF7",
-                    title: {
-                        text: "Presenças por mês",
-                        fontFamily:"Times New Roman"
-                    },
-                    axisY: {
-                        tickLength: 0,
-                        title: "Presenças",
-                        includeZero: false
-                    },
-                    legend: {
-                        cursor: "pointer"
-                    },
-                    toolTip: {
-                        shared: true
-                    },
-                    data: [
-                        {
-                            type: "column",
-                            name: "Domingo A",
-                            showInLegend: dadosGraficoA !== null,
-                            color: "#78A0E6",
-                            dataPoints: dadosGraficoA
-                        },
-                        {
-                            type: "column",
-                            name: "Domingo B",
-                            showInLegend: dadosGraficoB !== null,
-                            color: "#2C6F99",
-                            dataPoints: dadosGraficoB
-                        },
-                        {
-                            type: "column",
-                            name: "Domingo C",
-                            showInLegend: dadosGraficoC !== null,
-                            color: "#0B4D75",
-                            dataPoints: dadosGraficoC
-                        },
-                        {
-                            type: "column",
-                            name: "Domingo D",
-                            showInLegend: dadosGraficoD !== null,
-                            color: "#243B4A",
-                            dataPoints: dadosGraficoD
-                        }
-                    ]
-                });
-
-                chart.render();
-            } else {
-                chart = null;
-            }
         },
         carregarLista(opcao) {
             
@@ -771,7 +766,7 @@ export default {
         }
     },
     async mounted() {
-        await this.comumOuAdmin();
+        await this.carregarDashboard();
     }
 }
 </script>
