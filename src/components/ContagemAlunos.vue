@@ -6,7 +6,7 @@
             <div style="height: 100%; margin-top: 10px;">
                 <div
                     style="display: flex; justify-content: center; flex-direction: column; align-items: center; color:  #0b4d75;">
-                    <div style="border: 1px solid #0b4d75; width: 100%; display: flex; justify-content: space-around; flex-direction: row;" v-for="sala in salas">
+                    <div style="border: 1px solid #0b4d75; width: 100%; display: flex; justify-content: space-around; flex-direction: row;" v-for="sala in salas" :key="sala.sala">
                         <div style="border: 1px solid #0b4d75; padding: 5px; width: 25%;">
                             <h3>{{ sala.sala }}</h3>
                         </div>
