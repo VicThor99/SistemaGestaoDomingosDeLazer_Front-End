@@ -1,6 +1,6 @@
 <template>
     <div id="principal">
-        <div id="telaInicial" v-if="this.lista == null && admin == 'true'">
+        <div id="telaInicial" v-if="this.lista == null && this.isAdmin">
             <div style="width: 100%; margin: 15px; display: flex; flex-direction: column;">
                 <div style="display: flex; flex-direction: column; width: 100%; margin-bottom: 5px;" >
                     <div style="background-color: #E4EDF7; border-radius: 5px; padding: 10px;border: #0b4d75 1px solid;">
@@ -591,13 +591,13 @@ export default {
             tituloListagem: '',
             search: '',
             token: cookies.get('token'),
-            admin: cookies.get('admin'),
+            isAdmin: cookies.get('admin') === 'true',
             escola: cookies.get('escolaEscolhida')
         }
     },
     methods: {
         async carregarDashboard(){
-            if(this.admin == 'true') {
+            if(this.isAdmin) {
                 const res = await axios.get('https://api.domingodelazer.click/api/dashboard/admin/' + this.escola, {
                     headers: {
                         Authorization: this.token,
@@ -691,12 +691,8 @@ export default {
     
                 this.planoAula = res.data.planoAula;
             }
-
-        },
-        async carregarDashboardAdmin() {
         },
         carregarLista(opcao) {
-            
             switch (opcao) {
                 case "DomAAptas":
                     this.tituloListagem = 'Domingo A Aptas';
@@ -760,9 +756,9 @@ export default {
                     break;
             }
         },
-        voltar() {
+        async voltar() {
             this.lista = null;
-            this.comumOuAdmin();
+            await this.carregarDashboard();
         }
     },
     async mounted() {
