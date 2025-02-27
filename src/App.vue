@@ -216,7 +216,6 @@ export default {
       this.logado = cookies.get('token') != null;
       this.isAdmin = cookies.get('admin') === 'true';
       this.erro = null;
-      this.telaAtual = 'TelaInicial';
           
       res = await axios.get('https://api.domingodelazer.click/api/access/' + this.username, {
         headers: {
@@ -238,6 +237,8 @@ export default {
       } else {
         this.escolas = res.data;
       }
+      
+      this.telaAtual = 'TelaInicial';
         
     },
     download() {
