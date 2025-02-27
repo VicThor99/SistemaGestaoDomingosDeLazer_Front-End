@@ -214,7 +214,7 @@ export default {
       cookies.set('user_name', res.data.username, date);
       this.username = cookies.get('user_name');
       this.logado = cookies.get('token') != null;
-      this.admin = cookies.get('admin');
+      this.isAdmin = cookies.get('admin') === 'true';
       this.erro = null;
       this.telaAtual = 'TelaInicial';
           
