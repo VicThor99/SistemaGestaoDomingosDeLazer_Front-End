@@ -433,7 +433,7 @@
                         </div>
                     </div>
                 </div>
-                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-show="this.planoAula != null">
+                <div style="display: flex; flex-direction: column; width: 100%; margin-top: 0px;" v-if="this.planoAula != null">
                     <div
                         style="display: flex; justify-content: space-around; width: 100%; border-radius: 5px 5px 0px 0px; background-color: #0b4d75; ">
                         <p style="color: white; font-size: 30px;">Proposta de Plano de Aula</p>
@@ -598,98 +598,98 @@ export default {
     methods: {
         async carregarDashboard(){
             if(this.isAdmin) {
-                const res = await axios.get('https://api.domingodelazer.click/api/dashboard/admin/' + this.escola, {
+                await axios.get('https://api.domingodelazer.click/api/dashboard/admin/' + this.escola, {
                     headers: {
                         Authorization: this.token,
                     }
+                }).then(res => {
+                    this.domingoa = res.data.domingoA;
+                    this.domingob = res.data.domingoB;
+                    this.domingoc = res.data.domingoC;
+                    this.domingod = res.data.domingoD;
+                    this.domingos = res.data.domingos;
+        
+                    var dadosGraficoA = res.data.dadosGraficoA;
+                    var dadosGraficoB = res.data.dadosGraficoB;
+                    var dadosGraficoC = res.data.dadosGraficoC;
+                    var dadosGraficoD = res.data.dadosGraficoD;
+        
+                    this.proximaDataDomA = res.data.proximaDataDomA;
+                    this.proximaDataDomB = res.data.proximaDataDomB;
+                    this.proximaDataDomC = res.data.proximaDataDomC;
+                    this.proximaDataDomD = res.data.proximaDataDomD;
+        
+                    if(dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            animationEnabled: true,
+                            exportEnabled: false,
+                            theme: "light1",
+                            backgroundColor: "#E4EDF7",
+                            title: {
+                                text: "Presenças por mês",
+                                fontFamily:"Times New Roman"
+                            },
+                            axisY: {
+                                tickLength: 0,
+                                title: "Presenças",
+                                includeZero: false
+                            },
+                            legend: {
+                                cursor: "pointer"
+                            },
+                            toolTip: {
+                                shared: true
+                            },
+                            data: [
+                                {
+                                    type: "column",
+                                    name: "Domingo A",
+                                    showInLegend: dadosGraficoA !== null,
+                                    color: "#78A0E6",
+                                    dataPoints: dadosGraficoA
+                                },
+                                {
+                                    type: "column",
+                                    name: "Domingo B",
+                                    showInLegend: dadosGraficoB !== null,
+                                    color: "#2C6F99",
+                                    dataPoints: dadosGraficoB
+                                },
+                                {
+                                    type: "column",
+                                    name: "Domingo C",
+                                    showInLegend: dadosGraficoC !== null,
+                                    color: "#0B4D75",
+                                    dataPoints: dadosGraficoC
+                                },
+                                {
+                                    type: "column",
+                                    name: "Domingo D",
+                                    showInLegend: dadosGraficoD !== null,
+                                    color: "#243B4A",
+                                    dataPoints: dadosGraficoD
+                                }
+                            ]
+                        });
+        
+                        chart.render();
+                    } else {
+                        chart = null;
+                    }
                 });
-    
-                this.domingoa = res.data.domingoA;
-                this.domingob = res.data.domingoB;
-                this.domingoc = res.data.domingoC;
-                this.domingod = res.data.domingoD;
-                this.domingos = res.data.domingos;
-    
-                var dadosGraficoA = res.data.dadosGraficoA;
-                var dadosGraficoB = res.data.dadosGraficoB;
-                var dadosGraficoC = res.data.dadosGraficoC;
-                var dadosGraficoD = res.data.dadosGraficoD;
-    
-                this.proximaDataDomA = res.data.proximaDataDomA;
-                this.proximaDataDomB = res.data.proximaDataDomB;
-                this.proximaDataDomC = res.data.proximaDataDomC;
-                this.proximaDataDomD = res.data.proximaDataDomD;
-    
-                if(dadosGraficoA != null || dadosGraficoB != null || dadosGraficoC != null || dadosGraficoD != null) {
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        animationEnabled: true,
-                        exportEnabled: false,
-                        theme: "light1",
-                        backgroundColor: "#E4EDF7",
-                        title: {
-                            text: "Presenças por mês",
-                            fontFamily:"Times New Roman"
-                        },
-                        axisY: {
-                            tickLength: 0,
-                            title: "Presenças",
-                            includeZero: false
-                        },
-                        legend: {
-                            cursor: "pointer"
-                        },
-                        toolTip: {
-                            shared: true
-                        },
-                        data: [
-                            {
-                                type: "column",
-                                name: "Domingo A",
-                                showInLegend: dadosGraficoA !== null,
-                                color: "#78A0E6",
-                                dataPoints: dadosGraficoA
-                            },
-                            {
-                                type: "column",
-                                name: "Domingo B",
-                                showInLegend: dadosGraficoB !== null,
-                                color: "#2C6F99",
-                                dataPoints: dadosGraficoB
-                            },
-                            {
-                                type: "column",
-                                name: "Domingo C",
-                                showInLegend: dadosGraficoC !== null,
-                                color: "#0B4D75",
-                                dataPoints: dadosGraficoC
-                            },
-                            {
-                                type: "column",
-                                name: "Domingo D",
-                                showInLegend: dadosGraficoD !== null,
-                                color: "#243B4A",
-                                dataPoints: dadosGraficoD
-                            }
-                        ]
-                    });
-    
-                    chart.render();
-                } else {
-                    chart = null;
-                }
             } else {
-                const res = await axios.get('https://api.domingodelazer.click/api/dashboard/comuns/' + this.escola + '/' + cookies.get('user_name'), {
+                await axios.get('https://api.domingodelazer.click/api/dashboard/comuns/' + this.escola + '/' + cookies.get('user_name'), {
                     headers: {
                         Authorization: this.token,
                     }
+                }).then(res => {
+                    this.proximaDataDomA = res.data.proximaDataDomA;
+                    this.proximaDataDomB = res.data.proximaDataDomB;
+                    this.proximaDataDomC = res.data.proximaDataDomC;
+                    this.proximaDataDomD = res.data.proximaDataDomD;
+
+                    this.planoAula = res.data.planoAula;
                 });
-    
-                this.proximaDataDomA = res.data.proximaDataDomA;
-                this.proximaDataDomB = res.data.proximaDataDomB;
-                this.proximaDataDomC = res.data.proximaDataDomC;
-                this.proximaDataDomD = res.data.proximaDataDomD;
-    
-                this.planoAula = res.data.planoAula;
             }
         },
         carregarLista(opcao) {
@@ -756,13 +756,13 @@ export default {
                     break;
             }
         },
-        async voltar() {
+        voltar() {
             this.lista = null;
-            await this.carregarDashboard();
+            this.carregarDashboard();
         }
     },
-    async mounted() {
-        await this.carregarDashboard();
+    mounted() {
+        this.carregarDashboard();
     }
 }
 </script>
