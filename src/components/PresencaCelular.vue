@@ -96,7 +96,7 @@ export default {
             this.code = '';
             this.carregando = false;
             this.concluido = false;
-            cameraStatus = ref(false);
+            stopReader();
         }
     },
     setup() {
