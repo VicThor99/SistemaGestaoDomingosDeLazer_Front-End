@@ -43,7 +43,7 @@
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
                 style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%; padding: 20px;">
-                <h2>Foram dadas presenças para {{ this.numeroPresencas }} crianças</h2>
+                <h2>{{ this.numeroPresencas }}</h2>
             </div>
         </div>
     </div>
