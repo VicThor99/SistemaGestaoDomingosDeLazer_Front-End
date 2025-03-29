@@ -94,6 +94,7 @@ export default {
         },
         voltar(){
             this.code = '';
+            this.alunosPorNome = [];
             this.carregando = false;
             this.concluido = false;
             this.stopReader();
