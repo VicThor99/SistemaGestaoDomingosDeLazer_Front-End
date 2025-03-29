@@ -24,7 +24,7 @@
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: center; width: 100%;">
-                <button id="botaoFooter" @click="concluir()">Concluir Presenças</button>
+                <button id="botaoFooter" @click="concluir()">Dar Presenças para Lista</button>
             </div>
         </div>
         <div id="presencaCelular" v-if="this.carregando">
@@ -96,6 +96,7 @@ export default {
             this.code = '';
             this.carregando = false;
             this.concluido = false;
+            cameraStatus = ref(false);
         }
     },
     setup() {
