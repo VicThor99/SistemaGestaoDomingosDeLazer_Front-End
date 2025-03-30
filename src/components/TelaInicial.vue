@@ -632,7 +632,7 @@ export default {
                             axisY: {
                                 tickLength: 0,
                                 title: "Presenças",
-                                includeZero: false
+                                includeZero: true
                             },
                             legend: {
                                 cursor: "pointer"
