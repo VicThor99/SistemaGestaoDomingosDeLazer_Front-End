@@ -1,25 +1,19 @@
 <template>
     <div id="principal">
         <div id="presencaCelular" v-if="!this.carregando && !this.concluido">
-            <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
+            <h2 style="margin-left: 30px;">Presenças via Celular</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 49.5%; display: flex; justify-content: center; flex-direction: column;">
-                    <div v-show="!cameraStatus && code == ''" class="text-center">
-                        <button id="botao" @click="initReader">Iniciar detecção</button>
+                    <div v-show="!cameraStatus" class="text-center">
+                        <button id="botao" @click="initReader">Iniciar Detecção</button>
                     </div>
                     <div v-show="cameraStatus" id="reader"></div>
-                    <div style="display: flex; justify-content: center; flex-direction: column; width: 100%;" v-if="code !== ''">
-                        <h2>O código detectado foi {{ code }}, deseja adicioná-lo na lista?</h2>
-                        <div style="display: flex; width: 100%; justify-content: space-evenly;">
-                            <button id="botao" @click="adicionarAoVetor()">Sim</button>
-                            <button id="botao" @click="initReader()">Não</button>
-                        </div>
-                    </div>
                 </div>
                 <div style="width: 49.5%; text-align: left; font-size: 15pt; border-left: #0b4d75 1px solid;">
                     <p style="font-weight: bold; text-align: center; font-size: 18pt;">Lista de Alunos Captados</p>
-                    <p v-for="a in alunosPorNome" :key="a" style="margin-left: 20px;">• {{ a }}</p>
+                    <hr style="opacity: 0.2; width: 99.86%;" />
+                    <p v-for="a in alunos" :key="a" style="margin-left: 20px;">• {{ a }}</p>
                 </div>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
@@ -28,7 +22,7 @@
             </div>
         </div>
         <div id="presencaCelular" v-if="this.carregando">
-            <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
+            <h2 style="margin-left: 30px;">Presenças via Celular</h2>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
                 style="display: flex; justify-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%; padding: 20px;">
@@ -38,7 +32,7 @@
         <div id="presencaCelular" v-if="this.concluido">
             <div style="display: flex; justify-content: stretch; text-align: left; flex-direction: row;">
                 <a id="voltar" style="margin-left: 30px;" @click="voltar()"><i class="mdi mdi-chevron-left"></i>Voltar</a>
-                <h2 style="margin-left: 30px;">Leitor de Código de Barras</h2>
+                <h2 style="margin-left: 30px;">Presenças via Celular</h2>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
@@ -60,8 +54,6 @@ export default {
     name: 'PresencaCelular',
     data() {
         return {
-            alunos: [],
-            alunosPorNome: [],
             carregando: false,
             concluido: false,
             token: cookies.get('token'),
@@ -69,18 +61,6 @@ export default {
         }
     },
     methods: {
-        resgatarNomeDoAluno(code){
-            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
-                { headers: { 'Authorization': this.token } })
-            .then(res => {
-                this.alunosPorNome.push(res.data)
-            })
-        },
-        adicionarAoVetor() {
-            this.alunos.push(this.code);
-            this.resgatarNomeDoAluno(this.code);
-            this.initReader();
-        },
         concluir() {
             this.carregando = true;
             axios.post('https://api.domingodelazer.click/api/registros/celular/' + this.escola, this.alunos,
@@ -94,7 +74,7 @@ export default {
         },
         voltar(){
             this.code = '';
-            this.alunosPorNome = [];
+            this.alunos = [];
             this.carregando = false;
             this.concluido = false;
             this.stopReader();
@@ -103,6 +83,8 @@ export default {
     setup() {
         const code = ref('');
         const cameraStatus = ref(false);
+        const alunos = ref([]);
+        
         const initReader = () => {
             cameraStatus.value = true;
             code.value = '';
@@ -135,9 +117,11 @@ export default {
                     canvases.forEach(canvas => canvas.remove()); // Remove todos os canvases
                 });
                 Quagga.onDetected((data) => {
-                    if (data.codeResult.code.length === 6) {
-                        code.value = data.codeResult.code;
-                        stopReader();
+                    if (data.codeResult.code.length === 6 && 
+                            (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
+                            data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
+                        {
+                        resgatarNomeDoAluno(data.codeResult.code);
                     }
                 });
             });
@@ -146,6 +130,18 @@ export default {
         const stopReader = () => {
             cameraStatus.value = false;
             Quagga.stop();
+        }
+
+        const resgatarNomeDoAluno = (code) => {
+            stopReader();
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+                { headers: { 'Authorization': this.token } })
+            .then(res => {
+                if(res.data && !alunos.includes(res.data)){
+                    alunos.push(res.data);
+                    initReader();
+                }
+            })
         }
 
         return {
