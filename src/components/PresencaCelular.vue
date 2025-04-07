@@ -5,15 +5,15 @@
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div style="display: flex; justify-content: space-between;">
                 <div style="width: 49.5%; display: flex; justify-content: center; flex-direction: column;">
-                    <div v-show="!cameraStatus" class="text-center">
+                    <div v-show="!this.cameraStatus" class="text-center">
                         <button id="botao" @click="initReader">Iniciar Detecção</button>
                     </div>
-                    <div v-show="cameraStatus" id="reader"></div>
+                    <div v-show="this.cameraStatus" id="reader"></div>
                 </div>
                 <div style="width: 49.5%; text-align: left; font-size: 15pt; border-left: #0b4d75 1px solid;">
                     <p style="font-weight: bold; text-align: center; font-size: 18pt;">Lista de Alunos Captados</p>
                     <hr style="opacity: 0.2; width: 99.86%;" />
-                    <p v-for="a in alunos" :key="a" style="margin-left: 20px;">• {{ a }}</p>
+                    <p v-for="a in this.alunos" :key="a" style="margin-left: 20px;">• {{ a }}</p>
                 </div>
             </div>
             <hr style="opacity: 0.2; width: 99.86%;" />
