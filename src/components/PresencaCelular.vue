@@ -47,7 +47,6 @@
 import cookies from 'vue-cookies';
 import Quagga from 'quagga';
 import axios from 'axios';
-import { ref } from 'vue';
 
 export default {
 
@@ -118,7 +117,7 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
-                        this.resgatarNomeDoAluno(data.codeResult.code);
+                        resgatarNomeDoAluno(data.codeResult.code);
                     }
                 });
             });
@@ -128,13 +127,13 @@ export default {
             Quagga.stop();
         },
         resgatarNomeDoAluno(code) {
-            this.stopReader();
+            stopReader();
             axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
                 if(res.data && !this.alunos.includes(res.data)){
                     this.alunos.push(res.data);
-                    this.initReader();
+                    initReader();
                 }
             })
         }
