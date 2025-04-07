@@ -81,7 +81,7 @@ export default {
     setup() {
         const code = ref('');
         const cameraStatus = ref(false);
-        const alunos = [];
+        let alunos = [];
         const escola = cookies.get('escolaEscolhida');
         const token = cookies.get('token');
         
@@ -132,15 +132,15 @@ export default {
             Quagga.stop();
         }
 
-        const resgatarNomeDoAluno = (code) => {
+        const resgatarNomeDoAluno = async (code) => {
             stopReader();
-            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
+            await axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
                 { headers: { 'Authorization': token } })
             .then(res => {
                 if(res.data && !alunos.includes(res.data)){
                     alunos.push(res.data);
-                    initReader();
                 }
+                initReader();
             })
         }
 
