@@ -132,15 +132,15 @@ export default {
             Quagga.stop();
         }
 
-        const resgatarNomeDoAluno = async (code) => {
+        const resgatarNomeDoAluno = (code) => {
             stopReader();
-            await axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
                 { headers: { 'Authorization': token } })
             .then(res => {
                 if(res.data && !alunos.includes(res.data)){
                     alunos.push(res.data);
+                    initReader();
                 }
-                initReader();
             })
         }
 
