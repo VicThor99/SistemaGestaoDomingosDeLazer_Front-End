@@ -56,8 +56,7 @@ export default {
         return {
             carregando: false,
             concluido: false,
-            token: cookies.get('token'),
-            escola: cookies.get('escolaEscolhida')
+            token: cookies.get('token')
         }
     },
     methods: {
@@ -84,6 +83,7 @@ export default {
         const code = ref('');
         const cameraStatus = ref(false);
         const alunos = ref([]);
+        const escola = cookies.get('escolaEscolhida');
         
         const initReader = () => {
             cameraStatus.value = true;
@@ -134,7 +134,7 @@ export default {
 
         const resgatarNomeDoAluno = (code) => {
             stopReader();
-            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
                 { headers: { 'Authorization': this.token } })
             .then(res => {
                 if(res.data && !alunos.includes(res.data)){
