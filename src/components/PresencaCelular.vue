@@ -86,7 +86,7 @@ export default {
             Quagga.stop();
         },    
         initReader() {
-            console.log(this); 
+            const self = this; 
             this.cameraStatus = true;
             this.code = '';
             Quagga.init({
@@ -117,7 +117,7 @@ export default {
                     const canvases = document.querySelectorAll("canvas");
                     canvases.forEach(canvas => canvas.remove()); // Remove todos os canvases
                 });
-                Quagga.onDetected((data) => {
+                Quagga.onDetected(function (data) {
                     if (data.codeResult.code.length === 6 && 
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
