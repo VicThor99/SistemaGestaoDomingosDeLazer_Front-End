@@ -80,6 +80,21 @@ export default {
             this.carregando = false;
             this.concluido = false;
             this.stopReader();
+        },
+        stopReader() {
+            this.cameraStatus = false;
+            Quagga.stop();
+        },
+        resgatarNomeDoAluno(code) {
+            this.stopReader();
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+                { headers: { 'Authorization': this.token } })
+            .then(res => {
+                if(res.data && !this.alunos.includes(res.data)){
+                    this.alunos.push(res.data);
+                    this.initReader();
+                }
+            })
         },        
         initReader() {
             this.cameraStatus = true;
@@ -117,25 +132,10 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
-                        resgatarNomeDoAluno(data.codeResult.code);
+                        this.resgatarNomeDoAluno(data.codeResult.code);
                     }
                 });
             });
-        },
-        stopReader() {
-            this.cameraStatus = false;
-            Quagga.stop();
-        },
-        resgatarNomeDoAluno(code) {
-            stopReader();
-            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
-                { headers: { 'Authorization': this.token } })
-            .then(res => {
-                if(res.data && !this.alunos.includes(res.data)){
-                    this.alunos.push(res.data);
-                    initReader();
-                }
-            })
         }
     }
 
