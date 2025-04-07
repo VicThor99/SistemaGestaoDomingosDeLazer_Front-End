@@ -55,7 +55,12 @@ export default {
     data() {
         return {
             carregando: false,
-            concluido: false
+            concluido: false,
+            code: '',
+            cameraStatus: false,
+            alunos: [],
+            escola: cookies.get('escolaEscolhida'),
+            token: cookies.get('token'),
         }
     },
     methods: {
@@ -76,16 +81,8 @@ export default {
             this.carregando = false;
             this.concluido = false;
             this.stopReader();
-        }
-    },
-    setup() {
-        const code = ref('');
-        const cameraStatus = ref(false);
-        const alunos = new Array();
-        const escola = cookies.get('escolaEscolhida');
-        const token = cookies.get('token');
-        
-        const initReader = () => {
+        },        
+        initReader() {
             cameraStatus.value = true;
             code.value = '';
             Quagga.init({
@@ -121,18 +118,16 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
-                        resgatarNomeDoAluno(data.codeResult.code);
+                        this.resgatarNomeDoAluno(data.codeResult.code);
                     }
                 });
             });
-        }
-
-        const stopReader = () => {
+        },
+        stopReader() {
             cameraStatus.value = false;
             Quagga.stop();
-        }
-
-        const resgatarNomeDoAluno = (code) => {
+        },
+        resgatarNomeDoAluno(code) {
             stopReader();
             axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
                 { headers: { 'Authorization': token } })
@@ -142,13 +137,6 @@ export default {
                     initReader();
                 }
             })
-        }
-
-        return {
-            initReader,
-            stopReader,
-            cameraStatus,
-            code
         }
     }
 
