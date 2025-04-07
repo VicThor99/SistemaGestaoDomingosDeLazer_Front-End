@@ -122,14 +122,13 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
-                        console.log(this); 
-                        this.cameraStatus = false;
+                        self.cameraStatus = false;
                         Quagga.stop();
-                        axios.get('https://api.domingodelazer.click/api/alunos/' + data.codeResult.code + '/' + this.escola,
-                            { headers: { 'Authorization': this.token } })
+                        axios.get('https://api.domingodelazer.click/api/alunos/' + data.codeResult.code + '/' + self.escola,
+                            { headers: { 'Authorization': self.token } })
                         .then(res => {
-                            if(res.data && !this.alunos.includes(res.data)){
-                                this.alunos.push(res.data);
+                            if(res.data && !self.alunos.includes(res.data)){
+                                self.alunos.push(res.data);
                             }
                         })
                     }
