@@ -83,8 +83,8 @@ export default {
             this.stopReader();
         },        
         initReader() {
-            cameraStatus.value = true;
-            code.value = '';
+            this.cameraStatus = true;
+            this.code = '';
             Quagga.init({
                 inputStream: {
                     name: "Live",
@@ -124,17 +124,17 @@ export default {
             });
         },
         stopReader() {
-            cameraStatus.value = false;
+            this.cameraStatus = false;
             Quagga.stop();
         },
         resgatarNomeDoAluno(code) {
-            stopReader();
-            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + escola,
-                { headers: { 'Authorization': token } })
+            this.stopReader();
+            axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+                { headers: { 'Authorization': this.token } })
             .then(res => {
-                if(res.data && !alunos.includes(res.data)){
-                    alunos.push(res.data);
-                    initReader();
+                if(res.data && !this.alunos.includes(res.data)){
+                    this.alunos.push(res.data);
+                    this.initReader();
                 }
             })
         }
