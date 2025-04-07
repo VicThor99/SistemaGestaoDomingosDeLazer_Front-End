@@ -86,6 +86,7 @@ export default {
             Quagga.stop();
         },    
         initReader() {
+            console.log(this); 
             this.cameraStatus = true;
             this.code = '';
             Quagga.init({
@@ -121,9 +122,10 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
+                        console.log(this); 
                         this.cameraStatus = false;
                         Quagga.stop();
-                        axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
+                        axios.get('https://api.domingodelazer.click/api/alunos/' + data.codeResult.code + '/' + this.escola,
                             { headers: { 'Authorization': this.token } })
                         .then(res => {
                             if(res.data && !this.alunos.includes(res.data)){
