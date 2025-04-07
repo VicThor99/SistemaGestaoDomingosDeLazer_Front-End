@@ -121,7 +121,8 @@ export default {
                             (data.codeResult.code.startsWith("10") || data.codeResult.code.startsWith("20") || 
                             data.codeResult.code.startsWith("30") || data.codeResult.code.startsWith("40"))) 
                         {
-                        stopReader();
+                        this.cameraStatus = false;
+                        Quagga.stop();
                         axios.get('https://api.domingodelazer.click/api/alunos/' + code + '/' + this.escola,
                             { headers: { 'Authorization': this.token } })
                         .then(res => {
