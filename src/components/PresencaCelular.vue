@@ -81,7 +81,7 @@ export default {
     setup() {
         const code = ref('');
         const cameraStatus = ref(false);
-        const alunos = ref([]);
+        const alunos = [];
         const escola = cookies.get('escolaEscolhida');
         const token = cookies.get('token');
         
