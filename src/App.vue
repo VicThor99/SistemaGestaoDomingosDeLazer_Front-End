@@ -282,6 +282,7 @@ export default {
       this.opcoes = false;
       this.cadastros = false;
       this.impressoes = false;
+      this.visualizacoes = false;
       this.registroPresencas = false;
     },
     sair() {

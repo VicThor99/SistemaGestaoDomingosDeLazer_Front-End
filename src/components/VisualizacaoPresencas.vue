@@ -29,7 +29,7 @@ export default {
             headers: [
                 { title: 'Código', key: 'codigo', align: 'start', width: '20%' },
                 { title: 'Nome', key: 'nome', align: 'start', width: '50%' },
-                { title: 'Presença no Mês Atual', key: 'presença', align: 'end', width: '30%' },
+                { title: 'Presença no Mês Atual', key: 'presenca', align: 'end', width: '30%' },
             ],
             registros: [],
             search: '',
