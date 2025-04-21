@@ -35,6 +35,7 @@
               src="./assets/logo.png"></a>
           <a class="headerButton" v-if="isAdmin" @click="abrirOuFecharCadastros">Cadastros <i class="mdi mdi-menu-down"></i></a>
           <a class="headerButton" @click="abrirOuFecharPresencas">Presenças <i class="mdi mdi-menu-down"></i></a>
+          <a class="headerButton" v-if="!isAdmin" @click="abrirOuFecharVisualizacoes">Visualizações <i class="mdi mdi-menu-down"></i></a>
           <a class="headerButton" v-if="isAdmin" @click="abrirOuFecharImpressoes">Impressões <i class="mdi mdi-menu-down"></i></a>
         </div>
         <div style="width: 30%;height: 100%; margin-top: 25px;display: flex; justify-content: flex-end;">
@@ -75,10 +76,14 @@
             class="mdi mdi-calendar-sync"></i> Correção</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 400px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 243px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas && !isAdmin">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
             class="mdi mdi-cellphone"></i> Registro pelo Celular</a>
+      </div>
+      <div
+        style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 379px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        v-if="visualizacoes && !isAdmin">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('VisualizacaoPresencas')"><i
             class="mdi mdi-calendar-sync"></i> Visualização das Presenças da Sala</a>
       </div>
@@ -194,6 +199,7 @@ export default {
       cadastros: false,
       registroPresencas: false,
       impressoes: false,
+      visualizacoes: false,
       opcoes: false,
       token: cookies.get('token'),
       escolas: [],
@@ -297,24 +303,35 @@ export default {
       this.opcoes = false;
       this.impressoes = false;
       this.registroPresencas = false;
+      this.visualizacoes = false;
       this.cadastros = !this.cadastros;
     },
     abrirOuFecharPresencas() {
       this.opcoes = false;
       this.cadastros = false;
       this.impressoes = false;
+      this.visualizacoes = false;
       this.registroPresencas = !this.registroPresencas;
+    },
+    abrirOuFecharVisualizacoes() {
+      this.opcoes = false;
+      this.cadastros = false;
+      this.impressoes = false;
+      this.registroPresencas = false;
+      this.visualizacoes = !this.visualizacoes;
     },
     abrirOuFecharOpcoes() {
       this.cadastros = false;
       this.impressoes = false;
       this.registroPresencas = false;
+      this.visualizacoes = false;
       this.opcoes = !this.opcoes;
     },
     abrirOuFecharImpressoes() {
       this.opcoes = false;
       this.cadastros = false;
       this.registroPresencas = false;
+      this.visualizacoes = false;
       this.impressoes = !this.impressoes;
     },
     selecionarEscola(id) {
