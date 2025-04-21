@@ -75,10 +75,12 @@
             class="mdi mdi-calendar-sync"></i> Correção</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 213px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 90px; border-radius: 0px 0px 5px 5px; width: 400px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="registroPresencas && !isAdmin">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('PresencaCelular')"><i
-            class="mdi mdi-cellphone"></i> Registro (Celular)</a>
+            class="mdi mdi-cellphone"></i> Registro pelo Celular</a>
+        <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('VisualizacaoPresencas')"><i
+            class="mdi mdi-calendar-sync"></i> Visualização das Presenças da Sala</a>
       </div>
       <div
         style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 491px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
@@ -120,6 +122,7 @@
       <PresencaCelular v-if="telaAtual === 'PresencaCelular'"/>
       <PlanoAula v-if="telaAtual === 'PlanoAula'"/>
       <ContagemAlunos v-if="telaAtual === 'ContagemAlunos'"/>
+      <VisualizacaoPresencas v-if="telaAtual === 'VisualizacaoPresencas'"/>
     </div>
   </div>
 </template>
@@ -145,6 +148,7 @@ import ArquivosAluno from './components/ArquivosAluno.vue';
 import PresencaCelular from './components/PresencaCelular.vue';
 import PlanoAula from './components/PlanoAula.vue';
 import ContagemAlunos from './components/ContagemAlunos.vue';
+import VisualizacaoPresencas from './components/VisualizacaoPresencas.vue';
 
 export default {
   name: 'App',
@@ -165,7 +169,8 @@ export default {
     ArquivosAluno,
     PresencaCelular,
     PlanoAula,
-    ContagemAlunos
+    ContagemAlunos,
+    VisualizacaoPresencas
 },
   data() {
     return {
