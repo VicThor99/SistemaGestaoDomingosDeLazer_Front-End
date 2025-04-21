@@ -101,13 +101,13 @@
       </div>
 
       <div
-        style="margin: -15px 15px 0px 0px; border-radius: 0px 0px 5px 5px;width: 180px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
+        style="margin: -15px 20px 0px 0px; border-radius: 0px 0px 5px 5px;width: 92px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
         v-if="opcoes && !isAdmin">
         <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="sair"><i
             class="mdi mdi-exit-to-app"></i> Sair</a>
       </div>
       <div
-        style="margin: -15px 15px 0px 0px; border-radius: 0px 0px 5px 5px;width: 430px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
+        style="margin: -15px 20px 0px 0px; border-radius: 0px 0px 5px 5px;width: 430px; height: 45px; background-color: whitesmoke; display: flex; justify-content: end;  align-self: end;"
         v-if="opcoes && isAdmin">
         <a style="margin-top: 10px; margin-right: 15px; cursor: pointer;" @click="download"><i
             class="mdi mdi-file-excel"></i> Exportar Excel</a>
