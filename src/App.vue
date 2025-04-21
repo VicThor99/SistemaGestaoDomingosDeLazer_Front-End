@@ -82,7 +82,7 @@
             class="mdi mdi-cellphone"></i> Registro pelo Celular</a>
       </div>
       <div
-        style="margin: -15px -20px 0px 410px; border-radius: 0px 0px 5px 5px; width: 379px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
+        style="margin: -15px -20px 0px 250px; border-radius: 0px 0px 5px 5px; width: 379px; height: 45px; background-color: whitesmoke; display: flex; justify-content: start; align-self: start;"
         v-if="visualizacoes && !isAdmin">
         <a style="margin-top: 10px; margin-left: 15px; cursor: pointer;" @click="mudarPagina('VisualizacaoPresencas')"><i
             class="mdi mdi-calendar-sync"></i> Visualização das Presenças da Sala</a>
