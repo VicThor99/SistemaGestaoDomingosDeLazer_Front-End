@@ -27,9 +27,10 @@ export default {
     data() {
         return {
             headers: [
-                { title: 'Código', key: 'codigo', align: 'start', width: '20%' },
+                { title: 'Código', key: 'codigo', align: 'start', width: '10%' },
                 { title: 'Nome', key: 'nome', align: 'start', width: '50%' },
-                { title: 'Presença no Mês Atual', key: 'presenca', align: 'end', width: '30%' },
+                { title: 'Série', key: 'serie', align: 'start', width: '10%' },
+                { title: 'Presença no Mês Atual', key: 'presenca', align: 'start', width: '30%' },
             ],
             registros: [],
             search: '',
