@@ -266,7 +266,7 @@ export default {
       })
         .then(res => {
           this.listaCriancas = [];
-          this.listaCriancas.push({ "codigo": "Código", "nome": "Nome", "sexo": "Sexo", "idade": "Idade", "nascimento": "Data de Nascimento", "sapato": "Calçado", "calca": "Calça", "camisa": "Camisa", "serie": "Série", "sala": "Sala" });
+          this.listaCriancas.push({ "codigo": "Código", "nome": "Nome", "idade": "Idade", "nascimento": "Data de Nascimento", "sexo": "Sexo", "turma": "Turma", "grupo": "Grupo", "sapato": "Calçado", "blusa": "Blusa", "calca": "Calça", "responsavel": "Responsável", "telefone": "Telefone" });
           res.data.forEach((element) => this.listaCriancas.push(element));
           const data = utils.json_to_sheet(this.listaCriancas, { skipHeader: true });
           const wb = utils.book_new();
