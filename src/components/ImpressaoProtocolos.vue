@@ -5,11 +5,11 @@
             <hr style="opacity: 0.2; width: 99.86%;" />
             <div
                 style="display: flex; justify-content: center; align-content: center;flex-direction: column;align-items: center;color:  #0b4d75; height: 100%;">
-                <div style="display: flex; justify-content: space-between; width: 1250px;">
+                <div style="display: flex; justify-content: space-between; width: fit-content;">
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Código</p>
                     <p style="color: #5a5a5a; margin-left: 5px; width: 240px;">Domingo</p>
                 </div>
-                <div style="display: flex; justify-content: space-between; width: 1250px;">
+                <div style="display: flex; justify-content: space-between; width: fit-content;">
                     <input v-model="parametros.codigo"
                         style="width: 240px; height: 60px; font-size:30px; padding: 20px; border-radius: 5px; background-color: white; margin-right: 20px;" />
                     
