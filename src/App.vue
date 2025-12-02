@@ -267,7 +267,7 @@ export default {
         .then(res => {
           this.listaCriancas = [];
           this.listaCriancas.push({ "codigo": "Código", "numeroSacolinha": "Número da Sacolinha", "nome": "Nome", "idade": "Idade", "nascimento": "Data de Nascimento", "sexo": "Sexo", "turma": "Turma", "grupo": "Grupo", "sapato": "Calçado", "blusa": "Blusa", "calca": "Calça", "responsavel": "Responsável", "telefone": "Telefone" });
-          res.data.forEach((element) => this.listaCriancas.push(element));
+          res.data.forEach((aluno) => this.listaCriancas.push(aluno));
           const data = utils.json_to_sheet(this.listaCriancas, { skipHeader: true });
           const wb = utils.book_new();
           utils.book_append_sheet(wb, data, 'Dados para Sacolinha');
